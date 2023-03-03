@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "569253482493",
+    "project_id": "eliav-android-project",
+    "storage_bucket": "eliav-android-project.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:569253482493:android:dc7b92e938e9240a555394",
+        "android_client_info": {
+          "package_name": "com.example.wegive"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "569253482493-nluscv5fg7pu2knmh2f7qhu0cjnsi69h.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA6PIViOjqQqwuapJsz16deis28UlxW2Eo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "569253482493-nluscv5fg7pu2knmh2f7qhu0cjnsi69h.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
