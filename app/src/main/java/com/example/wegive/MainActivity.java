@@ -6,6 +6,8 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.os.Bundle;
 
+import java.util.Objects;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -21,5 +23,9 @@ public class MainActivity extends AppCompatActivity {
         }
 
 
+    }
+
+    public void hideToolbar(){
+        Objects.requireNonNull(getSupportActionBar()).hide();
     }
 }

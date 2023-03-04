@@ -22,6 +22,7 @@ public class User {
     public static final String ID = "id";
     public static final String NAME = "name";
     public static final String EMAIL = "email";
+    public static final String PHONE_NUMBER = "phone_number";
     public static final String AVATAR_URL = "avatar_url";
     public static final String IS_VERIFIED = "is_verified";
     public static final String IS_ADMIN = "is_admin";
@@ -32,8 +33,11 @@ public class User {
     @PrimaryKey
     @NotNull
     public String id = "";
+
     public String name = "";
     public String email = "";
+
+    public String phoneNumber = "";
     public String avatarUrl = "";
     public Boolean isVerified = false;
     public Boolean isAdmin = false;
@@ -44,10 +48,11 @@ public class User {
 
     }
 
-    public User(@NonNull String id, String name,String email, String avatarUrl, Boolean isVerified, Boolean isAdmin) {
+    public User(@NonNull String id, String name, String email, String phoneNumber, String avatarUrl, Boolean isVerified, Boolean isAdmin) {
         this.id = id;
         this.name = name;
-        this.name = email;
+        this.email = email;
+        this.phoneNumber = phoneNumber;
         this.avatarUrl = avatarUrl;
         this.isVerified = isVerified;
         this.isAdmin = isAdmin;
@@ -59,7 +64,8 @@ public class User {
         json.put(ID, getId());
         json.put(NAME, getName());
         json.put(EMAIL, getEmail());
-        json.put(AVATAR_URL, getName());
+        json.put(PHONE_NUMBER, getPhoneNumber());
+        json.put(AVATAR_URL, getAvatarUrl());
         json.put(IS_VERIFIED, getIsVerified());
         json.put(IS_ADMIN, getIsAdmin());
         json.put(LAST_UPDATED, FieldValue.serverTimestamp());
@@ -72,10 +78,11 @@ public class User {
         String id = (String) json.get(ID);
         String name = (String) json.get(NAME);
         String email = (String) json.get(EMAIL);
+        String phoneNumber = (String) json.get(PHONE_NUMBER);
         String avatarUrl = (String) json.get(AVATAR_URL);
         Boolean isVerified = (Boolean) json.get(IS_VERIFIED);
         Boolean isAdmin = (Boolean) json.get(IS_ADMIN);
-        User user = new User(id, name,email, avatarUrl, isVerified, isAdmin);
+        User user = new User(id, name, email, phoneNumber, avatarUrl, isVerified, isAdmin);
 
         Timestamp time = (Timestamp) json.get(LAST_UPDATED);
         if (time != null) {
@@ -112,20 +119,48 @@ public class User {
         return this.name;
     }
 
-    public String getEmail(){
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getEmail() {
         return this.email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public String getAvatarUrl() {
         return this.avatarUrl;
     }
 
-    public Boolean getIsVerified() {
+    public void setAvatarUrl(String avatarUrl) {
+        this.avatarUrl = avatarUrl;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public boolean getIsVerified() {
         return this.isVerified;
     }
 
-    public Boolean getIsAdmin() {
+    public void setIsVerified(boolean isVerified) {
+        this.isVerified = isVerified;
+    }
+
+    public boolean getIsAdmin() {
         return this.isAdmin;
+    }
+
+    public void setIsAdmin(boolean isAdmin) {
+        this.isAdmin = isAdmin;
     }
 
 

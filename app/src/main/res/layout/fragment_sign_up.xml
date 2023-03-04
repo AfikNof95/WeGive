@@ -23,54 +23,93 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:paddingLeft="35dp"
-            android:paddingRight="35dp">
+            android:paddingLeft="5dp"
+            android:paddingRight="5dp">
 
             <ImageView
-                android:id="@+id/sign_up_image"
-                android:layout_gravity="center"
-                android:layout_width="301dp"
-                android:layout_height="184dp"
-                android:src="@drawable/undraw_grandma_re_rnv1" />
+                android:id="@+id/imageView2"
+                android:layout_width="match_parent"
+                android:layout_height="136dp"
+                android:layout_gravity="center|center_horizontal|center_vertical"
+                android:src="@drawable/undraw_sign__up_nm4k" />
 
             <TextView
                 android:id="@+id/textView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+
+                android:layout_gravity="center|center_horizontal|center_vertical"
+                android:layout_marginBottom="10dp"
+                android:fontFamily="@font/open_sans_extrabold"
+                android:text="@string/sign_up_welcome"
+                android:textColor="@color/black"
+                android:textSize="20sp" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_gravity="center|center_horizontal"
+
+                android:elevation="14dp"
+                android:hapticFeedbackEnabled="true"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="100dp"
+                app:cardElevation="14dp"
+                app:strokeColor="@color/black"
+                app:strokeWidth="1dp">
+
+                <ImageView
+                    android:id="@+id/sign_up_user_avatar"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_gravity="center|center_horizontal|center_vertical"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:scaleType="fitXY"
+                    app:srcCompat="@drawable/undraw_pic_profile_re_7g2h"
+                    tools:src="@drawable/undraw_pic_profile_re_7g2h"
+                    tools:srcCompat="@drawable/undraw_pic_profile_re_7g2h"
+                    tools:visibility="visible" />
+            </com.google.android.material.card.MaterialCardView>
+
+            <TextView
+                android:id="@+id/user_avatar_error"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:fontFamily="@font/open_sans_semibold"
-                android:text="@string/sign_up"
-                android:textAppearance="@style/TextAppearance.AppCompat.Display2"
-                android:textColor="@color/black"
-
-                />
+                android:text="Please upload a photo!"
+                android:textColor="@color/error"
+                android:textSize="12sp"
+                android:visibility="invisible" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/emailInputLayout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
+
                 android:layout_height="match_parent"
-                android:layout_marginBottom="10dp"
-                app:errorEnabled="true"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+                app:errorEnabled="true">
                 >
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/email_input"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:fontFamily="@font/open_sans_semibold"
                     android:hint="@string/email"
                     android:inputType="textEmailAddress"
-                    android:singleLine="true" />
+                    android:singleLine="true"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/passwordInputLayout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="match_parent"
+
                 android:layout_height="match_parent"
-                android:layout_marginBottom="10dp"
                 app:errorEnabled="true"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+                app:passwordToggleEnabled="true">
                 >
 
                 <com.google.android.material.textfield.TextInputEditText
@@ -79,16 +118,63 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/password"
                     android:inputType="textPassword"
-                    android:singleLine="true" />
+                    android:singleLine="true"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
 
             </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/sign_up_name_input_layout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+
+                android:layout_height="match_parent"
+                app:errorEnabled="true">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/sign_up_name_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/full_name"
+                    android:inputType="text"
+                    android:singleLine="true"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/sign_up_phone_input_layout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+
+                android:layout_height="match_parent"
+                app:errorEnabled="true">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/sign_up_phone_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/phone_number"
+                    android:inputType="phone"
+                    android:singleLine="true" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <TextView
+                android:id="@+id/sign_up_error_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                android:text="TextView"
+                android:textColor="@color/error"
+                android:textSize="10sp"
+                android:visibility="invisible" />
 
             <Button
                 android:id="@+id/sign_up_button"
                 style="outlined"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
+
                 android:text="@string/action_sign_up_short" />
 
 

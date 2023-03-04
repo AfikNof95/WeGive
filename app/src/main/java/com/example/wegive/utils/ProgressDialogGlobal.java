@@ -10,20 +10,23 @@ public class ProgressDialogGlobal {
 
 
     private static final ProgressDialogGlobal _instance = new ProgressDialogGlobal();
-    private final ProgressDialog pDialog;
+    private  ProgressDialog pDialog;
 
     public static ProgressDialogGlobal getInstance() {
         return _instance;
     }
 
     private ProgressDialogGlobal() {
-        pDialog = new ProgressDialog(MyApplication.getMyContext());
     }
 
     public void show(View view, String text) {
-        this.pDialog.setView(view);
+        this.pDialog = new ProgressDialog(view.getContext());
         this.pDialog.setIndeterminate(true);
         this.pDialog.setMessage(text);
         this.pDialog.show();
+    }
+
+    public void hide(){
+        this.pDialog.hide();
     }
 }

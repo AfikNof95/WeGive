@@ -28,10 +28,10 @@
 
             <ImageView
                 android:id="@+id/sign_in_image"
-                android:layout_gravity="center"
                 android:layout_width="301dp"
                 android:layout_height="184dp"
-                android:src="@drawable/undraw_sharing_knowledge_03vp" />
+                android:layout_gravity="center"
+                android:src="@drawable/undraw_grandma_re_rnv1" />
 
             <TextView
                 android:id="@+id/textView"
