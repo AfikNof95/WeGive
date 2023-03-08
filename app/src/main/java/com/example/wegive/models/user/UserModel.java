@@ -61,8 +61,8 @@ public class UserModel {
 
     }
 
-    public void signIn(String email,String password,IListener<Task> listener){
-
+    public void signIn(String email,String password,IListener<Task<AuthResult>> listener){
+    fireBaseAuth.signIn(email,password,listener);
     }
 
     public void uploadUserAvatar(String userId, Bitmap bitmap,IListener<String> listener){
@@ -72,6 +72,12 @@ public class UserModel {
     public void addUser(User user,IListener<Void> listener){
     userDB.addUser(user,listener);
     }
+
+    public void getUser(String userId,IListener<User> listener){
+        userDB.getUser(userId,listener);
+    }
+
+
 
 
 

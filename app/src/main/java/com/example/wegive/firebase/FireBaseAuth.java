@@ -25,4 +25,10 @@ public class FireBaseAuth {
             listener.onComplete(task);
         });
     }
+
+    public void signIn(String email, String password, IListener<Task<AuthResult>> listener) {
+        auth.signInWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
+            listener.onComplete(task);
+        });
+    }
 }

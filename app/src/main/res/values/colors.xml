@@ -9,7 +9,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="link">#0000EE</color>
     <color name="error">#ff3333</color>
-    <color name="success">#0000EE</color>
-    <color name="warning">#0000EE</color>
-    <color name="info">#0000EE</color>
+    <color name="success">#2e7d32</color>
+    <color name="warning">#ed6c02</color>
+    <color name="info">#0288d1</color>
 </resources>

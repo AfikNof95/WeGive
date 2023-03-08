@@ -13,6 +13,14 @@
         <item name="colorOnSecondary">@color/black</item>
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        <item name="android:actionOverflowButtonStyle">@style/OverflowButtonStyle</item>
+
+
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="OverflowButtonStyle" parent="Widget.AppCompat.ActionButton.Overflow">
+        <item name="tint">@color/black</item>
+    </style>
+
 </resources>

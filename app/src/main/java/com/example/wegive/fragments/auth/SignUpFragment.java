@@ -148,7 +148,7 @@ public class SignUpFragment extends Fragment {
                         String phoneNumber = binding.signUpPhoneInput.getText().toString();
                         User newUser = new User(userId, name, email, phoneNumber, data, false, false);
                         UserModel.instance().addUser(newUser, data1 -> {
-                            pg.hide();
+
                             Navigation.findNavController(view).navigate(SignUpFragmentDirections.actionSignUpFragmentToLoginFragment());
                         });
                         Log.d("TAG", "test");
@@ -157,13 +157,15 @@ public class SignUpFragment extends Fragment {
                     binding.signUpErrorLabel.setText(task.getException().getMessage());
                     binding.signUpErrorLabel.setVisibility(View.VISIBLE);
                 }
+
+                pg.hide();
             });
         }
     }
 
     private boolean validateForm() {
         String email = binding.emailInput.getText().toString();
-        String password = binding.emailInput.getText().toString();
+        String password = binding.passwordInput.getText().toString();
         String phoneNumber = binding.signUpPhoneInput.getText().toString();
         String fullName = binding.signUpNameInput.getText().toString();
         Drawable userAvatar = binding.signUpUserAvatar.getDrawable();
@@ -189,18 +191,6 @@ public class SignUpFragment extends Fragment {
             isValid = false;
         }
         return isValid;
-    }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        ((AppCompatActivity) getActivity()).getSupportActionBar().hide();
-    }
-
-    @Override
-    public void onStop() {
-        super.onStop();
-        ((AppCompatActivity) getActivity()).getSupportActionBar().show();
     }
 
 }

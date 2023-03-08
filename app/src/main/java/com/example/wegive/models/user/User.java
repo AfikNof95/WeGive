@@ -16,6 +16,9 @@ import org.jetbrains.annotations.NotNull;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 public class User {
 
     public static final String COLLECTION = "users";
@@ -108,6 +111,29 @@ public class User {
 
     public void setLastUpdated(Long lastUpdated) {
         this.lastUpdated = lastUpdated;
+    }
+
+
+    public static void setCurrentUser(User user) {
+        SharedPreferences sp = MyApplication.getMyContext().getSharedPreferences("TAG", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+        Gson gson = new Gson();
+        editor.putString("user", gson.toJson(user));
+        editor.commit();
+    }
+
+    public static User getCurrentUser() {
+        SharedPreferences sp = MyApplication.getMyContext().getSharedPreferences("TAG", Context.MODE_PRIVATE);
+        Gson gson = new Gson();
+        String json = sp.getString("user", "");
+        return gson.fromJson(json, User.class);
+    }
+
+    public static void signOut() {
+        SharedPreferences sharedPref = MyApplication.getMyContext().getSharedPreferences("TAG", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.remove("user");
+        editor.commit();
     }
 
     @NotNull

@@ -13,8 +13,8 @@ public class FirebaseUserDB extends FirebaseBaseDB {
         });
     }
 
-    public void getUser(String email, IListener<User> listener) {
-        db.collection(User.COLLECTION).whereEqualTo(User.EMAIL, email).get()
+    public void getUser(String userId, IListener<User> listener) {
+        db.collection(User.COLLECTION).whereEqualTo(User.ID, userId).get()
                 .addOnSuccessListener(task -> {
                     User response = User.fromJSON(Objects.requireNonNull(task.getDocuments().get(0).getData()));
                     listener.onComplete(response);

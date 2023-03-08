@@ -26,13 +26,6 @@
             android:paddingLeft="5dp"
             android:paddingRight="5dp">
 
-            <ImageView
-                android:id="@+id/imageView2"
-                android:layout_width="match_parent"
-                android:layout_height="136dp"
-                android:layout_gravity="center|center_horizontal|center_vertical"
-                android:src="@drawable/undraw_sign__up_nm4k" />
-
             <TextView
                 android:id="@+id/textView"
                 android:layout_width="wrap_content"
@@ -164,9 +157,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="4dp"
-                android:text="TextView"
+                android:text=""
                 android:textColor="@color/error"
-                android:textSize="10sp"
+                android:textSize="11sp"
                 android:visibility="invisible" />
 
             <Button
