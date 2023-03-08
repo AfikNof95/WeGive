@@ -5,7 +5,7 @@
     android:id="@+id/toolbar"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/black"
+    android:background="@color/design_default_color_background"
     android:elevation="4dp"
     android:minHeight="?attr/actionBarSize"
     android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
@@ -15,9 +15,9 @@
         android:id="@+id/toolbar_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
+        android:layout_gravity="start"
         android:text="@string/app_name"
-        android:textColor="@color/white"
+        android:textColor="@color/design_default_color_on_secondary"
         android:textSize="18sp" />
 </androidx.appcompat.widget.Toolbar>
 

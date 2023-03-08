@@ -68,8 +68,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginBottom="10dp"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                app:passwordToggleEnabled="true"
                 >
+
 
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/password_input"
@@ -77,6 +79,7 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/password"
                     android:inputType="textPassword"
+
                     android:singleLine="true" />
 
             </com.google.android.material.textfield.TextInputLayout>
@@ -95,8 +98,18 @@
                 android:layout_marginBottom="10dp"
                 />
 
+            <TextView
+                android:id="@+id/sign_in_error_label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="4dp"
+                android:text="@string/generic_auth_exception"
+                android:textColor="@color/error"
+                android:textSize="11sp"
+                android:visibility="invisible" />
+
             <Button
-                android:id="@+id/sign_up_button"
+                android:id="@+id/sign_in_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
