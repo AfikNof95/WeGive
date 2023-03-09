@@ -23,7 +23,7 @@ import java.util.UUID;
 @Entity
 public class Post implements Serializable, Comparable<Post> {
 
-    static final String COLLECTION = "posts";
+    public static final String COLLECTION = "posts";
     static final String ID = "id";
     static final String TITLE = "title";
     static final String CONTENT = "content";
@@ -32,7 +32,7 @@ public class Post implements Serializable, Comparable<Post> {
     static final String CREATOR_NAME = "creator_name";
     static final String CREATOR_ID = "creator_id";
     static final String PARTICIPANTS = "participants";
-    static final String LAST_UPDATED = "last_updated";
+    public static final String LAST_UPDATED = "last_updated";
     static final String LOCAL_LAST_UPDATED = "last_updated";
 
 

@@ -22,7 +22,18 @@ public class FireBaseStorage {
     }
 
 
-    public void uploadImage(String path, Bitmap image, IListener<String> listener) {
+    private void deleteImage(String path, IListener<Void> listener) {
+        StorageReference storageRef = storage.getReference();
+        StorageReference imagesRef = storageRef.child("images/" + path + ".jpg");
+        imagesRef.delete().addOnCompleteListener(task -> {
+            if (task.isSuccessful()) {
+                listener.onComplete(null);
+            }
+        });
+    }
+
+
+    private void uploadImage(String path, Bitmap image, IListener<String> listener) {
         StorageReference sf = storage.getReference();
         StorageReference imageRef = sf.child("images/" + path + ".jpg");
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -51,5 +62,15 @@ public class FireBaseStorage {
     public void uploadUserAvatar(String userId, Bitmap avatarBitmap, IListener<String> listener) {
         String path = "users/" + userId;
         uploadImage(path, avatarBitmap, listener);
+    }
+
+    public void uploadPostImage(String postId, Bitmap postImage, IListener<String> listener) {
+        String path = "posts/" + postId;
+        uploadImage(path, postImage, listener);
+    }
+
+    public void deletePostImage(String postId, IListener<Void> listener) {
+        String path = "posts/" + postId;
+        deleteImage(path, listener);
     }
 }

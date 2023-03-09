@@ -8,6 +8,7 @@ import android.os.Bundle;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
@@ -76,7 +77,8 @@ public class SignUpFragment extends Fragment {
 
         binding = FragmentSignUpBinding.inflate(inflater, container, false);
         view = binding.getRoot();
-
+        ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
+        actionBar.hide();
         this.registerInputEvents();
 
 
@@ -192,5 +194,7 @@ public class SignUpFragment extends Fragment {
         }
         return isValid;
     }
+
+
 
 }

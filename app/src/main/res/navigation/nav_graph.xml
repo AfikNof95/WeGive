@@ -15,7 +15,6 @@
             app:destination="@id/signUpFragment"
             app:enterAnim="@android:anim/slide_in_left"
             app:exitAnim="@android:anim/slide_out_right"
-            app:popUpToInclusive="false"
             />
         <action
             android:id="@+id/action_loginFragment_to_homePageFragment"

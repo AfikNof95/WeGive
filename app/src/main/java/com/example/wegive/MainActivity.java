@@ -6,33 +6,27 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.menu.MenuBuilder;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+
 import androidx.navigation.NavController;
 import androidx.navigation.NavDestination;
 import androidx.navigation.Navigation;
-import androidx.navigation.fragment.NavHostFragment;
+
 
 import android.app.AlertDialog;
-import android.graphics.Bitmap;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
 import com.example.wegive.models.user.User;
-import com.squareup.picasso.Picasso;
-import com.squareup.picasso.Target;
 
-import java.io.IOException;
-import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
     boolean isFirstRun = true;
     private NavController navController;
-    private View navHostFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        navHostFragment = findViewById(R.id.nav_host_fragment);
+        View navHostFragment = findViewById(R.id.nav_host_fragment);
         navController = Navigation.findNavController(navHostFragment);
         if (isFirstRun && User.getCurrentUser() != null) {
 
@@ -106,8 +100,9 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-
-        if (navController != null && navController.getBackQueue().size() == 0) {
+        Fragment navHost = getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
+        FragmentManager manager = navHost.getChildFragmentManager();
+        if (manager.getBackStackEntryCount() == 0) {
             new AlertDialog.Builder(this)
                     .setTitle("Are you sure you want to close WeGive?")
                     .setMessage("We are sorry to see you leave.")
@@ -116,7 +111,6 @@ public class MainActivity extends AppCompatActivity {
                     .create().show();
         } else {
             super.onBackPressed();
-            overridePendingTransition(R.anim.slide_in, R.anim.fade_out);
         }
 
     }
