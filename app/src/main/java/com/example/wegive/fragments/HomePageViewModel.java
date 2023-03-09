@@ -5,19 +5,15 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.wegive.models.post.Post;
+import com.example.wegive.models.post.PostModel;
 
 import java.util.List;
 
 public class HomePageViewModel extends ViewModel {
     // TODO: Implement the ViewModel
-//    private LiveData<List<Post>> data = PostModel.instance().getAllRecipes();
-//    private MutableLiveData<List<Post>> serverPosts = PostModel.instance().getApiRecipes();
+    private LiveData<List<Post>> data = PostModel.getInstance().getAllPosts();
 
-//    public MutableLiveData<List<Post>> getServerPosts(){
-//        return serverPosts;
-//    }
-
-//    public LiveData<List<Post>> getData(){
-//        return data;
-//    }
+    public LiveData<List<Post>> getData() {
+        return data;
+    }
 }

@@ -1,5 +1,7 @@
 package com.example.wegive.fragments;
 
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import android.content.Context;
@@ -50,7 +52,8 @@ public class HomePageFragment extends Fragment {
                              @Nullable Bundle savedInstanceState) {
         binding = FragmentHomePageBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
-
+        ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
+        actionBar.show();
         binding.postsRecyclerView.setHasFixedSize(true);
         binding.postsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         adapter = new PostsRecyclerAdapter(getLayoutInflater(), new ArrayList<>());
