@@ -81,11 +81,6 @@ public class HomePageFragment extends Fragment {
         return view;
     }
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        mViewModel = new ViewModelProvider(this).get(HomePageViewModel.class);
-        // TODO: Use the ViewModel
-    }
+
 
 }

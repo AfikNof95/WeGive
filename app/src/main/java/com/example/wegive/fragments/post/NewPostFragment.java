@@ -130,7 +130,7 @@ public class NewPostFragment extends Fragment {
             SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             String formattedDate = dateFormat.format(currentDate);
             User currentUser = User.getCurrentUser();
-            Post post = new Post(title, content, formattedDate, null, currentUser.getName(), currentUser.getId(), null);
+            Post post = new Post(null,title, content, formattedDate, null, currentUser.getName(), currentUser.getId(), null);
             ProgressDialogGlobal pg = ProgressDialogGlobal.getInstance();
             pg.show(view, getString(R.string.add_post_loading_message));
             PostModel.getInstance().uploadPostImage(post.getId(), postImage, data -> {

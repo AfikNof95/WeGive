@@ -31,6 +31,13 @@
     <string name="post_content_hint">What is on your mind?</string>
     <string name="post">Post</string>
     <string name="cancel">Cancel</string>
+    <string name="bottom_menu_home">Home</string>
+    <string name="bottom_menu_account">Account</string>
+    <string name="bottom_menu_my_posts">My Posts</string>
+    <string name="bottom_menu_my_events">Events</string>
+    <string name="edit">Edit</string>
+    <string name="attend">Attend</string>
+    <string name="cancel_attend">Cancel Attendance</string>
 
 
     <!--Loading Messages-->

@@ -43,7 +43,10 @@
                         android:layout_gravity="center|center_horizontal|center_vertical"
                         android:contentDescription="@string/upload_image"
                         android:scaleType="fitCenter"
-                        android:src="@drawable/upload_image_24" />
+                        android:src="@drawable/upload_image_24"
+                        app:tint="@color/purple_500" />
+
+
 
                     <TextView
                         android:id="@+id/upload_post_image_label"

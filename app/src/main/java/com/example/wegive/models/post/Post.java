@@ -8,17 +8,20 @@ import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 import com.example.wegive.MyApplication;
-import com.example.wegive.models.user.User;
 import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.FieldValue;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.UUID;
+
+
+
 
 @Entity
 public class Post implements Serializable, Comparable<Post> {
@@ -48,19 +51,15 @@ public class Post implements Serializable, Comparable<Post> {
     public String participants;
     public Long lastUpdated;
 
-    public Post() {
-        this.id = UUID.randomUUID().toString();
-    }
-
-    public Post( String title, String content, String time, String imageUrl, String creatorName, String creatorId, String participants) {
-        this.id = UUID.randomUUID().toString();
+    public Post( String id,String title, String content, String time, String imageUrl, String creatorName, String creatorId, String participants) {
+        this.id = id == null ?  UUID.randomUUID().toString() : id;
         this.title = title;
         this.content = content;
         this.time = time;
         this.imageUrl = imageUrl;
         this.creatorName = creatorName;
         this.creatorId = creatorId;
-        this.participants = participants;
+        this.participants = participants == null ? "" : participants;
     }
 
 
@@ -73,7 +72,7 @@ public class Post implements Serializable, Comparable<Post> {
         String creatorName = (String) json.get(CREATOR_NAME);
         String creatorId = (String) json.get(CREATOR_ID);
         String participants = (String) json.get(PARTICIPANTS);
-        Post post = new Post(title, content, time, imageUrl, creatorName, creatorId, participants);
+        Post post = new Post(id,title, content, time, imageUrl, creatorName, creatorId, participants);
         Timestamp lastUpdated = (Timestamp) json.get(LAST_UPDATED);
         if (lastUpdated != null) {
             post.setLastUpdated(lastUpdated.getSeconds());
