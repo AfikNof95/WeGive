@@ -20,6 +20,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.example.wegive.fragments.HomePageFragmentDirections;
+import com.example.wegive.fragments.auth.LoginFragmentDirections;
 import com.example.wegive.models.user.User;
 
 
@@ -64,10 +66,10 @@ public class MainActivity extends AppCompatActivity {
         View navHostFragment = findViewById(R.id.nav_host_fragment);
         navController = Navigation.findNavController(navHostFragment);
         if (isFirstRun && User.getCurrentUser() != null) {
-
-            NavController navController = Navigation.findNavController(navHostFragment);
-            navController.navigate(R.id.homePageFragment);
             isFirstRun = false;
+            NavController navController = Navigation.findNavController(navHostFragment);
+            navController.navigate(com.example.wegive.fragments.auth.LoginFragmentDirections.actionLoginFragmentToHomePageFragment());
+
         }
 
     }
@@ -89,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
         switch (item.getItemId()) {
             case R.id.menu_sign_out:
                 User.signOut();
-                navController.navigate(R.id.loginFragment);
+                navController.navigate(com.example.wegive.fragments.HomePageFragmentDirections.actionHomePageFragmentToLoginFragment());
                 break;
             default:
                 return super.onOptionsItemSelected(item);

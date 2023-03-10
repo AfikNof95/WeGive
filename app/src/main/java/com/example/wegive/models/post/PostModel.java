@@ -10,15 +10,10 @@ import com.example.wegive.IListener;
 import com.example.wegive.firebase.FireBaseStorage;
 import com.example.wegive.firebase.FirebasePostDB;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 public class PostModel {
     private static final PostModel _instance = new PostModel();
@@ -57,7 +52,7 @@ public class PostModel {
     }
 
 
-    private void refreshAllPosts() {
+    public void refreshAllPosts() {
         EventPostListLoadingState.setValue(LoadingState.LOADING);
         Long localLastUpdate = Post.getLocalLastUpdated();
         db.getAllPostsSince(localLastUpdate, response -> {
@@ -70,6 +65,11 @@ public class PostModel {
                     if (time < post.getLastUpdated()) {
                         time = post.getLastUpdated();
                     }
+                }
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
                 }
 
                 Post.setLocalLastUpdate(time);

@@ -52,8 +52,8 @@ public class Post implements Serializable, Comparable<Post> {
         this.id = UUID.randomUUID().toString();
     }
 
-    public Post(String id, String title, String content, String time, String imageUrl, String creatorName, String creatorId, String participants) {
-        this.id = id;
+    public Post( String title, String content, String time, String imageUrl, String creatorName, String creatorId, String participants) {
+        this.id = UUID.randomUUID().toString();
         this.title = title;
         this.content = content;
         this.time = time;
@@ -73,7 +73,7 @@ public class Post implements Serializable, Comparable<Post> {
         String creatorName = (String) json.get(CREATOR_NAME);
         String creatorId = (String) json.get(CREATOR_ID);
         String participants = (String) json.get(PARTICIPANTS);
-        Post post = new Post(id, title, content, time, imageUrl, creatorName, creatorId, participants);
+        Post post = new Post(title, content, time, imageUrl, creatorName, creatorId, participants);
         Timestamp lastUpdated = (Timestamp) json.get(LAST_UPDATED);
         if (lastUpdated != null) {
             post.setLastUpdated(lastUpdated.getSeconds());
@@ -93,7 +93,7 @@ public class Post implements Serializable, Comparable<Post> {
         json.put(CREATOR_NAME,this.creatorName);
         json.put(CREATOR_ID,this.creatorId);
         json.put(PARTICIPANTS,this.participants);
-        json.put(LAST_UPDATED, FieldValue.serverTimestamp().toString());
+        json.put(LAST_UPDATED, FieldValue.serverTimestamp());
 
         return json;
     }
