@@ -27,12 +27,18 @@
     <string name="phone_number">Phone Number</string>
     <string name="menu_account">Account</string>
     <string name="menu_signout">Sign Out</string>
+    <string name="upload_image">Upload Image</string>
+    <string name="post_content_hint">What is on your mind?</string>
+    <string name="post">Post</string>
+    <string name="cancel">Cancel</string>
 
 
     <!--Loading Messages-->
     <string name="sign_up_loading_message">One moment away from joining our family!</string>
     <string name="sign_in_loading_message">One moment away from helping the community!</string>
     <string name="sign_in_success">Welcome back!</string>
+    <string name="add_post_success">Post created successfully!</string>
+    <string name="add_post_loading_message">Posting...</string>
 
 
     <!--Error Messages-->
@@ -43,5 +49,8 @@
     <string name="fab_content_desc">New Post</string>
     <string name="generic_auth_exception">We had a problem signing you in, please try again later!</string>
     <string name="auth_wrong_credentials">We could not find a user matching this credentials!</string>
+    <string name="post_title_hint">Post title</string>
+    <string name="empty_post_content_error">Please enter a valid title!</string>
+    <string name="empty_post_title_error">Please enter a valid content!</string>
 
 </resources>
