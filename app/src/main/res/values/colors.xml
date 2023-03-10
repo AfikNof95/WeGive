@@ -12,4 +12,5 @@
     <color name="success">#2e7d32</color>
     <color name="warning">#ed6c02</color>
     <color name="info">#0288d1</color>
+    <color name="divider">#cecece</color>
 </resources>
