@@ -25,6 +25,7 @@ import com.example.wegive.models.user.UserModel;
 import com.example.wegive.utils.ErrorHandler;
 import com.example.wegive.utils.ProgressDialogGlobal;
 import com.example.wegive.utils.SnackBarGlobal;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuthException;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -60,6 +61,8 @@ public class LoginFragment extends Fragment {
 
         ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
         actionBar.hide();
+        BottomNavigationView bottomNavigationView = ((AppCompatActivity) getActivity()).findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setVisibility(View.GONE);
 
         NavHostFragment navHostFragment = (NavHostFragment) getActivity().getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
         navController = navHostFragment.getNavController();
@@ -94,7 +97,7 @@ public class LoginFragment extends Fragment {
                         SnackBarGlobal.make(view, getString(R.string.sign_in_success), SnackBarGlobal.SEVERITY.SUCCESS);
                         navController.navigate(LoginFragmentDirections.actionLoginFragmentToHomePageFragment());
                         getActivity().invalidateOptionsMenu();
-                        pg.hide();
+
                     });
                 } else {
                     if (data.getException() instanceof FirebaseAuthException) {
@@ -110,7 +113,7 @@ public class LoginFragment extends Fragment {
 
                     binding.signInErrorLabel.setVisibility(View.VISIBLE);
                 }
-
+                pg.hide();
             });
         }
 
