@@ -8,8 +8,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.navigation.NavDirections;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.wegive.fragments.HomePageFragmentDirections;
 import com.example.wegive.models.post.Post;
 import com.example.wegive.models.post.PostModel;
 import com.example.wegive.models.user.User;
@@ -34,10 +37,13 @@ class PostViewHolder extends RecyclerView.ViewHolder {
     ImageView postImage;
     ImageView userAvatar;
     Chip editButton;
+    Chip deleteButton;
 
     Button attendButton;
 
     Boolean isAttended = false;
+
+    View parentView;
 
     public PostViewHolder(@NotNull View view, PostsRecyclerAdapter.OnItemClickListener listener, List<Post> data) {
         super(view);
@@ -47,8 +53,10 @@ class PostViewHolder extends RecyclerView.ViewHolder {
         postUserName = view.findViewById(R.id.post_user_name);
         postImage = view.findViewById(R.id.post_image);
         editButton = view.findViewById(R.id.post_edit_button);
+        deleteButton = view.findViewById(R.id.post_delete_button);
         userAvatar = view.findViewById(R.id.post_user_avatar);
         attendButton = view.findViewById(R.id.post_attend);
+        parentView = view;
         this.data = data;
 
 
@@ -63,6 +71,8 @@ class PostViewHolder extends RecyclerView.ViewHolder {
         postTitle.setText(post.getTitle());
         postContent.setText(post.getContent());
         postUserName.setText(post.getCreatorName());
+        isAttended = false;
+        attendButton.setText(R.string.attend);
         Picasso.get().load(currentUser.getAvatarUrl()).placeholder(R.drawable.undraw_pic_profile_re_7g2h).into(userAvatar);
         String participants = post.getParticipants();
         if (!Objects.equals(post.getImageUrl(), "")) {
@@ -73,6 +83,7 @@ class PostViewHolder extends RecyclerView.ViewHolder {
 
         if (post.getCreatorId().equals(currentUser.getId())) {
             editButton.setVisibility(View.VISIBLE);
+            deleteButton.setVisibility(View.VISIBLE);
         }
 
         String[] participantsArray = participants.split(",");
@@ -91,7 +102,7 @@ class PostViewHolder extends RecyclerView.ViewHolder {
             if (isAttended) {
                 Stream<String> newParticipantsStream = Arrays.stream(participantsArray).filter(participant -> !participant.equals(currentUser.getId()));
                 String[] arr = (newParticipantsStream.toArray(String[]::new));
-                newParticipants =String.join(",",arr);
+                newParticipants = String.join(",", arr);
             } else {
                 newParticipants = participants.trim().equals("") ? currentUser.getId() : participants + "," + currentUser.getId();
             }
@@ -99,6 +110,10 @@ class PostViewHolder extends RecyclerView.ViewHolder {
             PostModel.getInstance().updatePost(post, data1 -> {
 
             });
+        });
+
+        editButton.setOnClickListener(view -> {
+            Navigation.findNavController(parentView).navigate(HomePageFragmentDirections.actionHomePageFragmentToNewPostFragment(post));
         });
 
     }

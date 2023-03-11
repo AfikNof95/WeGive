@@ -44,7 +44,7 @@
                         android:contentDescription="@string/upload_image"
                         android:scaleType="fitCenter"
                         android:src="@drawable/upload_image_24"
-                        app:tint="@color/purple_500" />
+                        />
 
 
 

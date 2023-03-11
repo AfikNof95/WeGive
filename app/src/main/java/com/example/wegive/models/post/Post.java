@@ -1,42 +1,45 @@
 package com.example.wegive.models.post;
 
+import static androidx.room.ForeignKey.CASCADE;
+
 import android.content.Context;
 import android.content.SharedPreferences;
 
 import androidx.annotation.NonNull;
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
-
 import com.example.wegive.MyApplication;
+import com.example.wegive.models.attendent.Attendant;
 import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.FieldValue;
-
 import org.jetbrains.annotations.NotNull;
 
 import java.io.Serializable;
-import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.UUID;
 
 
-
-
+//@Entity(tableName = "posts",foreignKeys = @ForeignKey(entity = Attendant.class,parentColumns = Attendant.POST_ID,childColumns = Post.ID,onDelete = CASCADE))
 @Entity
 public class Post implements Serializable, Comparable<Post> {
 
     public static final String COLLECTION = "posts";
-    static final String ID = "id";
-    static final String TITLE = "title";
-    static final String CONTENT = "content";
-    static final String TIME = "time";
-    static final String IMAGE_URL = "image_url";
-    static final String CREATOR_NAME = "creator_name";
-    static final String CREATOR_ID = "creator_id";
-    static final String PARTICIPANTS = "participants";
+    public static final String ID = "id";
+    public static final String TITLE = "title";
+    public static final String CONTENT = "content";
+    public static final String TIME = "time";
+    public static final String IMAGE_URL = "image_url";
+    public static final String CREATOR_NAME = "creator_name";
+    public static final String CREATOR_ID = "creator_id";
+    public static final String CREATED_AT = "created_at";
+    public static final String PARTICIPANTS = "participants";
     public static final String LAST_UPDATED = "last_updated";
-    static final String LOCAL_LAST_UPDATED = "last_updated";
+    public static final String LOCAL_LAST_UPDATED = "last_updated";
 
 
     @PrimaryKey
@@ -48,11 +51,14 @@ public class Post implements Serializable, Comparable<Post> {
     public String imageUrl;
     public String creatorName;
     public String creatorId;
+
+    public Long createdAt;
     public String participants;
     public Long lastUpdated;
 
-    public Post( String id,String title, String content, String time, String imageUrl, String creatorName, String creatorId, String participants) {
-        this.id = id == null ?  UUID.randomUUID().toString() : id;
+
+    public Post(String id, String title, String content, String time, String imageUrl, String creatorName, String creatorId, String participants, Long createdAt) {
+        this.id = id == null ? UUID.randomUUID().toString() : id;
         this.title = title;
         this.content = content;
         this.time = time;
@@ -60,6 +66,7 @@ public class Post implements Serializable, Comparable<Post> {
         this.creatorName = creatorName;
         this.creatorId = creatorId;
         this.participants = participants == null ? "" : participants;
+        this.createdAt = createdAt != null ? createdAt : (new Date()).getTime();
     }
 
 
@@ -72,7 +79,8 @@ public class Post implements Serializable, Comparable<Post> {
         String creatorName = (String) json.get(CREATOR_NAME);
         String creatorId = (String) json.get(CREATOR_ID);
         String participants = (String) json.get(PARTICIPANTS);
-        Post post = new Post(id,title, content, time, imageUrl, creatorName, creatorId, participants);
+        Long createdAt = (Long)json.get(CREATED_AT);
+        Post post = new Post(id, title, content, time, imageUrl, creatorName, creatorId, participants,createdAt);
         Timestamp lastUpdated = (Timestamp) json.get(LAST_UPDATED);
         if (lastUpdated != null) {
             post.setLastUpdated(lastUpdated.getSeconds());
@@ -82,16 +90,17 @@ public class Post implements Serializable, Comparable<Post> {
         return post;
     }
 
-    public Map<String,Object> toJson(){
-        Map<String,Object> json = new HashMap<>();
-        json.put(ID,this.id);
-        json.put(TITLE,this.title);
-        json.put(CONTENT,this.content);
-        json.put(TIME,this.time);
-        json.put(IMAGE_URL,this.imageUrl);
-        json.put(CREATOR_NAME,this.creatorName);
-        json.put(CREATOR_ID,this.creatorId);
-        json.put(PARTICIPANTS,this.participants);
+    public Map<String, Object> toJson() {
+        Map<String, Object> json = new HashMap<>();
+        json.put(ID, this.id);
+        json.put(TITLE, this.title);
+        json.put(CONTENT, this.content);
+        json.put(TIME, this.time);
+        json.put(IMAGE_URL, this.imageUrl);
+        json.put(CREATOR_NAME, this.creatorName);
+        json.put(CREATOR_ID, this.creatorId);
+        json.put(PARTICIPANTS, this.participants);
+        json.put(CREATED_AT, this.createdAt);
         json.put(LAST_UPDATED, FieldValue.serverTimestamp());
 
         return json;
@@ -111,9 +120,7 @@ public class Post implements Serializable, Comparable<Post> {
     }
 
 
-    public void setLastUpdated(Long lastUpdated) {
-        this.lastUpdated = lastUpdated;
-    }
+
 
     @NotNull
     public String getId() {
@@ -197,3 +204,5 @@ public class Post implements Serializable, Comparable<Post> {
         return (Objects.nonNull(post.lastUpdated)) ? getLastUpdated().compareTo(post.lastUpdated) : 0;
     }
 }
+
+

@@ -1,7 +1,6 @@
 package com.example.wegive.models.post;
 
 import android.graphics.Bitmap;
-import android.util.Log;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -9,6 +8,8 @@ import androidx.lifecycle.MutableLiveData;
 import com.example.wegive.IListener;
 import com.example.wegive.firebase.FireBaseStorage;
 import com.example.wegive.firebase.FirebasePostDB;
+import com.example.wegive.models.AppLocalDB;
+import com.example.wegive.models.AppLocalDbRepository;
 
 import java.util.List;
 import java.util.concurrent.Executor;
@@ -74,6 +75,14 @@ public class PostModel {
 
                 Post.setLocalLastUpdate(time);
                 EventPostListLoadingState.postValue(LoadingState.NOT_LOADING);
+            });
+        });
+
+        db.getAllDeletedSince(localLastUpdate,response->{
+            executor.execute(()->{
+                for(String id : response){
+                    localDB.postDao().deletePostById(id);
+                }
             });
         });
     }

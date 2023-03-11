@@ -8,12 +8,12 @@ import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
 
 
-
 import java.util.List;
+
 @Dao
 public interface PostDao {
 
-    @Query("select * from Post")
+    @Query("select * from Post ORDER BY createdAt DESC")
     LiveData<List<Post>> getAll();
 
     @Query("select * from Post where id = :postId")
@@ -22,6 +22,10 @@ public interface PostDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     void insertAll(Post... posts);
 
+
     @Delete
     void delete(Post post);
+
+    @Query("DELETE FROM Post WHERE id= :id")
+    void deletePostById(String id);
 }

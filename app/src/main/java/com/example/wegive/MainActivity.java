@@ -41,16 +41,16 @@ public class MainActivity extends AppCompatActivity {
         if (appBar != null) {
             appBar.setDisplayShowTitleEnabled(false);
             toolbar.findViewById(R.id.toolbar_title).setOnClickListener(view1 -> {
-                navController.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {
-                    @Override
-                    public void onDestinationChanged(@NonNull NavController navController, @NonNull NavDestination navDestination, @Nullable Bundle bundle) {
-                        if (navDestination.getId() == R.id.signUpFragment || navDestination.getId() == R.id.loginFragment) {
-                            appBar.hide();
-                        } else if (!appBar.isShowing()) {
-                            appBar.show();
-                        }
-                    }
-                });
+//                navController.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {
+//                    @Override
+//                    public void onDestinationChanged(@NonNull NavController navController, @NonNull NavDestination navDestination, @Nullable Bundle bundle) {
+//                        if (navDestination.getId() == R.id.signUpFragment || navDestination.getId() == R.id.loginFragment) {
+//                            appBar.hide();
+//                        } else if (!appBar.isShowing()) {
+//                            appBar.show();
+//                        }
+//                    }
+//                });
                 navController.navigate(R.id.homePageFragment);
 
 
@@ -66,11 +66,11 @@ public class MainActivity extends AppCompatActivity {
         View navHostFragment = findViewById(R.id.nav_host_fragment);
         navController = Navigation.findNavController(navHostFragment);
         if (isFirstRun && User.getCurrentUser() != null) {
-            isFirstRun = false;
             NavController navController = Navigation.findNavController(navHostFragment);
             navController.navigate(com.example.wegive.fragments.auth.LoginFragmentDirections.actionLoginFragmentToHomePageFragment());
 
         }
+        isFirstRun = false;
 
     }
 

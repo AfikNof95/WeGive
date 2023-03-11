@@ -22,6 +22,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
+import com.example.wegive.IListener;
 import com.example.wegive.R;
 import com.example.wegive.databinding.FragmentNewPostBinding;
 import com.example.wegive.models.post.Post;
@@ -31,6 +32,7 @@ import com.example.wegive.utils.ProgressDialogGlobal;
 import com.example.wegive.utils.SnackBarGlobal;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
+import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -52,6 +54,10 @@ public class NewPostFragment extends Fragment {
     TextInputLayout contentLayout;
 
     ImageView uploadPostImage;
+
+    boolean isEditMode = false;
+
+    Post post = null;
 
     public NewPostFragment() {
     }
@@ -91,6 +97,10 @@ public class NewPostFragment extends Fragment {
         contentInput = binding.postContentInput;
         contentLayout = binding.postContentLayout;
         uploadPostImage = binding.uploadPostImage;
+        post = NewPostFragmentArgs.fromBundle(getArguments()).getPost();
+        if (post != null) {
+            initializeEditingMode(post);
+        }
 
         binding.addPostCancelButton.setOnClickListener(view1 -> {
             Navigation.findNavController(view).navigate(NewPostFragmentDirections.actionNewPostFragmentToHomePageFragment());
@@ -121,32 +131,54 @@ public class NewPostFragment extends Fragment {
         return view;
     }
 
+
+    private void initializeEditingMode(Post post) {
+        isEditMode = true;
+        titleInput.setText(post.getTitle());
+        contentInput.setText(post.getContent());
+        Picasso.get().load(post.getImageUrl()).placeholder(R.drawable.progress_animation).into(uploadPostImage);
+    }
+
     private void handlePostUpload() {
         if (validateForm()) {
-            String title = titleInput.getText().toString();
-            String content = contentInput.getText().toString();
+
+            Post newPost = getPost();
+
             Bitmap postImage = ((BitmapDrawable) uploadPostImage.getDrawable()).getBitmap();
-            Date currentDate = new Date();
-            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-            String formattedDate = dateFormat.format(currentDate);
-            User currentUser = User.getCurrentUser();
-            Post post = new Post(null,title, content, formattedDate, null, currentUser.getName(), currentUser.getId(), null);
+
             ProgressDialogGlobal pg = ProgressDialogGlobal.getInstance();
             pg.show(view, getString(R.string.add_post_loading_message));
-            PostModel.getInstance().uploadPostImage(post.getId(), postImage, data -> {
-                if (data != null) {
-                    post.setImageUrl(data);
-                }
 
-                PostModel.getInstance().addPost(post, unused -> {
+            PostModel.getInstance().uploadPostImage(newPost.getId(), postImage, data -> {
+                if (data != null) {
+                    newPost.setImageUrl(data);
+                }
+                
+                IListener<Void> listener = data1 -> {
                     SnackBarGlobal.make(view, getString(R.string.add_post_success), SnackBarGlobal.SEVERITY.SUCCESS);
                     pg.hide();
                     Navigation.findNavController(view).navigate(NewPostFragmentDirections.actionNewPostFragmentToHomePageFragment());
-                });
+                };
+
+                PostModel.getInstance().addPost(newPost, listener);
+
             });
 
 
         }
+    }
+
+    private Post getPost() {
+        String id = post != null ? post.getId() : null;
+        String title = titleInput.getText().toString();
+        String content = contentInput.getText().toString();
+        Date currentDate = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String formattedDate = dateFormat.format(currentDate);
+        Long createdAt = (new Date()).getTime();
+        User currentUser = User.getCurrentUser();
+
+        return new Post(id, title, content, formattedDate, null, currentUser.getName(), currentUser.getId(), null, createdAt);
     }
 
     private boolean validateForm() {

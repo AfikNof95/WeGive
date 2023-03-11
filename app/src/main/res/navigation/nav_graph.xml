@@ -84,5 +84,9 @@
             app:popExitAnim="@anim/fade_out"
             app:popEnterAnim="@anim/slide_in"
             />
+        <argument
+            android:name="post"
+            app:argType="com.example.wegive.models.post.Post"
+            app:nullable="true" />
     </fragment>
 </navigation>

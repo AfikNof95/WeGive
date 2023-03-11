@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import androidx.annotation.NonNull;
+import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 import com.example.wegive.MainActivity;
@@ -19,6 +20,7 @@ import java.util.Map;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+@Entity
 public class User {
 
     public static final String COLLECTION = "users";
@@ -47,9 +49,6 @@ public class User {
     public long lastUpdated;
 
 
-    public User() {
-
-    }
 
     public User(@NonNull String id, String name, String email, String phoneNumber, String avatarUrl, Boolean isVerified, Boolean isAdmin) {
         this.id = id;

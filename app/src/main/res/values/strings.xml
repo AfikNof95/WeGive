@@ -36,6 +36,7 @@
     <string name="bottom_menu_my_posts">My Posts</string>
     <string name="bottom_menu_my_events">Events</string>
     <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
     <string name="attend">Attend</string>
     <string name="cancel_attend">Cancel Attendance</string>
 
@@ -44,7 +45,8 @@
     <string name="sign_up_loading_message">One moment away from joining our family!</string>
     <string name="sign_in_loading_message">One moment away from helping the community!</string>
     <string name="sign_in_success">Welcome back!</string>
-    <string name="add_post_success">Post created successfully!</string>
+    <string name="add_post_success">Post posted successfully!</string>
+    <string name="update_post_success">Post updated successfully!</string>
     <string name="add_post_loading_message">Posting...</string>
 
 

@@ -16,12 +16,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 
 import com.example.wegive.PostsRecyclerAdapter;
 import com.example.wegive.R;
 import com.example.wegive.databinding.FragmentHomePageBinding;
 import com.example.wegive.models.post.Post;
 import com.example.wegive.models.post.PostModel;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;
 
@@ -57,30 +59,38 @@ public class HomePageFragment extends Fragment {
         adapter = new PostsRecyclerAdapter(getLayoutInflater(), mViewModel.getData().getValue());
         binding.postsRecyclerView.setAdapter(adapter);
 
+
+        BottomNavigationView bottomNavigationView = ((AppCompatActivity) getActivity()).findViewById(R.id.bottom_navigation);
+        bottomNavigationView.setVisibility(View.VISIBLE);
+
         adapter.setOnItemClickListener(pos -> {
             Post post = mViewModel.getData().getValue().get(pos);
         });
 
-        mViewModel.getData().observe(getViewLifecycleOwner(),list->{
+        mViewModel.getData().observe(getViewLifecycleOwner(), list -> {
             adapter.setData(list);
+
         });
 
-        PostModel.getInstance().EventPostListLoadingState.observe(getViewLifecycleOwner(), status->{
+        PostModel.getInstance().EventPostListLoadingState.observe(getViewLifecycleOwner(), status -> {
             binding.swipeRefreshLayout.setRefreshing(status == PostModel.LoadingState.LOADING);
+            if (status != PostModel.LoadingState.LOADING) {
+                getActivity().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+            }
         });
 
-        binding.swipeRefreshLayout.setOnRefreshListener(()->{
+        binding.swipeRefreshLayout.setOnRefreshListener(() -> {
             PostModel.getInstance().refreshAllPosts();
+            getActivity().getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE, WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
         });
 
         binding.addPostButton.setOnClickListener(view1 -> {
-            Navigation.findNavController(view).navigate(HomePageFragmentDirections.actionHomePageFragmentToNewPostFragment());
+            Navigation.findNavController(view).navigate(HomePageFragmentDirections.actionHomePageFragmentToNewPostFragment(null));
         });
 
 
         return view;
     }
-
 
 
 }
