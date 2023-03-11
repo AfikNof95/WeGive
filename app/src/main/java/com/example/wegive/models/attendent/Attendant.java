@@ -25,6 +25,8 @@ public class Attendant implements Serializable {
     public static final String ID = "id";
     public static final String USER_ID = "user_id";
     public static final String POST_ID = "post_id";
+    public static final String ATTENDANT_NAME = "attendant_name";
+    public static final String ATTENDANT_AVATAR = "attendant_avatar";
 
     public static final String ATTENDANT_LAST_UPDATED = "attendant_last_updated";
 
@@ -35,13 +37,18 @@ public class Attendant implements Serializable {
     private String id;
     private String userId;
     private String postId;
+
+    private String attendantAvatar;
+    private String attendantName;
     public Long lastUpdated;
 
 
-    public Attendant(String id, String userId, String postId) {
+    public Attendant(String id, String userId, String postId, String attendantName, String attendantAvatar) {
         this.id = id == null ? UUID.randomUUID().toString() : id;
         this.userId = userId;
         this.postId = postId;
+        this.attendantAvatar = attendantAvatar;
+        this.attendantName = attendantName;
     }
 
 
@@ -49,8 +56,9 @@ public class Attendant implements Serializable {
         String id = (String) json.get(ID);
         String userId = (String) json.get(USER_ID);
         String postId = (String) json.get(POST_ID);
-
-        Attendant attendant = new Attendant(id, userId, postId);
+        String attendantName = (String) json.get(ATTENDANT_NAME);
+        String attendantAvatar = (String) json.get(ATTENDANT_AVATAR);
+        Attendant attendant = new Attendant(id, userId, postId, attendantName, attendantAvatar);
 
         Timestamp lastUpdated = (Timestamp) json.get(ATTENDANT_LAST_UPDATED);
         if (lastUpdated != null) {
@@ -65,6 +73,8 @@ public class Attendant implements Serializable {
         json.put(ID, this.id);
         json.put(USER_ID, this.userId);
         json.put(POST_ID, this.postId);
+        json.put(ATTENDANT_NAME, this.attendantName);
+        json.put(ATTENDANT_AVATAR, this.attendantAvatar);
         json.put(ATTENDANT_LAST_UPDATED, FieldValue.serverTimestamp());
         return json;
     }
@@ -107,9 +117,26 @@ public class Attendant implements Serializable {
         this.postId = postId;
     }
 
+    public String getAttendantName() {
+        return attendantName;
+    }
+
+    public void setAttendantName(String attendantName) {
+        this.attendantName = attendantName;
+    }
+
+    public String getAttendantAvatar() {
+        return attendantAvatar;
+    }
+
+    public void setAttendantAvatar(String attendantAvatar) {
+        this.attendantAvatar = attendantAvatar;
+    }
+
     public void setLastUpdated(Long lastUpdated) {
         this.lastUpdated = lastUpdated;
     }
+
     public Long getLastUpdated() {
         return this.lastUpdated;
     }
