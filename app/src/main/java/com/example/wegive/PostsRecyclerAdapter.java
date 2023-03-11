@@ -73,8 +73,8 @@ class PostViewHolder extends RecyclerView.ViewHolder {
         postUserName.setText(post.getCreatorName());
         isAttended = false;
         attendButton.setText(R.string.attend);
-        Picasso.get().load(currentUser.getAvatarUrl()).placeholder(R.drawable.undraw_pic_profile_re_7g2h).into(userAvatar);
-        String participants = post.getParticipants();
+        Picasso.get().load(post.getCreatorAvatar()).placeholder(R.drawable.undraw_pic_profile_re_7g2h).into(userAvatar);
+
         if (!Objects.equals(post.getImageUrl(), "")) {
             Picasso.get().load(post.getImageUrl()).placeholder(R.drawable.progress_animation).into(postImage);
         } else {
@@ -86,30 +86,16 @@ class PostViewHolder extends RecyclerView.ViewHolder {
             deleteButton.setVisibility(View.VISIBLE);
         }
 
-        String[] participantsArray = participants.split(",");
 
-        for (String id : participantsArray) {
-            if (id.equals(currentUser.getId())) {
-                isAttended = true;
-                attendButton.setText(R.string.cancel_attend);
-                break;
-            }
 
-        }
 
         attendButton.setOnClickListener(view -> {
-            String newParticipants = "";
-            if (isAttended) {
-                Stream<String> newParticipantsStream = Arrays.stream(participantsArray).filter(participant -> !participant.equals(currentUser.getId()));
-                String[] arr = (newParticipantsStream.toArray(String[]::new));
-                newParticipants = String.join(",", arr);
-            } else {
-                newParticipants = participants.trim().equals("") ? currentUser.getId() : participants + "," + currentUser.getId();
-            }
-            post.setParticipants(newParticipants);
-            PostModel.getInstance().updatePost(post, data1 -> {
 
-            });
+            if (isAttended) {
+
+            } else {
+
+            }
         });
 
         editButton.setOnClickListener(view -> {

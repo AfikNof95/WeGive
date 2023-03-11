@@ -153,7 +153,7 @@ public class NewPostFragment extends Fragment {
                 if (data != null) {
                     newPost.setImageUrl(data);
                 }
-                
+
                 IListener<Void> listener = data1 -> {
                     SnackBarGlobal.make(view, getString(R.string.add_post_success), SnackBarGlobal.SEVERITY.SUCCESS);
                     pg.hide();
@@ -178,7 +178,7 @@ public class NewPostFragment extends Fragment {
         Long createdAt = (new Date()).getTime();
         User currentUser = User.getCurrentUser();
 
-        return new Post(id, title, content, formattedDate, null, currentUser.getName(), currentUser.getId(), null, createdAt);
+        return new Post(id, title, content, formattedDate, null, currentUser.getName(), currentUser.getId(),currentUser.getAvatarUrl(), null, createdAt);
     }
 
     private boolean validateForm() {

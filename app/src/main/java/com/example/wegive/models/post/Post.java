@@ -35,6 +35,8 @@ public class Post implements Serializable, Comparable<Post> {
     public static final String TIME = "time";
     public static final String IMAGE_URL = "image_url";
     public static final String CREATOR_NAME = "creator_name";
+
+    public static final String CREATOR_AVATAR = "creator_avatar";
     public static final String CREATOR_ID = "creator_id";
     public static final String CREATED_AT = "created_at";
     public static final String PARTICIPANTS = "participants";
@@ -52,12 +54,14 @@ public class Post implements Serializable, Comparable<Post> {
     public String creatorName;
     public String creatorId;
 
+    public String creatorAvatar;
+
     public Long createdAt;
     public String participants;
     public Long lastUpdated;
 
 
-    public Post(String id, String title, String content, String time, String imageUrl, String creatorName, String creatorId, String participants, Long createdAt) {
+    public Post(String id, String title, String content, String time, String imageUrl, String creatorName, String creatorId, String creatorAvatar ,String participants, Long createdAt) {
         this.id = id == null ? UUID.randomUUID().toString() : id;
         this.title = title;
         this.content = content;
@@ -65,6 +69,7 @@ public class Post implements Serializable, Comparable<Post> {
         this.imageUrl = imageUrl;
         this.creatorName = creatorName;
         this.creatorId = creatorId;
+        this.creatorAvatar = creatorAvatar;
         this.participants = participants == null ? "" : participants;
         this.createdAt = createdAt != null ? createdAt : (new Date()).getTime();
     }
@@ -79,8 +84,9 @@ public class Post implements Serializable, Comparable<Post> {
         String creatorName = (String) json.get(CREATOR_NAME);
         String creatorId = (String) json.get(CREATOR_ID);
         String participants = (String) json.get(PARTICIPANTS);
+        String creatorAvatar = (String) json.get(CREATOR_AVATAR);
         Long createdAt = (Long)json.get(CREATED_AT);
-        Post post = new Post(id, title, content, time, imageUrl, creatorName, creatorId, participants,createdAt);
+        Post post = new Post(id, title, content, time, imageUrl, creatorName, creatorId, creatorAvatar,participants,createdAt);
         Timestamp lastUpdated = (Timestamp) json.get(LAST_UPDATED);
         if (lastUpdated != null) {
             post.setLastUpdated(lastUpdated.getSeconds());
@@ -99,6 +105,7 @@ public class Post implements Serializable, Comparable<Post> {
         json.put(IMAGE_URL, this.imageUrl);
         json.put(CREATOR_NAME, this.creatorName);
         json.put(CREATOR_ID, this.creatorId);
+        json.put(CREATOR_AVATAR, this.creatorAvatar);
         json.put(PARTICIPANTS, this.participants);
         json.put(CREATED_AT, this.createdAt);
         json.put(LAST_UPDATED, FieldValue.serverTimestamp());
@@ -198,6 +205,13 @@ public class Post implements Serializable, Comparable<Post> {
         this.lastUpdated = lastUpdated;
     }
 
+    public String getCreatorAvatar() {
+        return creatorAvatar;
+    }
+
+    public void setCreatorAvatar(String creatorAvatar) {
+        this.creatorAvatar = creatorAvatar;
+    }
 
     @Override
     public int compareTo(Post post) {
