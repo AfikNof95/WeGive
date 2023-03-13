@@ -64,6 +64,8 @@ public class HomePageFragment extends Fragment {
 
         adapter.setOnItemClickListener(pos -> {
             Post post = mViewModel.getPosts().getValue().get(pos);
+            Navigation.findNavController(view).navigate(com.example.wegive.fragments.homePage.HomePageFragmentDirections.actionHomePageFragmentToPostDetailsFragment(post));
+
         });
 
         mViewModel.getPosts().observe(getViewLifecycleOwner(), list -> {

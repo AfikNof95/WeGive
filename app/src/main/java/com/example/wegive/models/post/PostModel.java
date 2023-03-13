@@ -27,6 +27,8 @@ public class PostModel {
     AppLocalDbRepository localDB = AppLocalDB.getAppDb();
     final public MutableLiveData<LoadingState> EventPostListLoadingState = new MutableLiveData<LoadingState>(LoadingState.NOT_LOADING);
 
+    final public MutableLiveData<LoadingState> MyPostsListLoadingState = new MutableLiveData<>(LoadingState.NOT_LOADING);
+
 
     public static PostModel getInstance() {
         return _instance;
