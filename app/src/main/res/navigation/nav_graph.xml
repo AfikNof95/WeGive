@@ -81,7 +81,12 @@
             />
         <action
             android:id="@+id/action_homePageFragment_to_postDetailsFragment"
-            app:destination="@id/postDetailsFragment" />
+            app:destination="@id/postDetailsFragment"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out"
+            app:popExitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/slide_in"
+            />
     </fragment>
     <fragment
         android:id="@+id/newPostFragment"
@@ -118,21 +123,36 @@
             />
         <action
             android:id="@+id/action_myPostsFragment_to_postDetailsFragment"
-            app:destination="@id/postDetailsFragment" />
+            app:destination="@id/postDetailsFragment"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out"
+            app:popExitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/slide_in"
+            />
     </fragment>
     <fragment
         android:id="@+id/postDetailsFragment"
         android:name="com.example.wegive.fragments.post.PostDetailsFragment"
         android:label="fragment_post_details"
         tools:layout="@layout/fragment_post_details"
-        app:enterAnim="@anim/slide_in"
-        app:exitAnim="@anim/fade_out"
-        app:popExitAnim="@anim/fade_out"
-        app:popEnterAnim="@anim/slide_in"
         >
         <argument
             android:name="post"
             app:argType="com.example.wegive.models.post.Post"
             app:nullable="true" />
+        <action
+            android:id="@+id/action_postDetailsFragment_to_newPostFragment"
+            app:destination="@id/newPostFragment"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out"
+            app:popExitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/slide_in"
+            />
+        <action
+            android:id="@+id/action_postDetailsFragment_self"
+            app:destination="@id/postDetailsFragment"
+            app:popUpTo="@id/postDetailsFragment"
+            app:popUpToInclusive="true"
+            />
     </fragment>
 </navigation>
