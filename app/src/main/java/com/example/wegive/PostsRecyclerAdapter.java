@@ -10,9 +10,11 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.navigation.Navigation;
+import androidx.navigation.ui.NavigationUI;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.wegive.fragments.homePage.HomePageFragmentDirections;
+import com.example.wegive.fragments.myPosts.MyPostsFragmentDirections;
 import com.example.wegive.models.attendent.Attendant;
 import com.example.wegive.models.post.Post;
 import com.example.wegive.models.post.PostModel;
@@ -91,7 +93,7 @@ class PostViewHolder extends RecyclerView.ViewHolder {
         isAttended = post.getAttendants().stream().anyMatch(attendant -> attendant.getUserId().equals(userId));
         attendButton.setText(isAttended ? R.string.leave : R.string.join);
         int attendButtonColor = parentView.getResources().getColor(isAttended ? R.color.error : R.color.success);
-        Drawable attendButtonIcon = parentView.getResources().getDrawable(isAttended ? R.drawable.outline_cancel_24 :R.drawable.outline_task_alt_24 );
+        Drawable attendButtonIcon = parentView.getResources().getDrawable(isAttended ? R.drawable.outline_cancel_24 : R.drawable.outline_task_alt_24);
         attendButton.setIconTint(ColorStateList.valueOf(attendButtonColor));
         attendButton.setTextColor(attendButtonColor);
         attendButton.setStrokeColor(ColorStateList.valueOf(attendButtonColor));
@@ -115,12 +117,17 @@ class PostViewHolder extends RecyclerView.ViewHolder {
         });
 
         editButton.setOnClickListener(view -> {
-            Navigation.findNavController(parentView).navigate(HomePageFragmentDirections.actionHomePageFragmentToNewPostFragment(post));
+            if (Navigation.findNavController(parentView).getCurrentDestination().getId() == R.id.homePageFragment) {
+                Navigation.findNavController(parentView).navigate(HomePageFragmentDirections.actionHomePageFragmentToNewPostFragment(post));
+            } else {
+                Navigation.findNavController(parentView).navigate(MyPostsFragmentDirections.actionMyPostsFragmentToNewPostFragment(post));
+            }
+
         });
 
     }
 
-    private void handleAttendClick(){
+    private void handleAttendClick() {
         String userId = user.getId();
         String userName = user.getName();
         String userAvatarUrl = user.getAvatarUrl();

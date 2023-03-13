@@ -56,7 +56,8 @@ public class MyPostsFragment extends Fragment {
         bottomNavigationView.setVisibility(View.VISIBLE);
 
         adapter.setOnItemClickListener(pos -> {
-            Post post = viewModel.getMyPosts().getValue().get(pos);
+            Post post = adapter.getData().get(pos);
+            Navigation.findNavController(view).navigate(MyPostsFragmentDirections.actionMyPostsFragmentToPostDetailsFragment(post));
         });
 
         viewModel.getMyPosts().observe(getViewLifecycleOwner(), list -> {
