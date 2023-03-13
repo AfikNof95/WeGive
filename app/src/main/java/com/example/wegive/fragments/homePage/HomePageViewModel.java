@@ -1,14 +1,10 @@
-package com.example.wegive.fragments;
+package com.example.wegive.fragments.homePage;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
-
-import com.example.wegive.models.attendent.Attendant;
-import com.example.wegive.models.attendent.AttendantModel;
 import com.example.wegive.models.post.Post;
-//import com.example.wegive.models.postAttendantPair.PostAttendantPair;
 import com.example.wegive.models.post.PostModel;
-import com.example.wegive.models.postAttendantPair.PostAttendantPair;
+
 
 import java.util.List;
 

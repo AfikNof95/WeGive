@@ -19,6 +19,9 @@ public interface PostDao {
     @Query("select * from Post ORDER BY createdAt DESC")
     LiveData<List<Post>> getAll();
 
+   @Query("select * from Post WHERE creatorId = :userId ORDER BY createdAt DESC")
+    LiveData<List<Post>> getAllPostsByUserId(String userId);
+
     @Transaction
     @Query("SELECT * FROM  Post ORDER BY createdAt DESC ")
     LiveData<List<PostAttendantPair>> getAllPostWithAttendants();

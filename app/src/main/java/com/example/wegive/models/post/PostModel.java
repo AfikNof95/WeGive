@@ -44,6 +44,7 @@ public class PostModel {
 
 
     private LiveData<List<Post>> postList;
+    private LiveData<List<Post>> myPostsList;
     private LiveData<List<PostAttendantPair>> postAttendantList;
 
     public LiveData<List<Post>> getAllPosts() {
@@ -52,6 +53,12 @@ public class PostModel {
             refreshAllPosts();
         }
         return postList;
+    }
+
+    public LiveData<List<Post>> getAllUserPosts(String userId) {
+        myPostsList = localDB.postDao().getAllPostsByUserId(userId);
+        refreshAllPosts();
+        return myPostsList;
     }
 
     public LiveData<List<PostAttendantPair>> getAllPostsWithAttendants() {
@@ -88,9 +95,9 @@ public class PostModel {
             });
         });
 
-        db.getAllDeletedSince(localLastUpdate,response->{
-            executor.execute(()->{
-                for(String id : response){
+        db.getAllDeletedSince(localLastUpdate, response -> {
+            executor.execute(() -> {
+                for (String id : response) {
                     localDB.postDao().deletePostById(id);
                 }
             });

@@ -12,6 +12,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDestination;
 import androidx.navigation.Navigation;
+import androidx.navigation.fragment.NavHostFragment;
+import androidx.navigation.ui.NavigationUI;
 
 
 import android.app.AlertDialog;
@@ -20,9 +22,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.example.wegive.fragments.HomePageFragmentDirections;
+import com.example.wegive.fragments.homePage.HomePageFragmentDirections;
 import com.example.wegive.fragments.auth.LoginFragmentDirections;
 import com.example.wegive.models.user.User;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -41,21 +44,13 @@ public class MainActivity extends AppCompatActivity {
         if (appBar != null) {
             appBar.setDisplayShowTitleEnabled(false);
             toolbar.findViewById(R.id.toolbar_title).setOnClickListener(view1 -> {
-//                navController.addOnDestinationChangedListener(new NavController.OnDestinationChangedListener() {
-//                    @Override
-//                    public void onDestinationChanged(@NonNull NavController navController, @NonNull NavDestination navDestination, @Nullable Bundle bundle) {
-//                        if (navDestination.getId() == R.id.signUpFragment || navDestination.getId() == R.id.loginFragment) {
-//                            appBar.hide();
-//                        } else if (!appBar.isShowing()) {
-//                            appBar.show();
-//                        }
-//                    }
-//                });
                 navController.navigate(R.id.homePageFragment);
-
-
             });
         }
+        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.nav_host_fragment);
+        navController = navHostFragment.getNavController();
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottom_navigation);
+        NavigationUI.setupWithNavController(bottomNavigationView, navController);
 
 
     }
@@ -88,15 +83,15 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         invalidateOptionsMenu();
-        switch (item.getItemId()) {
-            case R.id.menu_sign_out:
-                User.signOut();
-                navController.navigate(com.example.wegive.fragments.HomePageFragmentDirections.actionHomePageFragmentToLoginFragment());
-                break;
-            default:
-                return super.onOptionsItemSelected(item);
+        int itemId = item.getItemId();
+        if(itemId == R.id.menu_sign_out){
+            User.signOut();
+            navController.navigate(R.id.loginFragment);
         }
-        return true;
+        else{
+            NavigationUI.onNavDestinationSelected(item,navController);
+        }
+        return super.onOptionsItemSelected(item);
     }
 
 

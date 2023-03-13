@@ -5,18 +5,15 @@ import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.navigation.NavDirections;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.wegive.fragments.HomePageFragmentDirections;
+import com.example.wegive.fragments.homePage.HomePageFragmentDirections;
 import com.example.wegive.models.attendent.Attendant;
-import com.example.wegive.models.attendent.AttendantModel;
 import com.example.wegive.models.post.Post;
 import com.example.wegive.models.post.PostModel;
 import com.example.wegive.models.user.User;
@@ -26,13 +23,9 @@ import com.squareup.picasso.Picasso;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.net.URI;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 class PostViewHolder extends RecyclerView.ViewHolder {
 
@@ -40,8 +33,9 @@ class PostViewHolder extends RecyclerView.ViewHolder {
     TextView postTitle;
     TextView postContent;
     TextView postUserName;
-    TextView postTime;
+    TextView postCreatedAt;
     TextView postAttendantCount;
+    TextView postEventDate;
     ImageView postImage;
     ImageView userAvatar;
     Chip editButton;
@@ -67,8 +61,9 @@ class PostViewHolder extends RecyclerView.ViewHolder {
         deleteButton = view.findViewById(R.id.post_delete_button);
         userAvatar = view.findViewById(R.id.post_user_avatar);
         attendButton = view.findViewById(R.id.post_attend);
-        postTime = view.findViewById(R.id.post_time);
+        postCreatedAt = view.findViewById(R.id.post_created_at);
         postAttendantCount = view.findViewById(R.id.post_attendant_count);
+        postEventDate = view.findViewById(R.id.post_event_date);
         parentView = view;
         this.data = data;
 
@@ -90,7 +85,8 @@ class PostViewHolder extends RecyclerView.ViewHolder {
         postTitle.setText(post.getTitle());
         postContent.setText(post.getContent());
         postUserName.setText(post.getCreatorName());
-        postTime.setText(post.getCreatedAt());
+        postCreatedAt.setText(post.getCreatedAt());
+        postEventDate.setText(post.getTime());
         postAttendantCount.setText(String.valueOf(post.getAttendants().size()) + " Attendants");
         isAttended = post.getAttendants().stream().anyMatch(attendant -> attendant.getUserId().equals(userId));
         attendButton.setText(isAttended ? R.string.leave : R.string.join);
