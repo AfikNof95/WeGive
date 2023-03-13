@@ -6,7 +6,10 @@ import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.OnConflictStrategy;
 import androidx.room.Query;
+import androidx.room.Transaction;
 
+
+import com.example.wegive.models.postAttendantPair.PostAttendantPair;
 
 import java.util.List;
 
@@ -15,6 +18,10 @@ public interface PostDao {
 
     @Query("select * from Post ORDER BY createdAt DESC")
     LiveData<List<Post>> getAll();
+
+    @Transaction
+    @Query("SELECT * FROM  Post ORDER BY createdAt DESC ")
+    LiveData<List<PostAttendantPair>> getAllPostWithAttendants();
 
     @Query("select * from Post where id = :postId")
     Post getPostById(String postId);

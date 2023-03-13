@@ -1,4 +1,4 @@
-package com.example.wegive.models.post;
+package com.example.wegive.models.postAttendantPair;
 
 import android.graphics.Bitmap;
 
@@ -10,15 +10,15 @@ import com.example.wegive.firebase.FireBaseStorage;
 import com.example.wegive.firebase.FirebasePostDB;
 import com.example.wegive.models.AppLocalDB;
 import com.example.wegive.models.AppLocalDbRepository;
-import com.example.wegive.models.postAttendantPair.PostAttendantPair;
+import com.example.wegive.models.post.Post;
 
 import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
 
-public class PostModel {
-    private static final PostModel _instance = new PostModel();
+public class PostAttendantPairModel {
+    private static final PostAttendantPairModel _instance = new PostAttendantPairModel();
 
     private final Executor executor = Executors.newSingleThreadExecutor();
 
@@ -28,11 +28,11 @@ public class PostModel {
     final public MutableLiveData<LoadingState> EventPostListLoadingState = new MutableLiveData<LoadingState>(LoadingState.NOT_LOADING);
 
 
-    public static PostModel getInstance() {
+    public static PostAttendantPairModel getInstance() {
         return _instance;
     }
 
-    private PostModel() {
+    private PostAttendantPairModel() {
 
     }
 

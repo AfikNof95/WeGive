@@ -12,13 +12,13 @@ import java.util.List;
 
 @Dao
 public interface AttendantDao {
-    @Query("select * from ATTENDANT")
+    @Query("select * from ATTENDANTS")
     LiveData<List<Attendant>> getAll();
 
-    @Query("select * from ATTENDANT WHERE postId = :postId")
+    @Query("select * from ATTENDANTS WHERE postId = :postId")
     LiveData<List<Attendant>> getAllByPostId(String postId);
 
-    @Query("select * from Attendant where id = :attendantId")
+    @Query("select * from ATTENDANTS where id = :attendantId")
     Attendant getAttendantById(String attendantId);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
@@ -28,6 +28,6 @@ public interface AttendantDao {
     @Delete
     void delete(Attendant attendant);
 
-    @Query("DELETE FROM Attendant WHERE id= :id")
+    @Query("DELETE FROM ATTENDANTS WHERE id= :id")
     void deleteAttendantById(String id);
 }
