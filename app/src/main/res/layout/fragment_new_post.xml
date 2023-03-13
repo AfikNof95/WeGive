@@ -36,6 +36,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
 
+
                     <ImageView
                         android:id="@+id/upload_post_image"
                         android:layout_width="match_parent"
@@ -43,9 +44,7 @@
                         android:layout_gravity="center|center_horizontal|center_vertical"
                         android:contentDescription="@string/upload_image"
                         android:scaleType="fitCenter"
-                        android:src="@drawable/upload_image_24"
-                        />
-
+                        android:src="@drawable/upload_image_24" />
 
 
                     <TextView
@@ -101,7 +100,24 @@
                             android:padding="15dp"
                             android:scrollbarStyle="insideInset"
                             android:scrollbars="vertical" />
-                        />
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/post_date_layout"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:errorEnabled="true"
+                        android:layout_marginBottom="10dp">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/post_date_input"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:enabled="false"
+                            android:allowClickWhenDisabled="true"
+                            android:hint="@string/choose_date"
+                            android:inputType="date" />
                     </com.google.android.material.textfield.TextInputLayout>
 
 

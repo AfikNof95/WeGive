@@ -10,15 +10,21 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.ForeignKey;
 import androidx.room.PrimaryKey;
+
 import com.example.wegive.MyApplication;
 import com.example.wegive.models.attendent.Attendant;
 import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.FieldValue;
+
+import org.checkerframework.checker.units.qual.C;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.Serializable;
+import java.text.DateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.UUID;
@@ -39,13 +45,14 @@ public class Post implements Serializable, Comparable<Post> {
     public static final String CREATOR_AVATAR = "creator_avatar";
     public static final String CREATOR_ID = "creator_id";
     public static final String CREATED_AT = "created_at";
-    public static final String PARTICIPANTS = "participants";
+    public static final String ATTENDANTS = "attendants";
     public static final String LAST_UPDATED = "last_updated";
     public static final String LOCAL_LAST_UPDATED = "last_updated";
 
 
     @PrimaryKey
     @NotNull
+    @ColumnInfo(name = "id", index = true)
     public String id;
     public String title;
     public String content;
@@ -57,11 +64,11 @@ public class Post implements Serializable, Comparable<Post> {
     public String creatorAvatar;
 
     public Long createdAt;
-    public String participants;
+    public List<Attendant> attendants;
     public Long lastUpdated;
 
 
-    public Post(String id, String title, String content, String time, String imageUrl, String creatorName, String creatorId, String creatorAvatar ,String participants, Long createdAt) {
+    public Post(String id, String title, String content, String time, String imageUrl, String creatorName, String creatorId, String creatorAvatar, List<Attendant> attendants, Long createdAt) {
         this.id = id == null ? UUID.randomUUID().toString() : id;
         this.title = title;
         this.content = content;
@@ -70,7 +77,7 @@ public class Post implements Serializable, Comparable<Post> {
         this.creatorName = creatorName;
         this.creatorId = creatorId;
         this.creatorAvatar = creatorAvatar;
-        this.participants = participants == null ? "" : participants;
+        this.attendants = attendants == null ? new ArrayList<>() : attendants;
         this.createdAt = createdAt != null ? createdAt : (new Date()).getTime();
     }
 
@@ -83,10 +90,10 @@ public class Post implements Serializable, Comparable<Post> {
         String imageUrl = (String) json.get(IMAGE_URL);
         String creatorName = (String) json.get(CREATOR_NAME);
         String creatorId = (String) json.get(CREATOR_ID);
-        String participants = (String) json.get(PARTICIPANTS);
+        List<Attendant> attendants = (List<Attendant>) json.get(ATTENDANTS);
         String creatorAvatar = (String) json.get(CREATOR_AVATAR);
-        Long createdAt = (Long)json.get(CREATED_AT);
-        Post post = new Post(id, title, content, time, imageUrl, creatorName, creatorId, creatorAvatar,participants,createdAt);
+        Long createdAt = (Long) json.get(CREATED_AT);
+        Post post = new Post(id, title, content, time, imageUrl, creatorName, creatorId, creatorAvatar, attendants, createdAt);
         Timestamp lastUpdated = (Timestamp) json.get(LAST_UPDATED);
         if (lastUpdated != null) {
             post.setLastUpdated(lastUpdated.getSeconds());
@@ -106,7 +113,7 @@ public class Post implements Serializable, Comparable<Post> {
         json.put(CREATOR_NAME, this.creatorName);
         json.put(CREATOR_ID, this.creatorId);
         json.put(CREATOR_AVATAR, this.creatorAvatar);
-        json.put(PARTICIPANTS, this.participants);
+        json.put(ATTENDANTS, this.attendants);
         json.put(CREATED_AT, this.createdAt);
         json.put(LAST_UPDATED, FieldValue.serverTimestamp());
 
@@ -125,8 +132,6 @@ public class Post implements Serializable, Comparable<Post> {
         editor.putLong(LOCAL_LAST_UPDATED, time);
         editor.commit();
     }
-
-
 
 
     @NotNull
@@ -159,8 +164,8 @@ public class Post implements Serializable, Comparable<Post> {
         return this.imageUrl;
     }
 
-    public String getParticipants() {
-        return this.participants;
+    public List<Attendant> getAttendants() {
+        return this.attendants;
     }
 
     public Long getLastUpdated() {
@@ -197,8 +202,8 @@ public class Post implements Serializable, Comparable<Post> {
         this.imageUrl = imageUrl;
     }
 
-    public void setParticipants(String participants) {
-        this.participants = participants;
+    public void setAttendants(List<Attendant> attendants) {
+        this.attendants = attendants;
     }
 
     public void setLastUpdated(long lastUpdated) {
@@ -216,6 +221,10 @@ public class Post implements Serializable, Comparable<Post> {
     @Override
     public int compareTo(Post post) {
         return (Objects.nonNull(post.lastUpdated)) ? getLastUpdated().compareTo(post.lastUpdated) : 0;
+    }
+
+    public String getCreatedAt() {
+        return DateFormat.getDateInstance().format(new Date(this.createdAt));
     }
 }
 

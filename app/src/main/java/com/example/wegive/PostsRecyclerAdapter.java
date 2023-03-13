@@ -1,5 +1,7 @@
 package com.example.wegive;
 
+import android.content.res.ColorStateList;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,9 +15,12 @@ import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.wegive.fragments.HomePageFragmentDirections;
+import com.example.wegive.models.attendent.Attendant;
+import com.example.wegive.models.attendent.AttendantModel;
 import com.example.wegive.models.post.Post;
 import com.example.wegive.models.post.PostModel;
 import com.example.wegive.models.user.User;
+import com.google.android.material.button.MaterialButton;
 import com.google.android.material.chip.Chip;
 import com.squareup.picasso.Picasso;
 
@@ -26,6 +31,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 class PostViewHolder extends RecyclerView.ViewHolder {
@@ -34,16 +40,21 @@ class PostViewHolder extends RecyclerView.ViewHolder {
     TextView postTitle;
     TextView postContent;
     TextView postUserName;
+    TextView postTime;
+    TextView postAttendantCount;
     ImageView postImage;
     ImageView userAvatar;
     Chip editButton;
     Chip deleteButton;
 
-    Button attendButton;
+    MaterialButton attendButton;
 
     Boolean isAttended = false;
 
     View parentView;
+
+    Post post;
+    User user;
 
     public PostViewHolder(@NotNull View view, PostsRecyclerAdapter.OnItemClickListener listener, List<Post> data) {
         super(view);
@@ -56,6 +67,8 @@ class PostViewHolder extends RecyclerView.ViewHolder {
         deleteButton = view.findViewById(R.id.post_delete_button);
         userAvatar = view.findViewById(R.id.post_user_avatar);
         attendButton = view.findViewById(R.id.post_attend);
+        postTime = view.findViewById(R.id.post_time);
+        postAttendantCount = view.findViewById(R.id.post_attendant_count);
         parentView = view;
         this.data = data;
 
@@ -68,11 +81,25 @@ class PostViewHolder extends RecyclerView.ViewHolder {
 
     public void bind(Post post, User currentUser) {
 
+        this.post = post;
+        this.user = currentUser;
+
+        String userId = currentUser.getId();
+
+
         postTitle.setText(post.getTitle());
         postContent.setText(post.getContent());
         postUserName.setText(post.getCreatorName());
-        isAttended = false;
-        attendButton.setText(R.string.attend);
+        postTime.setText(post.getCreatedAt());
+        postAttendantCount.setText(String.valueOf(post.getAttendants().size()) + " Attendants");
+        isAttended = post.getAttendants().stream().anyMatch(attendant -> attendant.getUserId().equals(userId));
+        attendButton.setText(isAttended ? R.string.leave : R.string.join);
+        int attendButtonColor = parentView.getResources().getColor(isAttended ? R.color.error : R.color.success);
+        Drawable attendButtonIcon = parentView.getResources().getDrawable(isAttended ? R.drawable.outline_cancel_24 :R.drawable.outline_task_alt_24 );
+        attendButton.setIconTint(ColorStateList.valueOf(attendButtonColor));
+        attendButton.setTextColor(attendButtonColor);
+        attendButton.setStrokeColor(ColorStateList.valueOf(attendButtonColor));
+        attendButton.setIcon(attendButtonIcon);
         Picasso.get().load(post.getCreatorAvatar()).placeholder(R.drawable.undraw_pic_profile_re_7g2h).into(userAvatar);
 
         if (!Objects.equals(post.getImageUrl(), "")) {
@@ -81,27 +108,39 @@ class PostViewHolder extends RecyclerView.ViewHolder {
             postImage.setVisibility(View.GONE);
         }
 
-        if (post.getCreatorId().equals(currentUser.getId())) {
+        if (post.getCreatorId().equals(userId)) {
             editButton.setVisibility(View.VISIBLE);
             deleteButton.setVisibility(View.VISIBLE);
         }
 
 
-
-
         attendButton.setOnClickListener(view -> {
-
-            if (isAttended) {
-
-            } else {
-
-            }
+            handleAttendClick();
         });
 
         editButton.setOnClickListener(view -> {
             Navigation.findNavController(parentView).navigate(HomePageFragmentDirections.actionHomePageFragmentToNewPostFragment(post));
         });
 
+    }
+
+    private void handleAttendClick(){
+        String userId = user.getId();
+        String userName = user.getName();
+        String userAvatarUrl = user.getAvatarUrl();
+        attendButton.setClickable(false);
+        List<Attendant> attendantList = post.getAttendants();
+        if (isAttended) {
+            attendantList = attendantList.stream().filter(attendant -> !attendant.getUserId().equals(userId)).collect(Collectors.toList());
+            post.setAttendants(attendantList);
+        } else {
+            Attendant attendant = new Attendant(null, userId, post.getId(), userName, userAvatarUrl);
+            attendantList.add(attendant);
+            post.setAttendants(attendantList);
+        }
+        PostModel.getInstance().updatePost(post, data1 -> {
+            attendButton.setClickable(true);
+        });
     }
 }
 

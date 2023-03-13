@@ -4,10 +4,14 @@ import android.content.Context;
 import android.content.SharedPreferences;
 
 import androidx.annotation.NonNull;
+import androidx.room.ColumnInfo;
 import androidx.room.Entity;
+import androidx.room.ForeignKey;
+import androidx.room.Index;
 import androidx.room.PrimaryKey;
 
 import com.example.wegive.MyApplication;
+import com.example.wegive.models.post.Post;
 import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.FieldValue;
 
@@ -18,10 +22,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-@Entity
+@Entity(tableName = "attendants", foreignKeys = @ForeignKey(entity = Post.class, parentColumns = "id", childColumns = "postId"))
 public class Attendant implements Serializable {
 
-    public static final String COLLECTION = "attendant";
+    public static final String COLLECTION = "attendants";
     public static final String ID = "id";
     public static final String USER_ID = "user_id";
     public static final String POST_ID = "post_id";
@@ -32,10 +36,16 @@ public class Attendant implements Serializable {
 
     public static final String ATTENDANT_LOCAL_LAST_UPDATED = "attendant_local_last_updated";
 
-    @PrimaryKey
+
     @NotNull
+    @PrimaryKey
+    @ColumnInfo(name = "id",index = true)
     private String id;
+    @NotNull
+    @ColumnInfo(name = "userId",index = true)
     private String userId;
+    @NotNull
+    @ColumnInfo(name = "postId",index = true)
     private String postId;
 
     private String attendantAvatar;
@@ -43,7 +53,7 @@ public class Attendant implements Serializable {
     public Long lastUpdated;
 
 
-    public Attendant(String id, String userId, String postId, String attendantName, String attendantAvatar) {
+    public Attendant(String id, @NonNull String userId, @NonNull String postId, String attendantName, String attendantAvatar) {
         this.id = id == null ? UUID.randomUUID().toString() : id;
         this.userId = userId;
         this.postId = postId;

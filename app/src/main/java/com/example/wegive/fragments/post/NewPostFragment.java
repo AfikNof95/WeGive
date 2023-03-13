@@ -1,5 +1,6 @@
 package com.example.wegive.fragments.post;
 
+import android.app.DatePickerDialog;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -20,11 +21,13 @@ import androidx.navigation.Navigation;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.DatePicker;
 import android.widget.ImageView;
 
 import com.example.wegive.IListener;
 import com.example.wegive.R;
 import com.example.wegive.databinding.FragmentNewPostBinding;
+import com.example.wegive.models.attendent.Attendant;
 import com.example.wegive.models.post.Post;
 import com.example.wegive.models.post.PostModel;
 import com.example.wegive.models.user.User;
@@ -34,8 +37,12 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.squareup.picasso.Picasso;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 
 public class NewPostFragment extends Fragment {
@@ -52,6 +59,10 @@ public class NewPostFragment extends Fragment {
     TextInputLayout titleLayout;
     TextInputEditText contentInput;
     TextInputLayout contentLayout;
+
+    TextInputEditText dateInput;
+    TextInputLayout dateLayout;
+
 
     ImageView uploadPostImage;
 
@@ -96,7 +107,10 @@ public class NewPostFragment extends Fragment {
         titleLayout = binding.postTitleLayout;
         contentInput = binding.postContentInput;
         contentLayout = binding.postContentLayout;
+        dateInput = binding.postDateInput;
+        dateLayout = binding.postDateLayout;
         uploadPostImage = binding.uploadPostImage;
+
         post = NewPostFragmentArgs.fromBundle(getArguments()).getPost();
         if (post != null) {
             initializeEditingMode(post);
@@ -128,6 +142,10 @@ public class NewPostFragment extends Fragment {
             handlePostUpload();
         });
 
+        dateInput.setOnClickListener(view1 -> {
+            showDatePickerDialog();
+        });
+
         return view;
     }
 
@@ -136,6 +154,7 @@ public class NewPostFragment extends Fragment {
         isEditMode = true;
         titleInput.setText(post.getTitle());
         contentInput.setText(post.getContent());
+        dateInput.setText(post.getTime());
         Picasso.get().load(post.getImageUrl()).placeholder(R.drawable.progress_animation).into(uploadPostImage);
     }
 
@@ -172,13 +191,12 @@ public class NewPostFragment extends Fragment {
         String id = post != null ? post.getId() : null;
         String title = titleInput.getText().toString();
         String content = contentInput.getText().toString();
-        Date currentDate = new Date();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-        String formattedDate = dateFormat.format(currentDate);
+        String date = dateInput.getText().toString();
         Long createdAt = (new Date()).getTime();
         User currentUser = User.getCurrentUser();
+        List<Attendant> attendants = post != null ? post.getAttendants() : new ArrayList<>();
 
-        return new Post(id, title, content, formattedDate, null, currentUser.getName(), currentUser.getId(),currentUser.getAvatarUrl(), null, createdAt);
+        return new Post(id, title, content, date, null, currentUser.getName(), currentUser.getId(), currentUser.getAvatarUrl(), attendants, createdAt);
     }
 
     private boolean validateForm() {
@@ -186,6 +204,7 @@ public class NewPostFragment extends Fragment {
         String content = contentInput.getText().toString();
         Drawable postImage = uploadPostImage.getDrawable();
         boolean isValid = true;
+        String dateTime = dateInput.getText().toString();
         if (title.trim().equals("")) {
             titleLayout.setError(getString(R.string.empty_post_title_error));
             isValid = false;
@@ -195,10 +214,44 @@ public class NewPostFragment extends Fragment {
             isValid = false;
         }
 
+        if (dateTime.trim().equals("")) {
+            dateLayout.setError(getString(R.string.empty_date_error));
+            isValid = false;
+        }
+
         if (isValid && (postImage instanceof VectorDrawable || postImage == null)) {
             uploadPostImage.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.new_post_default_image, null));
         }
         return isValid;
+    }
+
+    private void showDatePickerDialog() {
+        int year, month, day;
+        final Calendar calendar = Calendar.getInstance();
+        try {
+            Date date = DateFormat.getDateInstance().parse(dateInput.getText().toString());
+            calendar.setTime(date);
+        } catch (Exception ex) {
+        } finally {
+            year = calendar.get(Calendar.YEAR);
+            month = calendar.get(Calendar.MONTH);
+            day = calendar.get(Calendar.DAY_OF_MONTH);
+        }
+
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(), new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker datePicker, int year, int monthOfYear, int dayOfMonth) {
+                Calendar calendar = Calendar.getInstance();
+                calendar.set(year, monthOfYear, dayOfMonth);
+                Date selectedDate = calendar.getTime();
+
+
+                String formattedDate = DateFormat.getDateInstance().format(selectedDate);
+                dateInput.setText(formattedDate);
+            }
+        }, year, month, day);
+        datePickerDialog.show();
     }
 
     private void showUploadImageDialog() {

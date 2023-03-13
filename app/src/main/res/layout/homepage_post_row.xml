@@ -19,6 +19,40 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+            <com.google.android.material.chip.Chip
+                android:id="@+id/post_edit_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="5dp"
+                android:text="@string/edit"
+                android:textColor="@color/white"
+                android:visibility="invisible"
+                app:chipBackgroundColor="@color/purple_500"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/post_delete_button"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:visibility="visible" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/post_delete_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/delete"
+                android:textColor="@color/white"
+                android:visibility="invisible"
+                app:chipBackgroundColor="@color/error"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:visibility="visible" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/materialCardView"
                 android:layout_width="40dp"
@@ -47,43 +81,28 @@
 
             </com.google.android.material.card.MaterialCardView>
 
-            <com.google.android.material.chip.Chip
-                android:id="@+id/post_edit_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="5dp"
-                android:text="@string/edit"
-                android:textColor="@color/white"
-                android:visibility="invisible"
-                app:chipBackgroundColor="@color/purple_500"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/post_delete_button"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:visibility="visible" />
-
-            <com.google.android.material.chip.Chip
-                android:id="@+id/post_delete_button"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/delete"
-                android:textColor="@color/white"
-                android:visibility="invisible"
-                app:chipBackgroundColor="@color/error"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:visibility="visible" />
-
             <TextView
                 android:id="@+id/post_user_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_marginStart="8dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/materialCardView"
+                app:layout_constraintStart_toEndOf="@id/materialCardView"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:visibility="visible" />
 
+            <TextView
+                android:id="@+id/post_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/open_sans_semibold"
+                android:textColor="@color/material_dynamic_neutral30"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="19/03/2023" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -93,16 +112,19 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginBottom="10dp"
+            android:fontFamily="@font/open_sans_extrabold"
             android:text="TextView"
-            android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+            android:textSize="18sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/post_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
+            android:fontFamily="@font/open_sans_semibold"
             android:text="TextView"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body2" />
+            android:textSize="13sp" />
 
         <ImageView
             android:id="@+id/post_image"
@@ -111,11 +133,29 @@
             android:scaleType="fitCenter"
             tools:srcCompat="@tools:sample/avatars" />
 
-        <Button
-            android:id="@+id/post_attend"
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/post_attendant_count"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/attend" />
+            android:layout_gravity="end"
+            android:textColor="@color/material_dynamic_neutral20"
+            android:textSize="10sp"
+            tools:text="1 attendant" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/post_attend"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:layout_marginBottom="5dp"
+            android:text="@string/join"
+            android:textColor="@color/success"
+            android:textSize="12sp"
+            app:icon="@drawable/outline_task_alt_24"
+            app:iconPadding="4dp"
+            app:iconSize="16sp"
+            app:iconTint="@color/success" />
 
         <View
             android:id="@+id/post_divider"

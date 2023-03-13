@@ -37,9 +37,12 @@
     <string name="bottom_menu_my_events">Events</string>
     <string name="edit">Edit</string>
     <string name="delete">Delete</string>
+    <string name="join">Join</string>
+    <string name="leave">Leave</string>
     <string name="attend">Attend</string>
     <string name="cancel_attend">Cancel Attendance</string>
-
+    <string name="more_info">More Info</string>
+    <string name="choose_date">Choose date</string>
 
     <!--Loading Messages-->
     <string name="sign_up_loading_message">One moment away from joining our family!</string>
@@ -61,5 +64,7 @@
     <string name="post_title_hint">Post title</string>
     <string name="empty_post_content_error">Please enter a valid title!</string>
     <string name="empty_post_title_error">Please enter a valid content!</string>
+    <string name="empty_date_error">Please enter a valid date!</string>
+
 
 </resources>

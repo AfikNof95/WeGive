@@ -56,7 +56,7 @@ public class HomePageFragment extends Fragment {
         actionBar.show();
         binding.postsRecyclerView.setHasFixedSize(true);
         binding.postsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        adapter = new PostsRecyclerAdapter(getLayoutInflater(), mViewModel.getData().getValue());
+        adapter = new PostsRecyclerAdapter(getLayoutInflater(), mViewModel.getPosts().getValue());
         binding.postsRecyclerView.setAdapter(adapter);
 
 
@@ -64,10 +64,10 @@ public class HomePageFragment extends Fragment {
         bottomNavigationView.setVisibility(View.VISIBLE);
 
         adapter.setOnItemClickListener(pos -> {
-            Post post = mViewModel.getData().getValue().get(pos);
+            Post post = mViewModel.getPosts().getValue().get(pos);
         });
 
-        mViewModel.getData().observe(getViewLifecycleOwner(), list -> {
+        mViewModel.getPosts().observe(getViewLifecycleOwner(), list -> {
             adapter.setData(list);
 
         });
