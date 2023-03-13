@@ -117,7 +117,8 @@ public class NewPostFragment extends Fragment {
         }
 
         binding.addPostCancelButton.setOnClickListener(view1 -> {
-            Navigation.findNavController(view).navigate(NewPostFragmentDirections.actionNewPostFragmentToHomePageFragment());
+//            Navigation.findNavController(view).navigate(NewPostFragmentDirections.actionNewPostFragmentToHomePageFragment());
+            Navigation.findNavController(view).popBackStack();
         });
 
         uploadPostImage.setOnClickListener(view1 -> {

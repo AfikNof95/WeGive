@@ -1,4 +1,4 @@
-package com.example.wegive.fragments;
+package com.example.wegive.fragments.myPosts;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,54 +20,46 @@ import android.view.WindowManager;
 
 import com.example.wegive.PostsRecyclerAdapter;
 import com.example.wegive.R;
-import com.example.wegive.databinding.FragmentHomePageBinding;
+import com.example.wegive.databinding.FragmentMyPostsBinding;
 import com.example.wegive.models.post.Post;
 import com.example.wegive.models.post.PostModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import java.util.ArrayList;
+public class MyPostsFragment extends Fragment {
 
-public class HomePageFragment extends Fragment {
+    private MyPostsViewModel viewModel;
+    private FragmentMyPostsBinding binding;
 
-    private HomePageViewModel mViewModel;
-    private PostsRecyclerAdapter adapter = null;
-    private FragmentHomePageBinding binding;
+    PostsRecyclerAdapter adapter;
 
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-
-    }
 
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        mViewModel = new ViewModelProvider(this).get(HomePageViewModel.class);
+        viewModel = new ViewModelProvider(this).get(MyPostsViewModel.class);
     }
+
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        binding = FragmentHomePageBinding.inflate(inflater, container, false);
+
+        binding = FragmentMyPostsBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
-        ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
-        actionBar.show();
-        binding.postsRecyclerView.setHasFixedSize(true);
-        binding.postsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        adapter = new PostsRecyclerAdapter(getLayoutInflater(), mViewModel.getPosts().getValue());
-        binding.postsRecyclerView.setAdapter(adapter);
+        binding.myPostsRecyclerView.setHasFixedSize(true);
+        binding.myPostsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        adapter = new PostsRecyclerAdapter(getLayoutInflater(), viewModel.getMyPosts().getValue());
+        binding.myPostsRecyclerView.setAdapter(adapter);
 
 
         BottomNavigationView bottomNavigationView = ((AppCompatActivity) getActivity()).findViewById(R.id.bottom_navigation);
         bottomNavigationView.setVisibility(View.VISIBLE);
 
         adapter.setOnItemClickListener(pos -> {
-            Post post = mViewModel.getPosts().getValue().get(pos);
+            Post post = viewModel.getMyPosts().getValue().get(pos);
         });
 
-        mViewModel.getPosts().observe(getViewLifecycleOwner(), list -> {
+        viewModel.getMyPosts().observe(getViewLifecycleOwner(), list -> {
             adapter.setData(list);
 
         });
@@ -84,9 +76,7 @@ public class HomePageFragment extends Fragment {
             getActivity().getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE, WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
         });
 
-        binding.addPostButton.setOnClickListener(view1 -> {
-            Navigation.findNavController(view).navigate(HomePageFragmentDirections.actionHomePageFragmentToNewPostFragment(null));
-        });
+
 
 
         return view;
