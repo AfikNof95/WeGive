@@ -1,0 +1,72 @@
+<resources>
+    <string name="app_name">WeGive</string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="action_sign_up_short">Sign up</string>
+    <string name="welcome">"Welcome !"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!--Layout Elements Strings-->
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="login">Sign In</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="sign_up_welcome">We are thrilled to have you join us!</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="new_user">New to WeGive?</string>
+    <string name="existing_user">Already have an account?</string>
+    <string name="full_name">Full Name</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="menu_account">Account</string>
+    <string name="menu_signout">Sign Out</string>
+    <string name="upload_image">Upload Image</string>
+    <string name="post_content_hint">What is on your mind?</string>
+    <string name="post">Post</string>
+    <string name="cancel">Cancel</string>
+    <string name="bottom_menu_home">Home</string>
+    <string name="bottom_menu_account">Account</string>
+    <string name="bottom_menu_my_posts">My Posts</string>
+    <string name="bottom_menu_my_events">Events</string>
+    <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
+    <string name="join">Join</string>
+    <string name="leave">Leave</string>
+    <string name="attend">Attend</string>
+    <string name="cancel_attend">Cancel Attendance</string>
+    <string name="more_info">More Info</string>
+    <string name="choose_date">Choose date</string>
+    <string name="post_event_date_label">Event date: </string>
+    <string name="post_number_of_attendants">Number of attendants:</string>
+
+    <!--Loading Messages-->
+    <string name="sign_up_loading_message">One moment away from joining our family!</string>
+    <string name="sign_in_loading_message">One moment away from helping the community!</string>
+    <string name="sign_in_success">Welcome back!</string>
+    <string name="add_post_success">Post posted successfully!</string>
+    <string name="update_post_success">Post updated successfully!</string>
+    <string name="add_post_loading_message">Posting...</string>
+
+
+    <!--Error Messages-->
+    <string name="empty_email_error">Please enter a valid email address!</string>
+    <string name="empty_password_error">Please enter a valid password!</string>
+    <string name="empty_name_error">Please enter a valid name!</string>
+    <string name="empty_phone_number_error">Please enter a valid phone number!</string>
+    <string name="fab_content_desc">New Post</string>
+    <string name="generic_auth_exception">We had a problem signing you in, please try again later!</string>
+    <string name="auth_wrong_credentials">We could not find a user matching this credentials!</string>
+    <string name="post_title_hint">Post title</string>
+    <string name="empty_post_content_error">Please enter a valid title!</string>
+    <string name="empty_post_title_error">Please enter a valid content!</string>
+    <string name="empty_date_error">Please enter a valid date!</string>
+
+
+</resources>
