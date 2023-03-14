@@ -1,5 +1,6 @@
 package com.example.wegive;
 
+import android.app.AlertDialog;
 import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
@@ -81,7 +82,13 @@ class PostViewHolder extends RecyclerView.ViewHolder {
         this.post = post;
         this.user = currentUser;
 
-        String userId = currentUser.getId();
+
+        initializeViewHolderValues();
+        setEventListeners();
+    }
+
+    public void initializeViewHolderValues() {
+        String userId = user.getId();
 
 
         postTitle.setText(post.getTitle());
@@ -110,6 +117,10 @@ class PostViewHolder extends RecyclerView.ViewHolder {
             editButton.setVisibility(View.VISIBLE);
             deleteButton.setVisibility(View.VISIBLE);
         }
+    }
+
+
+    private void setEventListeners() {
 
 
         attendButton.setOnClickListener(view -> {
@@ -125,6 +136,10 @@ class PostViewHolder extends RecyclerView.ViewHolder {
 
         });
 
+
+        deleteButton.setOnClickListener(view -> {
+            handleDeleteClick();
+        });
     }
 
     private void handleAttendClick() {
@@ -143,6 +158,20 @@ class PostViewHolder extends RecyclerView.ViewHolder {
         }
         PostModel.getInstance().updatePost(post, data1 -> {
             attendButton.setClickable(true);
+        });
+    }
+
+    private void handleDeleteClick() {
+        new AlertDialog.Builder(parentView.getContext())
+                .setTitle("Delete Post")
+                .setMessage("Are you sure you want to delete this post?")
+                .setPositiveButton("Delete", (dialog, whichButton) -> handlePostDelete())
+                .setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss())
+                .create().show();
+    }
+
+    private void handlePostDelete() {
+        PostModel.getInstance().deletePost(post.getId(), data1 -> {
         });
     }
 }

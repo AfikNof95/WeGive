@@ -51,7 +51,8 @@ public class PostModel {
 
     public LiveData<List<Post>> getAllPosts() {
         if (postList == null) {
-            postList = localDB.postDao().getAll();
+//            postList = localDB.postDao().getAll();
+            postList = localDB.postDao().getAllPosts();
             refreshAllPosts();
         }
         return postList;
@@ -119,7 +120,10 @@ public class PostModel {
     }
 
     public void deletePost(String postId, IListener<Void> listener) {
-        db.deletePost(postId, listener);
+        db.deletePost(postId, data -> {
+            listener.onComplete(null);
+            refreshAllPosts();
+        });
     }
 
     public void uploadPostImage(String id, Bitmap bitmap, IListener<String> listener) {

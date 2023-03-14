@@ -24,6 +24,8 @@ import com.example.wegive.databinding.FragmentHomePageBinding;
 import com.example.wegive.fragments.homePage.HomePageFragmentDirections;
 import com.example.wegive.models.post.Post;
 import com.example.wegive.models.post.PostModel;
+import com.example.wegive.models.user.User;
+import com.example.wegive.models.user.UserModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class HomePageFragment extends Fragment {
@@ -81,8 +83,12 @@ public class HomePageFragment extends Fragment {
         });
 
         binding.swipeRefreshLayout.setOnRefreshListener(() -> {
-            PostModel.getInstance().refreshAllPosts();
             getActivity().getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE, WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+            UserModel.instance().refreshAllUsers();
+        });
+
+        mViewModel.getUsers().observe(getViewLifecycleOwner(),list->{
+            PostModel.getInstance().refreshAllPosts();
         });
 
         binding.addPostButton.setOnClickListener(view1 -> {

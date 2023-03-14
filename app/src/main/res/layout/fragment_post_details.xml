@@ -145,38 +145,47 @@
 
         <Button
             android:id="@+id/post_details_delete"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_margin="2dp"
             android:backgroundTint="@color/error"
             android:text="@string/delete"
             android:visibility="invisible"
             app:icon="@drawable/outline_delete_24"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/post_details_attend"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/post_details_edit"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_margin="2dp"
             android:backgroundTint="@color/info"
             android:text="@string/edit"
             android:visibility="invisible"
             app:icon="@drawable/baseline_edit_24"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/post_details_attend" />
+            app:layout_constraintStart_toEndOf="@+id/post_details_attend"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/post_details_attend"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_margin="2dp"
             android:backgroundTint="@color/warning"
             android:text="@string/attend"
             app:icon="@drawable/outline_task_alt_24"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/post_details_edit"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/post_details_delete" />
+            app:layout_constraintStart_toEndOf="@+id/post_details_delete"
+            app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>

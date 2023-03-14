@@ -29,27 +29,12 @@ public class PostDetailsFragment extends Fragment {
 
     FragmentPostDetailsBinding binding;
     View view;
-
-    TextView postTitle;
-    TextView postContent;
-    TextView postCreatorName;
-    TextView postCreatedDate;
-    TextView postEventDate;
-    TextView postAttendantCount;
-    ImageView postCreatorAvatar;
-    ImageView postImage;
-    MaterialButton postAttendButton;
-    MaterialButton postEditButton;
-    MaterialButton postDeleteButton;
-
     boolean isPostOwner;
     boolean isAttended;
 
     Post post;
 
     User user;
-
-
 
 
     public PostDetailsFragment() {
@@ -72,57 +57,63 @@ public class PostDetailsFragment extends Fragment {
         user = User.getCurrentUser();
         isAttended = post.getAttendants().stream().anyMatch(attendant -> attendant.getUserId().equals(user.getId()));
         isPostOwner = post.getCreatorId().equals(user.getId());
-        postTitle = view.findViewById(R.id.post_title);
-        postContent = view.findViewById(R.id.post_content);
-        postCreatorName = view.findViewById(R.id.post_creator_name);
-        postCreatedDate = view.findViewById(R.id.post_created_at);
-        postEventDate = view.findViewById(R.id.post_event_date);
-        postAttendantCount = view.findViewById(R.id.post_attendant_count);
-        postAttendButton = view.findViewById(R.id.post_details_attend);
-        postEditButton = view.findViewById(R.id.post_details_edit);
-        postDeleteButton = view.findViewById(R.id.post_details_delete);
-        postCreatorAvatar = view.findViewById(R.id.post_user_avatar);
-        postImage = view.findViewById(R.id.post_image);
 
-
-        postTitle.setText(post.getTitle());
-        postContent.setText(post.getContent());
-        postCreatorName.setText(post.getCreatorName());
-        postCreatedDate.setText(post.getCreatedAt());
-        postEventDate.setText(post.getTime());
-        postAttendantCount.setText(String.valueOf(post.getAttendants().size()));
-
-        Picasso.get().load(post.getCreatorAvatar()).placeholder(R.drawable.progress_animation).into(postCreatorAvatar);
-        Picasso.get().load(post.getImageUrl()).placeholder(R.drawable.progress_animation).into(postImage);
 
         if (isPostOwner) {
-            postEditButton.setVisibility(View.VISIBLE);
-            postDeleteButton.setVisibility(View.VISIBLE);
+            binding.postDetailsEdit.setVisibility(View.VISIBLE);
+            binding.postDetailsDelete.setVisibility(View.VISIBLE);
         }
 
-        postAttendButton.setOnClickListener(view1 -> {
-            handleAttendClick();
-        });
 
+        setControlsValues();
         initializeAttendButton();
+        setEventListeners();
 
 
         return view;
     }
 
-    private void initializeAttendButton(){
-        postAttendButton.setText(isAttended ? R.string.leave : R.string.join);
-        int attendButtonColor = view.getResources().getColor(isAttended ? R.color.warning : R.color.success);
-        Drawable attendButtonIcon = view.getResources().getDrawable(isAttended ? R.drawable.outline_cancel_24 : R.drawable.outline_task_alt_24);
-        postAttendButton.setIcon(attendButtonIcon);
-        postAttendButton.setBackgroundColor(attendButtonColor);
+    private void setEventListeners() {
+        binding.postDetailsAttend.setOnClickListener(view1 -> {
+            handleAttendClick();
+        });
+
+        binding.postDetailsEdit.setOnClickListener(view1 -> {
+            handleEditButtonClick();
+        });
     }
 
-    private void handleAttendClick(){
+    private void setControlsValues() {
+        binding.postTitle.setText(post.getTitle());
+        binding.postContent.setText(post.getContent());
+        binding.postCreatorName.setText(post.getCreatorName());
+        binding.postCreatedAt.setText(post.getCreatedAt());
+        binding.postEventDate.setText(post.getTime());
+        binding.postAttendantCount.setText(String.valueOf(post.getAttendants().size()));
+
+        Picasso.get().load(post.getCreatorAvatar()).placeholder(R.drawable.progress_animation).into(binding.postUserAvatar);
+        Picasso.get().load(post.getImageUrl()).placeholder(R.drawable.progress_animation).into(binding.postImage);
+
+    }
+
+    private void initializeAttendButton() {
+        binding.postDetailsAttend.setText(isAttended ? R.string.leave : R.string.join);
+        int attendButtonColor = view.getResources().getColor(isAttended ? R.color.warning : R.color.success);
+        Drawable attendButtonIcon = view.getResources().getDrawable(isAttended ? R.drawable.outline_cancel_24 : R.drawable.outline_task_alt_24);
+        ((MaterialButton) binding.postDetailsAttend).setIcon(attendButtonIcon);
+        binding.postDetailsAttend.setBackgroundColor(attendButtonColor);
+    }
+
+
+    private void handleEditButtonClick() {
+        Navigation.findNavController(view).navigate(PostDetailsFragmentDirections.actionPostDetailsFragmentToNewPostFragment(post));
+    }
+
+    private void handleAttendClick() {
         String userId = user.getId();
         String userName = user.getName();
         String userAvatarUrl = user.getAvatarUrl();
-        postAttendButton.setClickable(false);
+        binding.postDetailsAttend.setClickable(false);
         List<Attendant> attendantList = post.getAttendants();
         if (isAttended) {
             attendantList = attendantList.stream().filter(attendant -> !attendant.getUserId().equals(userId)).collect(Collectors.toList());
@@ -133,7 +124,7 @@ public class PostDetailsFragment extends Fragment {
             post.setAttendants(attendantList);
         }
         PostModel.getInstance().updatePost(post, data1 -> {
-            postAttendButton.setClickable(true);
+            binding.postDetailsAttend.setClickable(true);
             Navigation.findNavController(view).navigate(PostDetailsFragmentDirections.actionPostDetailsFragmentSelf(post));
         });
     }

@@ -95,16 +95,10 @@ public class User {
         return user;
     }
 
-    public static long getLocalLastUpdated() {
-        SharedPreferences sp = MyApplication.getMyContext().getSharedPreferences("TAG", Context.MODE_PRIVATE);
-        return sp.getLong(LOCAL_LAST_UPDATED, 0);
-    }
 
-    public static void setLocalLastUpdate(Long time) {
-        SharedPreferences sharedPref = MyApplication.getMyContext().getSharedPreferences("TAG", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPref.edit();
-        editor.putLong(LOCAL_LAST_UPDATED, time);
-        editor.commit();
+
+    public Long getLastUpdated(){
+        return this.lastUpdated;
     }
 
 
@@ -134,6 +128,20 @@ public class User {
         editor.remove("user");
         editor.commit();
     }
+
+    public static long getLocalLastUpdated() {
+        SharedPreferences sp = MyApplication.getMyContext().getSharedPreferences("TAG", Context.MODE_PRIVATE);
+        return sp.getLong(LOCAL_LAST_UPDATED, 0);
+    }
+
+    public static void setLocalLastUpdate(Long time) {
+        SharedPreferences sharedPref = MyApplication.getMyContext().getSharedPreferences("TAG", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPref.edit();
+        editor.putLong(LOCAL_LAST_UPDATED, time);
+        editor.commit();
+    }
+
+
 
     @NotNull
     public String getId() {
