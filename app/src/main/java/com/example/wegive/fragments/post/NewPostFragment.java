@@ -116,8 +116,14 @@ public class NewPostFragment extends Fragment {
             initializeEditingMode(post);
         }
 
+
+        setEventListeners();
+
+        return view;
+    }
+
+    private void setEventListeners() {
         binding.addPostCancelButton.setOnClickListener(view1 -> {
-//            Navigation.findNavController(view).navigate(NewPostFragmentDirections.actionNewPostFragmentToHomePageFragment());
             Navigation.findNavController(view).popBackStack();
         });
 
@@ -146,8 +152,6 @@ public class NewPostFragment extends Fragment {
         dateInput.setOnClickListener(view1 -> {
             showDatePickerDialog();
         });
-
-        return view;
     }
 
 
