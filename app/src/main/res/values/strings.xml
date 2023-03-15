@@ -45,6 +45,7 @@
     <string name="choose_date">Choose date</string>
     <string name="post_event_date_label">Event date: </string>
     <string name="post_number_of_attendants">Number of attendants:</string>
+    <string name="charities">Charities</string>
 
     <!--Loading Messages-->
     <string name="sign_up_loading_message">One moment away from joining our family!</string>
