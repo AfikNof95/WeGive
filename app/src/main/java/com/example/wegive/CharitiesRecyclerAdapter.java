@@ -15,6 +15,9 @@ import com.squareup.picasso.Picasso;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -25,6 +28,8 @@ class CharityViewHolder extends RecyclerView.ViewHolder {
     TextView charityTitle;
     TextView charityContent;
     TextView charityCreatorName;
+    TextView charityCreatorEmail;
+
     TextView charityDate;
 
 
@@ -42,6 +47,8 @@ class CharityViewHolder extends RecyclerView.ViewHolder {
         charityTitle = view.findViewById(R.id.charity_title);
         charityContent = view.findViewById(R.id.charity_content);
         charityCreatorName = view.findViewById(R.id.charity_user_name);
+        charityCreatorEmail = view.findViewById(R.id.charity_creator_email);
+        charityDate = view.findViewById(R.id.charity_event_date);
         charityImage = view.findViewById(R.id.charity_image);
         parentView = view;
         this.data = data;
@@ -66,6 +73,15 @@ class CharityViewHolder extends RecyclerView.ViewHolder {
         charityTitle.setText(charity.getTitle());
         charityContent.setText(charity.getContent());
         charityCreatorName.setText(charity.getCreatorName());
+        charityCreatorEmail.setText(charity.getCreatorEmail());
+        Date date = new Date();
+        try {
+            date = DateFormat.getDateInstance().parse(charity.getDate());
+        } catch (Exception ex) {
+        }
+
+        charityDate.setText(date.toString());
+
         if (!Objects.equals(charity.getImageUrl(), "")) {
             Picasso.get().load(charity.getImageUrl()).placeholder(R.drawable.progress_animation).into(charityImage);
         } else {
