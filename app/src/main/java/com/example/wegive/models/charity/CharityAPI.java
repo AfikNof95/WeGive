@@ -1,5 +1,12 @@
 package com.example.wegive.models.charity;
 
+import retrofit2.Call;
+import retrofit2.http.GET;
+import retrofit2.http.Query;
+
 public interface CharityAPI {
-     String apiKey = "3ef22f8a-e79d-40f4-9edc-d2d41f105898";
+
+    @GET("search/projects?filter=country:IL,theme:disability")
+    Call<SearchResponse> getAPIPosts(@Query("api_key") String apiKey, @Query("q") String query);
+
 }

@@ -155,4 +155,9 @@
             app:popUpToInclusive="true"
             />
     </fragment>
+    <fragment
+        android:id="@+id/charityFragment"
+        android:name="com.example.wegive.fragments.charity.CharityFragment"
+        android:label="fragment_charity"
+        tools:layout="@layout/fragment_charity" />
 </navigation>

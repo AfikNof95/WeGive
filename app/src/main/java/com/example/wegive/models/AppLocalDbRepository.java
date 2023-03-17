@@ -23,5 +23,4 @@ public abstract class AppLocalDbRepository extends RoomDatabase {
 
     public abstract UserDao userDao();
 
-    public abstract PostsAttendantCrossDao  PostsAttendantCrossDao();
 }

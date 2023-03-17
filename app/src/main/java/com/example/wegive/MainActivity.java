@@ -84,12 +84,13 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         invalidateOptionsMenu();
         int itemId = item.getItemId();
-        if(itemId == R.id.menu_sign_out){
+        if (itemId == R.id.menu_sign_out) {
             User.signOut();
             navController.navigate(R.id.loginFragment);
-        }
-        else{
-            NavigationUI.onNavDestinationSelected(item,navController);
+        } else if (itemId == R.id.menu_charities) {
+            navController.navigate(R.id.charityFragment);
+        } else {
+            NavigationUI.onNavDestinationSelected(item, navController);
         }
         return super.onOptionsItemSelected(item);
     }
