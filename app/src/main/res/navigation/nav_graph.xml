@@ -160,4 +160,9 @@
         android:name="com.example.wegive.fragments.charity.CharityFragment"
         android:label="fragment_charity"
         tools:layout="@layout/fragment_charity" />
+    <fragment
+        android:id="@+id/eventsFragment"
+        android:name="com.example.wegive.fragments.events.EventsFragment"
+        android:label="fragment_events"
+        tools:layout="@layout/fragment_events" />
 </navigation>

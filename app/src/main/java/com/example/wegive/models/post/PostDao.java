@@ -19,11 +19,14 @@ public interface PostDao {
     @Query("select * from Post ORDER BY createdAt DESC")
     LiveData<List<Post>> getAll();
 
-   @Query("select * from Post WHERE creatorId = :userId ORDER BY createdAt DESC")
+    @Query("SELECT Post.id as id, Post.title as title, Post.content as content, Post.time as time, Post.creatorId as creatorId,User.name as creatorName, User.avatarUrl as creatorAvatar, Post.createdAt as createdAt, Post.attendants as attendants,Post.imageUrl as imageUrl, Post.lastUpdated as lastUpdated FROM Post LEFT JOIN User on Post.creatorId = User.id  WHERE Post.creatorId = :userId ORDER BY post.createdAt DESC")
     LiveData<List<Post>> getAllPostsByUserId(String userId);
 
-   @Query("SELECT Post.id as id, Post.title as title, Post.content as content, Post.time as time, Post.creatorId as creatorId,User.name as creatorName, User.avatarUrl as creatorAvatar, Post.createdAt as createdAt, Post.attendants as attendants,Post.imageUrl as imageUrl, Post.lastUpdated as lastUpdated FROM Post LEFT JOIN User on Post.creatorId = User.id ORDER BY post.createdAt DESC")
-   LiveData<List<Post>> getAllPosts();
+    @Query("SELECT Post.id as id, Post.title as title, Post.content as content, Post.time as time, Post.creatorId as creatorId,User.name as creatorName, User.avatarUrl as creatorAvatar, Post.createdAt as createdAt, Post.attendants as attendants,Post.imageUrl as imageUrl, Post.lastUpdated as lastUpdated FROM Post LEFT JOIN User on Post.creatorId = User.id  WHERE Post.creatorId = :userId ORDER BY post.createdAt DESC")
+    LiveData<List<Post>> getAllEventsByUserId(String userId);
+
+    @Query("SELECT Post.id as id, Post.title as title, Post.content as content, Post.time as time, Post.creatorId as creatorId,User.name as creatorName, User.avatarUrl as creatorAvatar, Post.createdAt as createdAt, Post.attendants as attendants,Post.imageUrl as imageUrl, Post.lastUpdated as lastUpdated FROM Post LEFT JOIN User on Post.creatorId = User.id ORDER BY post.createdAt DESC")
+    LiveData<List<Post>> getAllPosts();
 
     @Transaction
     @Query("SELECT * FROM  Post ORDER BY createdAt DESC ")
