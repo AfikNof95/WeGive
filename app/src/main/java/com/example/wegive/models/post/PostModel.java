@@ -51,7 +51,6 @@ public class PostModel {
 
     public LiveData<List<Post>> getAllPosts() {
         if (postList == null) {
-//            postList = localDB.postDao().getAll();
             postList = localDB.postDao().getAllPosts();
             refreshAllPosts();
         }

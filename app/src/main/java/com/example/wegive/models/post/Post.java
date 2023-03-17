@@ -64,6 +64,7 @@ public class Post implements Serializable, Comparable<Post> {
     public String creatorAvatar;
 
     public Long createdAt;
+
     public List<Attendant> attendants;
     public Long lastUpdated;
 
