@@ -12,7 +12,6 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.wegive.R;
 
-
 public class AccountFragment extends Fragment {
 
     AccountViewModel viewModel;

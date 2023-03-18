@@ -206,6 +206,11 @@
             app:argType="com.example.wegive.models.post.Post" />
     </fragment>
     <fragment
+        android:id="@+id/accountFragment"
+        android:name="com.example.wegive.fragments.account.AccountFragment"
+        android:label="fragment_account"
+        tools:layout="@layout/fragment_account" />
+    <fragment
         android:id="@+id/forgotPasswordFragment"
         android:name="com.example.wegive.fragments.auth.ForgotPasswordFragment"
         android:label="fragment_forgot_password"
