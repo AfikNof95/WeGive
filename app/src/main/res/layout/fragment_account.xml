@@ -53,7 +53,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
                 android:maxLines="2"
-                android:text="Please upload a photo!"
+                android:text="@string/invalid_photo"
                 android:textAlignment="center"
                 android:textColor="@color/error"
                 android:textSize="12sp"

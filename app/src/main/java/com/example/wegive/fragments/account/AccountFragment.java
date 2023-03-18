@@ -12,11 +12,14 @@ import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.wegive.R;
+import com.example.wegive.databinding.FragmentAccountBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.squareup.picasso.Picasso;
 
 public class AccountFragment extends Fragment {
 
     AccountViewModel viewModel;
+    FragmentAccountBinding binding;
 
     public AccountFragment() {
     }
@@ -28,7 +31,17 @@ public class AccountFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_account, container, false);
+        binding = FragmentAccountBinding.inflate(inflater, container, false);
+
+        binding.accountNameInput.setText(viewModel.currentUser.getName());
+        binding.accountEmailInput.setText(viewModel.currentUser.getEmail());
+        binding.accountPhoneInput.setText(viewModel.currentUser.getPhoneNumber());
+        Picasso.get()
+                .load(viewModel.currentUser.getAvatarUrl())
+                .placeholder(R.drawable.progress_animation)
+                .into(binding.userAvatar);
+
+        return binding.getRoot();
     }
 
     @Override
@@ -39,7 +52,7 @@ public class AccountFragment extends Fragment {
         FragmentActivity parentActivity = getActivity();
         if (parentActivity != null) {
             BottomNavigationView bottomNavigationView = parentActivity.findViewById(R.id.bottom_navigation);
-            if(bottomNavigationView != null) {
+            if (bottomNavigationView != null) {
                 bottomNavigationView.setVisibility(View.GONE);
             }
         }
