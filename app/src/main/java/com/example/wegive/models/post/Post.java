@@ -13,6 +13,7 @@ import androidx.room.PrimaryKey;
 
 import com.example.wegive.MyApplication;
 import com.example.wegive.models.attendent.Attendant;
+import com.example.wegive.models.comment.Comment;
 import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.FieldValue;
 
@@ -46,6 +47,7 @@ public class Post implements Serializable, Comparable<Post> {
     public static final String CREATOR_ID = "creator_id";
     public static final String CREATED_AT = "created_at";
     public static final String ATTENDANTS = "attendants";
+    public static final String COMMENTS = "comments";
     public static final String LAST_UPDATED = "last_updated";
     public static final String LOCAL_LAST_UPDATED = "last_updated";
 
@@ -66,10 +68,12 @@ public class Post implements Serializable, Comparable<Post> {
     public Long createdAt;
 
     public List<Attendant> attendants;
+
+    public List<Comment> comments;
     public Long lastUpdated;
 
 
-    public Post(String id, String title, String content, String time, String imageUrl, String creatorName, String creatorId, String creatorAvatar, List<Attendant> attendants, Long createdAt) {
+    public Post(String id, String title, String content, String time, String imageUrl, String creatorName, String creatorId, String creatorAvatar, List<Attendant> attendants, List<Comment> comments, Long createdAt) {
         this.id = id == null ? UUID.randomUUID().toString() : id;
         this.title = title;
         this.content = content;
@@ -79,6 +83,7 @@ public class Post implements Serializable, Comparable<Post> {
         this.creatorId = creatorId;
         this.creatorAvatar = creatorAvatar;
         this.attendants = attendants == null ? new ArrayList<>() : attendants;
+        this.comments = comments == null ? new ArrayList<>() : comments;
         this.createdAt = createdAt != null ? createdAt : (new Date()).getTime();
     }
 
@@ -92,9 +97,10 @@ public class Post implements Serializable, Comparable<Post> {
         String creatorName = (String) json.get(CREATOR_NAME);
         String creatorId = (String) json.get(CREATOR_ID);
         List<Attendant> attendants = (List<Attendant>) json.get(ATTENDANTS);
+        List<Comment> comments = (List<Comment>) json.get(COMMENTS);
         String creatorAvatar = (String) json.get(CREATOR_AVATAR);
         Long createdAt = (Long) json.get(CREATED_AT);
-        Post post = new Post(id, title, content, time, imageUrl, creatorName, creatorId, creatorAvatar, attendants, createdAt);
+        Post post = new Post(id, title, content, time, imageUrl, creatorName, creatorId, creatorAvatar, attendants, comments, createdAt);
         Timestamp lastUpdated = (Timestamp) json.get(LAST_UPDATED);
         if (lastUpdated != null) {
             post.setLastUpdated(lastUpdated.getSeconds());
@@ -115,6 +121,7 @@ public class Post implements Serializable, Comparable<Post> {
         json.put(CREATOR_ID, this.creatorId);
         json.put(CREATOR_AVATAR, this.creatorAvatar);
         json.put(ATTENDANTS, this.attendants);
+        json.put(COMMENTS, this.comments);
         json.put(CREATED_AT, this.createdAt);
         json.put(LAST_UPDATED, FieldValue.serverTimestamp());
 
@@ -217,6 +224,14 @@ public class Post implements Serializable, Comparable<Post> {
 
     public void setCreatorAvatar(String creatorAvatar) {
         this.creatorAvatar = creatorAvatar;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
     }
 
     @Override

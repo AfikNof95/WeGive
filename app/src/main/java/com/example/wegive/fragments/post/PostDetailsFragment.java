@@ -7,6 +7,7 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -17,9 +18,11 @@ import android.widget.TextView;
 import com.example.wegive.R;
 import com.example.wegive.databinding.FragmentPostDetailsBinding;
 import com.example.wegive.models.attendent.Attendant;
+import com.example.wegive.models.comment.Comment;
 import com.example.wegive.models.post.Post;
 import com.example.wegive.models.post.PostModel;
 import com.example.wegive.models.user.User;
+import com.example.wegive.recyclers.CommentsRecyclerAdapter;
 import com.example.wegive.utils.SnackBarGlobal;
 import com.google.android.material.button.MaterialButton;
 import com.squareup.picasso.Picasso;
@@ -39,6 +42,10 @@ public class PostDetailsFragment extends Fragment {
     User user;
 
 
+
+    CommentsRecyclerAdapter commentsAdapter;
+
+
     public PostDetailsFragment() {
     }
 
@@ -55,7 +62,11 @@ public class PostDetailsFragment extends Fragment {
                              Bundle savedInstanceState) {
         binding = FragmentPostDetailsBinding.inflate(inflater, container, false);
         view = binding.getRoot();
+        binding.commentsRecyclerView.setHasFixedSize(true);
+        binding.commentsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         post = NewPostFragmentArgs.fromBundle(getArguments()).getPost();
+        commentsAdapter = new CommentsRecyclerAdapter(getLayoutInflater(), post.getComments());
+        binding.commentsRecyclerView.setAdapter(commentsAdapter);
         user = User.getCurrentUser();
         isAttended = post.getAttendants().stream().anyMatch(attendant -> attendant.getUserId().equals(user.getId()));
         isPostOwner = post.getCreatorId().equals(user.getId());
@@ -89,11 +100,13 @@ public class PostDetailsFragment extends Fragment {
         });
 
         binding.postAttendantsLabel.setOnClickListener(view1 -> {
-            if(post.getAttendants().size() > 0){
+            if (post.getAttendants().size() > 0) {
                 Navigation.findNavController(view).navigate(PostDetailsFragmentDirections.actionPostDetailsFragmentToAttendantsFragment(post));
             }
+        });
 
-
+        binding.postAddCommentButton.setOnClickListener(view1 -> {
+            Navigation.findNavController(view).navigate(PostDetailsFragmentDirections.actionPostDetailsFragmentToAddCommentFragment(post));
         });
     }
 

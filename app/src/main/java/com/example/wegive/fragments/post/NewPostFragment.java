@@ -28,6 +28,7 @@ import com.example.wegive.IListener;
 import com.example.wegive.R;
 import com.example.wegive.databinding.FragmentNewPostBinding;
 import com.example.wegive.models.attendent.Attendant;
+import com.example.wegive.models.comment.Comment;
 import com.example.wegive.models.post.Post;
 import com.example.wegive.models.post.PostModel;
 import com.example.wegive.models.user.User;
@@ -199,8 +200,9 @@ public class NewPostFragment extends Fragment {
         Long createdAt = (new Date()).getTime();
         User currentUser = User.getCurrentUser();
         List<Attendant> attendants = post != null ? post.getAttendants() : new ArrayList<>();
+        List<Comment> comments = post != null ? post.getComments() : new ArrayList<>();
 
-        return new Post(id, title, content, date, null, currentUser.getName(), currentUser.getId(), currentUser.getAvatarUrl(), attendants, createdAt);
+        return new Post(id, title, content, date, null, currentUser.getName(), currentUser.getId(), currentUser.getAvatarUrl(), attendants, comments, createdAt);
     }
 
     private boolean validateForm() {
