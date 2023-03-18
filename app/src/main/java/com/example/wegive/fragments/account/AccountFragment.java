@@ -10,6 +10,8 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 
 import com.example.wegive.R;
 import com.example.wegive.databinding.FragmentAccountBinding;
@@ -17,6 +19,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.squareup.picasso.Picasso;
 
 public class AccountFragment extends Fragment {
+
+    private NavController navController;
 
     AccountViewModel viewModel;
     FragmentAccountBinding binding;
@@ -40,6 +44,10 @@ public class AccountFragment extends Fragment {
                 .load(viewModel.currentUser.getAvatarUrl())
                 .placeholder(R.drawable.progress_animation)
                 .into(binding.userAvatar);
+
+
+        binding.accountCancelButton.setOnClickListener((v) ->
+                Navigation.findNavController(v).popBackStack());
 
         return binding.getRoot();
     }
