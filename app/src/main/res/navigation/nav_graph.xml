@@ -154,6 +154,12 @@
             app:popUpTo="@id/postDetailsFragment"
             app:popUpToInclusive="true"
             />
+        <action
+            android:id="@+id/action_postDetailsFragment_to_eventsFragment"
+            app:destination="@id/eventsFragment"
+            app:popExitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/slide_in"
+            />
     </fragment>
     <fragment
         android:id="@+id/charityFragment"
@@ -164,5 +170,14 @@
         android:id="@+id/eventsFragment"
         android:name="com.example.wegive.fragments.events.EventsFragment"
         android:label="fragment_events"
-        tools:layout="@layout/fragment_events" />
+        tools:layout="@layout/fragment_events" >
+        <action
+            android:id="@+id/action_eventsFragment_to_postDetailsFragment"
+            app:destination="@id/postDetailsFragment"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out"
+            app:popExitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/slide_in"
+            />
+    </fragment>
 </navigation>

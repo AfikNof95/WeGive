@@ -1,5 +1,6 @@
 package com.example.wegive.fragments.post;
 
+import android.app.AlertDialog;
 import android.content.res.ColorStateList;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -19,6 +20,7 @@ import com.example.wegive.models.attendent.Attendant;
 import com.example.wegive.models.post.Post;
 import com.example.wegive.models.post.PostModel;
 import com.example.wegive.models.user.User;
+import com.example.wegive.utils.SnackBarGlobal;
 import com.google.android.material.button.MaterialButton;
 import com.squareup.picasso.Picasso;
 
@@ -81,6 +83,10 @@ public class PostDetailsFragment extends Fragment {
         binding.postDetailsEdit.setOnClickListener(view1 -> {
             handleEditButtonClick();
         });
+
+        binding.postDetailsDelete.setOnClickListener(view1 -> {
+            handleDeleteClick();
+        });
     }
 
     private void setControlsValues() {
@@ -126,6 +132,22 @@ public class PostDetailsFragment extends Fragment {
         PostModel.getInstance().updatePost(post, data1 -> {
             binding.postDetailsAttend.setClickable(true);
             Navigation.findNavController(view).navigate(PostDetailsFragmentDirections.actionPostDetailsFragmentSelf(post));
+        });
+    }
+
+    private void handleDeleteClick() {
+        new AlertDialog.Builder(view.getContext())
+                .setTitle("Delete Post")
+                .setMessage("Are you sure you want to delete this post?")
+                .setPositiveButton("Delete", (dialog, whichButton) -> handlePostDelete())
+                .setNegativeButton("Cancel", (dialog, which) -> dialog.dismiss())
+                .create().show();
+    }
+
+    private void handlePostDelete() {
+        PostModel.getInstance().deletePost(post.getId(), data1 -> {
+            Navigation.findNavController(view).popBackStack();
+            SnackBarGlobal.make(view,getString(R.string.post_delete_success), SnackBarGlobal.SEVERITY.ERROR);
         });
     }
 }

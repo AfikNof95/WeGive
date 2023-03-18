@@ -46,6 +46,7 @@
     <string name="post_event_date_label">Event date: </string>
     <string name="post_number_of_attendants">Number of attendants:</string>
     <string name="charities">Charities</string>
+    <string name="post_delete_success">Post deleted!</string>
 
     <!--Loading Messages-->
     <string name="sign_up_loading_message">One moment away from joining our family!</string>
@@ -68,6 +69,7 @@
     <string name="empty_post_content_error">Please enter a valid title!</string>
     <string name="empty_post_title_error">Please enter a valid content!</string>
     <string name="empty_date_error">Please enter a valid date!</string>
+
 
 
 </resources>

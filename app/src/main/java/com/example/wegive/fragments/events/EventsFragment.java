@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.example.wegive.PostsRecyclerAdapter;
 import com.example.wegive.R;
-import com.example.wegive.databinding.FragmentMyPostsBinding;
+import com.example.wegive.databinding.FragmentEventsBinding;
 import com.example.wegive.models.attendent.Attendant;
 import com.example.wegive.models.post.Post;
 import com.example.wegive.models.post.PostModel;
@@ -30,7 +30,7 @@ import java.util.List;
 public class EventsFragment extends Fragment {
 
     private EventsViewModel viewModel;
-    private FragmentMyPostsBinding binding;
+    private FragmentEventsBinding binding;
 
     PostsRecyclerAdapter adapter;
 
@@ -46,12 +46,12 @@ public class EventsFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
 
-        binding = FragmentMyPostsBinding.inflate(inflater, container, false);
+        binding = FragmentEventsBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
-        binding.myPostsRecyclerView.setHasFixedSize(true);
-        binding.myPostsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        binding.eventsRecyclerView.setHasFixedSize(true);
+        binding.eventsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         adapter = new PostsRecyclerAdapter(getLayoutInflater(), viewModel.getEvents().getValue());
-        binding.myPostsRecyclerView.setAdapter(adapter);
+        binding.eventsRecyclerView.setAdapter(adapter);
 
 
         BottomNavigationView bottomNavigationView = ((AppCompatActivity) getActivity()).findViewById(R.id.bottom_navigation);
@@ -59,7 +59,7 @@ public class EventsFragment extends Fragment {
 
         adapter.setOnItemClickListener(pos -> {
             Post post = adapter.getData().get(pos);
-            Navigation.findNavController(view).navigate(com.example.wegive.fragments.myPosts.MyPostsFragmentDirections.actionMyPostsFragmentToPostDetailsFragment(post));
+            Navigation.findNavController(view).navigate(EventsFragmentDirections.actionEventsFragmentToPostDetailsFragment(post));
         });
 
         viewModel.getEvents().observe(getViewLifecycleOwner(), list -> {
