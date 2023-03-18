@@ -100,8 +100,7 @@ public class NewPostFragment extends Fragment {
                              Bundle savedInstanceState) {
         binding = FragmentNewPostBinding.inflate(inflater, container, false);
         view = binding.getRoot();
-        ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
-        actionBar.hide();
+
 
         titleInput = binding.postTitleInput;
         titleLayout = binding.postTitleLayout;

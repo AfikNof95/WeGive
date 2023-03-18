@@ -27,11 +27,14 @@ import com.example.wegive.fragments.auth.LoginFragmentDirections;
 import com.example.wegive.models.user.User;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.util.Objects;
+
 
 public class MainActivity extends AppCompatActivity {
 
     boolean isFirstRun = true;
     private NavController navController;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +68,17 @@ public class MainActivity extends AppCompatActivity {
             navController.navigate(com.example.wegive.fragments.auth.LoginFragmentDirections.actionLoginFragmentToHomePageFragment());
 
         }
+
+        navController.addOnDestinationChangedListener((navController1, navDestination, bundle) -> {
+            if(navDestination.getId() == R.id.homePageFragment){
+                getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+                getSupportActionBar().setHomeButtonEnabled(false);
+            }else{
+                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+                getSupportActionBar().setHomeButtonEnabled(true);
+            }
+
+        });
         isFirstRun = false;
 
     }
@@ -84,7 +98,9 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         invalidateOptionsMenu();
         int itemId = item.getItemId();
-        if (itemId == R.id.menu_sign_out) {
+        if (itemId == android.R.id.home) {
+            navController.popBackStack();
+        } else if (itemId == R.id.menu_sign_out) {
             User.signOut();
             navController.navigate(R.id.loginFragment);
         } else if (itemId == R.id.menu_charities) {

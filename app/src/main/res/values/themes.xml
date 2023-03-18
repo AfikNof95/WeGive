@@ -14,6 +14,7 @@
         <!-- Status bar color. -->
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <item name="android:actionOverflowButtonStyle">@style/OverflowButtonStyle</item>
+        <item name="homeAsUpIndicator">@drawable/baseline_arrow_back_24</item>
 
 
         <!-- Customize your theme here. -->
@@ -22,5 +23,6 @@
     <style name="OverflowButtonStyle" parent="Widget.AppCompat.ActionButton.Overflow">
         <item name="tint">@color/black</item>
     </style>
+
 
 </resources>

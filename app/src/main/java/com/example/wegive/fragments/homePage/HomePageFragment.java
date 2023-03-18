@@ -87,7 +87,7 @@ public class HomePageFragment extends Fragment {
             UserModel.instance().refreshAllUsers();
         });
 
-        mViewModel.getUsers().observe(getViewLifecycleOwner(),list->{
+        mViewModel.getUsers().observe(getViewLifecycleOwner(), list -> {
             PostModel.getInstance().refreshAllPosts();
         });
 

@@ -69,7 +69,7 @@
     <string name="empty_post_content_error">Please enter a valid title!</string>
     <string name="empty_post_title_error">Please enter a valid content!</string>
     <string name="empty_date_error">Please enter a valid date!</string>
-
+    <string name="attendants">Attendants</string>
 
 
 </resources>

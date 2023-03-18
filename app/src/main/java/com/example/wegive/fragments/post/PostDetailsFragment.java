@@ -87,6 +87,14 @@ public class PostDetailsFragment extends Fragment {
         binding.postDetailsDelete.setOnClickListener(view1 -> {
             handleDeleteClick();
         });
+
+        binding.postAttendantsLabel.setOnClickListener(view1 -> {
+            if(post.getAttendants().size() > 0){
+                Navigation.findNavController(view).navigate(PostDetailsFragmentDirections.actionPostDetailsFragmentToAttendantsFragment(post));
+            }
+
+
+        });
     }
 
     private void setControlsValues() {
@@ -147,7 +155,7 @@ public class PostDetailsFragment extends Fragment {
     private void handlePostDelete() {
         PostModel.getInstance().deletePost(post.getId(), data1 -> {
             Navigation.findNavController(view).popBackStack();
-            SnackBarGlobal.make(view,getString(R.string.post_delete_success), SnackBarGlobal.SEVERITY.ERROR);
+            SnackBarGlobal.make(view, getString(R.string.post_delete_success), SnackBarGlobal.SEVERITY.ERROR);
         });
     }
 }
