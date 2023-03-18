@@ -5,6 +5,7 @@ import com.example.wegive.models.attendent.Attendant;
 import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.DocumentChange;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
@@ -54,8 +55,12 @@ public class FirebaseAttendantDB extends FirebaseBaseDB {
                 .addOnCompleteListener(task -> listener.onComplete(null));
     }
 
-    public void delete(String attendantId, IListener<Void> listener) {
-        db.collection(Attendant.COLLECTION).document(attendantId).delete()
+    public void delete(String userId, String postId, IListener<Void> listener) {
+        db.collection(Attendant.COLLECTION).whereEqualTo(Attendant.USER_ID, userId).whereEqualTo(Attendant.POST_ID, postId).get().addOnCompleteListener(runnable -> {
+                    for (QueryDocumentSnapshot document : runnable.getResult()) {
+                        document.getReference().delete();
+                    }
+                })
                 .addOnCompleteListener(task -> listener.onComplete(null));
     }
 

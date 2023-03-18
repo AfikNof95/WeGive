@@ -93,8 +93,8 @@ public class AttendantModel {
         });
     }
 
-    public void delete(String attendantId, IListener<Void> listener) {
-        db.delete(attendantId, data -> {
+    public void delete(String userId,String postId, IListener<Void> listener) {
+        db.delete(userId,postId, data -> {
             refreshAllAttendants();
             listener.onComplete(null);
         });

@@ -160,6 +160,14 @@
             app:popExitAnim="@anim/fade_out"
             app:popEnterAnim="@anim/slide_in"
             />
+        <action
+            android:id="@+id/action_postDetailsFragment_to_attendantsFragment"
+            app:destination="@id/attendantsFragment"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out"
+            app:popExitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/slide_in"
+            />
     </fragment>
     <fragment
         android:id="@+id/charityFragment"
@@ -179,5 +187,14 @@
             app:popExitAnim="@anim/fade_out"
             app:popEnterAnim="@anim/slide_in"
             />
+    </fragment>
+    <fragment
+        android:id="@+id/attendantsFragment"
+        android:name="com.example.wegive.fragments.attendants.AttendantsFragment"
+        android:label="fragment_attendants"
+        tools:layout="@layout/fragment_attendants" >
+        <argument
+            android:name="post"
+            app:argType="com.example.wegive.models.post.Post" />
     </fragment>
 </navigation>

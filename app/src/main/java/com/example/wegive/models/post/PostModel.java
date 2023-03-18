@@ -10,8 +10,10 @@ import com.example.wegive.firebase.FireBaseStorage;
 import com.example.wegive.firebase.FirebasePostDB;
 import com.example.wegive.models.AppLocalDB;
 import com.example.wegive.models.AppLocalDbRepository;
+import com.example.wegive.models.attendent.Attendant;
 import com.example.wegive.models.postAttendantPair.PostAttendantPair;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
@@ -62,6 +64,7 @@ public class PostModel {
         refreshAllPosts();
         return myPostsList;
     }
+
 
     public LiveData<List<PostAttendantPair>> getAllPostsWithAttendants() {
         if (postAttendantList == null) {
