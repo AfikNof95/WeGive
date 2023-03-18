@@ -31,4 +31,9 @@ public class FireBaseAuth {
             listener.onComplete(task);
         });
     }
+    public void forgotPassword(String email,IListener<Task<Void>> listener) {
+        auth.sendPasswordResetEmail(email).addOnCompleteListener(task -> {
+            listener.onComplete(task);
+        });
+    }
 }

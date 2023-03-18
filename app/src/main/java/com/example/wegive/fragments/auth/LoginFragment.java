@@ -150,5 +150,9 @@ public class LoginFragment extends Fragment {
             return false;
         });
 
+        binding.forgotPassword.setOnClickListener(view1 -> {
+            navController.navigate(LoginFragmentDirections.actionLoginFragmentToForgotPasswordFragment());
+        });
+
     }
 }

@@ -47,6 +47,8 @@
     <string name="post_number_of_attendants">Number of attendants:</string>
     <string name="charities">Charities</string>
     <string name="post_delete_success">Post deleted!</string>
+    <string name="forgot_password_title">Reset Your Password</string>
+    <string name="forgot_password_description">Please enter your email address, we will send you a link to reset your password.</string>
 
     <!--Loading Messages-->
     <string name="sign_up_loading_message">One moment away from joining our family!</string>
@@ -70,6 +72,8 @@
     <string name="empty_post_title_error">Please enter a valid content!</string>
     <string name="empty_date_error">Please enter a valid date!</string>
     <string name="attendants">Attendants</string>
+    <string name="confirm">Confirm</string>
+    <string name="forgot_password_success">Check your email for further instructions!</string>
 
 
 </resources>

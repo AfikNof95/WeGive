@@ -99,6 +99,11 @@ public class UserModel {
         fireBaseAuth.signIn(email, password, listener);
     }
 
+    public void forgotPassword(String email, IListener<Task<Void>> listener) {
+        fireBaseAuth.forgotPassword(email, listener);
+    }
+
+
     public void uploadUserAvatar(String userId, Bitmap bitmap, IListener<String> listener) {
         storage.uploadUserAvatar(userId, bitmap, listener);
     }
