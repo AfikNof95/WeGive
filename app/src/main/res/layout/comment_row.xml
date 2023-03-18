@@ -55,12 +55,30 @@
                 tools:text="Afik Nof"
                 tools:visibility="visible" />
 
+            <Button
+                android:id="@+id/comment_delete_button"
+                android:layout_width="25dp"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@color/error"
+                app:icon="@drawable/outline_delete_24"
+                app:iconGravity="textEnd"
+                app:iconPadding="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
             android:id="@+id/comment_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/black" />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

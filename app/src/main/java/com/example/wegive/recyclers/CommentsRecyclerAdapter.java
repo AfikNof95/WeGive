@@ -1,24 +1,31 @@
 package com.example.wegive.recyclers;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.wegive.R;
 
 import com.example.wegive.models.comment.Comment;
+import com.example.wegive.models.post.Post;
+import com.example.wegive.models.post.PostModel;
 import com.example.wegive.models.user.User;
+import com.example.wegive.utils.ProgressDialogGlobal;
 import com.squareup.picasso.Picasso;
 
 import org.jetbrains.annotations.NotNull;
 import org.w3c.dom.Text;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 class CommentsViewHolder extends RecyclerView.ViewHolder {
 
@@ -29,20 +36,25 @@ class CommentsViewHolder extends RecyclerView.ViewHolder {
 
     TextView commentContent;
 
+    Button deleteCommentButton;
+
     View view;
+
+    Post post;
     private Comment comment;
 
 
-    public CommentsViewHolder(@NotNull View view, CommentsRecyclerAdapter.OnItemClickListener listener, List<Comment> data) {
+    public CommentsViewHolder(@NotNull View view, CommentsRecyclerAdapter.OnItemClickListener listener, List<Comment> data, Post post) {
         super(view);
 
         this.view = view;
         this.data = data;
+        this.post = post;
 
         userAvatar = view.findViewById(R.id.comment_user_avatar);
         userName = view.findViewById(R.id.comment_user_name);
         commentContent = view.findViewById(R.id.comment_content);
-
+        deleteCommentButton = view.findViewById(R.id.comment_delete_button);
     }
 
     public void bind(Comment comment) {
@@ -62,7 +74,14 @@ class CommentsViewHolder extends RecyclerView.ViewHolder {
 
 
     private void setEventListeners() {
-
+        deleteCommentButton.setOnClickListener(view1 -> {
+            ProgressDialogGlobal.getInstance().show(view, view.getRootView().getResources().getString(R.string.processing_operation));
+            List<Comment> newComments = data.stream().filter(comm -> !comm.getId().equals(comment.getId())).collect(Collectors.toList());
+            post.setComments(newComments);
+            PostModel.getInstance().updatePost(post, data1 -> {
+            ProgressDialogGlobal.getInstance().hide();
+            });
+        });
     }
 
 
@@ -79,11 +98,14 @@ public class CommentsRecyclerAdapter extends RecyclerView.Adapter<CommentsViewHo
     LayoutInflater inflater;
     List<Comment> data;
 
+    Post post;
+
     User currentUser;
 
-    public CommentsRecyclerAdapter(LayoutInflater inflater, List<Comment> data) {
+    public CommentsRecyclerAdapter(LayoutInflater inflater, List<Comment> data, Post post) {
         this.inflater = inflater;
         this.data = data;
+        this.post = post;
         this.currentUser = User.getCurrentUser();
     }
 
@@ -105,7 +127,7 @@ public class CommentsRecyclerAdapter extends RecyclerView.Adapter<CommentsViewHo
     @Override
     public CommentsViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = inflater.inflate(R.layout.comment_row, parent, false);
-        return new CommentsViewHolder(view, listener, data);
+        return new CommentsViewHolder(view, listener, data, post);
     }
 
     @Override

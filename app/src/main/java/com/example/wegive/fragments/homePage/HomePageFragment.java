@@ -21,11 +21,10 @@ import android.view.WindowManager;
 import com.example.wegive.PostsRecyclerAdapter;
 import com.example.wegive.R;
 import com.example.wegive.databinding.FragmentHomePageBinding;
-import com.example.wegive.fragments.homePage.HomePageFragmentDirections;
 import com.example.wegive.models.post.Post;
 import com.example.wegive.models.post.PostModel;
-import com.example.wegive.models.user.User;
 import com.example.wegive.models.user.UserModel;
+import com.example.wegive.viewModels.HomePageViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class HomePageFragment extends Fragment {

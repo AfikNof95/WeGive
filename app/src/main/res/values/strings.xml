@@ -78,6 +78,7 @@
     <string name="confirm">Confirm</string>
     <string name="forgot_password_success">Check your email for further instructions!</string>
     <string name="empty_comment_error">Please enter a valid comment!</string>
+    <string name="processing_operation">Processing Operation</string>
 
 
 </resources>

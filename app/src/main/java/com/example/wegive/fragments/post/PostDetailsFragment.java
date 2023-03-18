@@ -1,22 +1,25 @@
 package com.example.wegive.fragments.post;
 
 import android.app.AlertDialog;
-import android.content.res.ColorStateList;
+import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 
 import com.example.wegive.R;
 import com.example.wegive.databinding.FragmentPostDetailsBinding;
+import com.example.wegive.models.user.UserModel;
+import com.example.wegive.utils.ProgressDialogGlobal;
+import com.example.wegive.viewModels.CommentsViewModel;
 import com.example.wegive.models.attendent.Attendant;
 import com.example.wegive.models.comment.Comment;
 import com.example.wegive.models.post.Post;
@@ -27,6 +30,7 @@ import com.example.wegive.utils.SnackBarGlobal;
 import com.google.android.material.button.MaterialButton;
 import com.squareup.picasso.Picasso;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -40,7 +44,7 @@ public class PostDetailsFragment extends Fragment {
     Post post;
 
     User user;
-
+    CommentsViewModel viewModel;
 
 
     CommentsRecyclerAdapter commentsAdapter;
@@ -49,6 +53,11 @@ public class PostDetailsFragment extends Fragment {
     public PostDetailsFragment() {
     }
 
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        viewModel = new ViewModelProvider(this).get(CommentsViewModel.class);
+    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -65,7 +74,7 @@ public class PostDetailsFragment extends Fragment {
         binding.commentsRecyclerView.setHasFixedSize(true);
         binding.commentsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         post = NewPostFragmentArgs.fromBundle(getArguments()).getPost();
-        commentsAdapter = new CommentsRecyclerAdapter(getLayoutInflater(), post.getComments());
+        commentsAdapter = new CommentsRecyclerAdapter(getLayoutInflater(), post.getComments(), post);
         binding.commentsRecyclerView.setAdapter(commentsAdapter);
         user = User.getCurrentUser();
         isAttended = post.getAttendants().stream().anyMatch(attendant -> attendant.getUserId().equals(user.getId()));
@@ -76,6 +85,25 @@ public class PostDetailsFragment extends Fragment {
             binding.postDetailsEdit.setVisibility(View.VISIBLE);
             binding.postDetailsDelete.setVisibility(View.VISIBLE);
         }
+
+
+        viewModel.getUsers().observe(getViewLifecycleOwner(), users -> {
+            List<Comment> comments = new ArrayList<>();
+            for (Comment comment : post.getComments()) {
+                innerLoop:
+                for (User user : users) {
+                    if (user.getId().equals(comment.getUserId())) {
+                        comments.add(new Comment(comment.getId(), comment.getUserId(), comment.getPostId(), comment.getContent(), user.getName(), user.getAvatarUrl()));
+                        break innerLoop;
+                    }
+                }
+            }
+            commentsAdapter.setData(comments);
+        });
+
+        viewModel.getPosts().observe(getViewLifecycleOwner(), posts -> {
+            UserModel.instance().refreshAllUsers();
+        });
 
 
         setControlsValues();
@@ -137,6 +165,7 @@ public class PostDetailsFragment extends Fragment {
     }
 
     private void handleAttendClick() {
+        ProgressDialogGlobal.getInstance().show(view, getString(R.string.processing_operation));
         String userId = user.getId();
         String userName = user.getName();
         String userAvatarUrl = user.getAvatarUrl();
@@ -153,6 +182,7 @@ public class PostDetailsFragment extends Fragment {
         PostModel.getInstance().updatePost(post, data1 -> {
             binding.postDetailsAttend.setClickable(true);
             Navigation.findNavController(view).navigate(PostDetailsFragmentDirections.actionPostDetailsFragmentSelf(post));
+            ProgressDialogGlobal.getInstance().hide();
         });
     }
 

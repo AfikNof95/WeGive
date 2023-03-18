@@ -1,6 +1,6 @@
 package com.example.wegive.models.post;
 
-import static androidx.room.ForeignKey.CASCADE;
+
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -8,7 +8,7 @@ import android.content.SharedPreferences;
 import androidx.annotation.NonNull;
 import androidx.room.ColumnInfo;
 import androidx.room.Entity;
-import androidx.room.ForeignKey;
+
 import androidx.room.PrimaryKey;
 
 import com.example.wegive.MyApplication;
@@ -17,7 +17,7 @@ import com.example.wegive.models.comment.Comment;
 import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.FieldValue;
 
-import org.checkerframework.checker.units.qual.C;
+
 import org.jetbrains.annotations.NotNull;
 
 import java.io.Serializable;
@@ -31,7 +31,7 @@ import java.util.Objects;
 import java.util.UUID;
 
 
-//@Entity(tableName = "posts",foreignKeys = @ForeignKey(entity = Attendant.class,parentColumns = Attendant.POST_ID,childColumns = Post.ID,onDelete = CASCADE))
+
 @Entity
 public class Post implements Serializable, Comparable<Post> {
 

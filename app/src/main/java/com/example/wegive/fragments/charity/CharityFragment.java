@@ -20,6 +20,7 @@ import com.example.wegive.R;
 import com.example.wegive.databinding.FragmentCharityBinding;
 import com.example.wegive.models.charity.Charity;
 import com.example.wegive.models.charity.CharityAPIModel;
+import com.example.wegive.viewModels.CharityViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 
