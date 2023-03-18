@@ -8,149 +8,132 @@
     android:orientation="vertical"
     tools:context=".fragments.post.NewPostFragment">
 
-    <LinearLayout
-        android:id="@+id/LinearLayout"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="10dp"
+        android:layout_height="0dp"
+        android:layout_marginBottom="64dp"
+        android:padding="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-            <ScrollView
+
+            <ImageView
+                android:id="@+id/upload_post_image"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
-                app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
+                android:layout_height="231dp"
+                android:layout_gravity="center|center_horizontal|center_vertical"
+                android:contentDescription="@string/upload_image"
+                android:scaleType="fitCenter"
+                android:src="@drawable/upload_image_24" />
 
-                <LinearLayout
+
+            <TextView
+                android:id="@+id/upload_post_image_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="10dp"
+                android:fontFamily="@font/open_sans_extrabold"
+                android:text="@string/upload_image"
+                android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/post_title_layout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="10dp"
+
+                >
+
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/post_title_input"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical">
+                    android:hint="@string/post_title_hint"
+                    android:inputType="textMultiLine"
+                    android:overScrollMode="always"
+                    android:scrollbarStyle="insideInset"
+                    android:scrollbars="vertical"
+                    android:singleLine="true" />
+                />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/post_content_layout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="10dp"
+
+                >
 
 
-                    <ImageView
-                        android:id="@+id/upload_post_image"
-                        android:layout_width="match_parent"
-                        android:layout_height="231dp"
-                        android:layout_gravity="center|center_horizontal|center_vertical"
-                        android:contentDescription="@string/upload_image"
-                        android:scaleType="fitCenter"
-                        android:src="@drawable/upload_image_24" />
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/post_content_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="150dp"
+                    android:hint="@string/post_content_hint"
+                    android:inputType="textMultiLine"
+                    android:overScrollMode="always"
+                    android:padding="15dp"
+                    android:scrollbarStyle="insideInset"
+                    android:scrollbars="vertical" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/post_date_layout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginBottom="10dp"
+                app:errorEnabled="true">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/post_date_input"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:allowClickWhenDisabled="true"
+                    android:enabled="false"
+                    android:hint="@string/choose_date"
+                    android:inputType="date" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <FrameLayout
+                android:id="@+id/constraintLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/add_post_cancel_button"
+                    style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                    android:layout_width="107dp"
+                    android:layout_height="58dp"
+                    android:layout_gravity="start"
+                    android:text="@string/cancel"
+                    android:textColor="@color/black"
+                    app:strokeColor="@color/black" />
+
+                <Button
+                    android:id="@+id/add_post_save_button"
+                    android:layout_width="107dp"
+                    android:layout_height="58dp"
+                    android:layout_gravity="end"
+                    android:text="@string/post" />
+
+            </FrameLayout>
 
 
-                    <TextView
-                        android:id="@+id/upload_post_image_label"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center"
-                        android:layout_marginBottom="10dp"
-                        android:fontFamily="@font/open_sans_extrabold"
-                        android:text="@string/upload_image"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/post_title_layout"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginBottom="10dp"
-
-                        >
-
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/post_title_input"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:hint="@string/post_title_hint"
-                            android:inputType="textMultiLine"
-                            android:overScrollMode="always"
-                            android:scrollbarStyle="insideInset"
-                            android:scrollbars="vertical"
-                            android:singleLine="true" />
-                        />
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/post_content_layout"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginBottom="10dp"
-
-                        >
-
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/post_content_input"
-                            android:layout_width="match_parent"
-                            android:layout_height="150dp"
-                            android:hint="@string/post_content_hint"
-                            android:inputType="textMultiLine"
-                            android:overScrollMode="always"
-                            android:padding="15dp"
-                            android:scrollbarStyle="insideInset"
-                            android:scrollbars="vertical" />
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <com.google.android.material.textfield.TextInputLayout
-                        android:id="@+id/post_date_layout"
-                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        app:errorEnabled="true"
-                        android:layout_marginBottom="10dp">
-
-                        <com.google.android.material.textfield.TextInputEditText
-                            android:id="@+id/post_date_input"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:enabled="false"
-                            android:allowClickWhenDisabled="true"
-                            android:hint="@string/choose_date"
-                            android:inputType="date" />
-                    </com.google.android.material.textfield.TextInputLayout>
-
-                    <FrameLayout
-                        android:id="@+id/constraintLayout"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal">
-
-                        <Button
-                            android:id="@+id/add_post_cancel_button"
-                            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-                            android:layout_width="107dp"
-                            android:layout_height="58dp"
-                            android:layout_gravity="start"
-                            android:text="@string/cancel"
-                            android:textColor="@color/black"
-                            app:strokeColor="@color/black" />
-
-                        <Button
-                            android:id="@+id/add_post_save_button"
-                            android:layout_width="107dp"
-                            android:layout_height="58dp"
-                            android:layout_gravity="end"
-                            android:text="@string/post" />
-
-                    </FrameLayout>
-
-
-                </LinearLayout>
-            </ScrollView>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-    </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
