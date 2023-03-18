@@ -8,9 +8,11 @@ import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProvider;
 
 import com.example.wegive.R;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class AccountFragment extends Fragment {
 
@@ -22,9 +24,6 @@ public class AccountFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-
-        }
     }
 
     @Override
@@ -36,5 +35,13 @@ public class AccountFragment extends Fragment {
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         viewModel = new ViewModelProvider(this).get(AccountViewModel.class);
+
+        FragmentActivity parentActivity = getActivity();
+        if (parentActivity != null) {
+            BottomNavigationView bottomNavigationView = parentActivity.findViewById(R.id.bottom_navigation);
+            if(bottomNavigationView != null) {
+                bottomNavigationView.setVisibility(View.GONE);
+            }
+        }
     }
 }
