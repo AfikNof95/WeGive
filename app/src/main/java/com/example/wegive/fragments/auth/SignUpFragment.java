@@ -152,6 +152,7 @@ public class SignUpFragment extends Fragment {
                         UserModel.instance().addUser(newUser, data1 -> {
 
                             Navigation.findNavController(view).navigate(SignUpFragmentDirections.actionSignUpFragmentToLoginFragment());
+                            SnackBarGlobal.make(view,getString(R.string.sign_up_welcome), SnackBarGlobal.SEVERITY.SUCCESS);
                         });
                         Log.d("TAG", "test");
                     });

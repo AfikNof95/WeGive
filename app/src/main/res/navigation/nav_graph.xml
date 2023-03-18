@@ -26,6 +26,14 @@
             app:popExitAnim="@anim/fade_out"
             app:popEnterAnim="@anim/slide_in"
             />
+        <action
+            android:id="@+id/action_loginFragment_to_forgotPasswordFragment"
+            app:destination="@id/forgotPasswordFragment"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out"
+            app:popExitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/slide_in"
+            />
     </fragment>
     <fragment
         android:id="@+id/signUpFragment"
@@ -197,4 +205,9 @@
             android:name="post"
             app:argType="com.example.wegive.models.post.Post" />
     </fragment>
+    <fragment
+        android:id="@+id/forgotPasswordFragment"
+        android:name="com.example.wegive.fragments.auth.ForgotPasswordFragment"
+        android:label="fragment_forgot_password"
+        tools:layout="@layout/fragment_forgot_password" />
 </navigation>
