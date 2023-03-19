@@ -22,6 +22,7 @@ import com.example.wegive.models.attendent.Attendant;
 import com.example.wegive.models.post.Post;
 import com.example.wegive.models.post.PostModel;
 import com.example.wegive.models.user.User;
+import com.example.wegive.viewModels.EventsViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import java.util.ArrayList;

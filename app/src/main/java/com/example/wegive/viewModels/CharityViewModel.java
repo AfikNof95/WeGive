@@ -1,4 +1,4 @@
-package com.example.wegive.fragments.charity;
+package com.example.wegive.viewModels;
 
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;

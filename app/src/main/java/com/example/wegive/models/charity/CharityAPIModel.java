@@ -65,7 +65,8 @@ public class CharityAPIModel implements Serializable {
                             String creatorEmail = project.getContactEmail();
                             String projectUrl = project.getProjectLink();
                             String country = project.getCountry();
-                            Charity charity = new Charity(title, content, imageUrl, creatorName, creatorEmail, date, projectUrl, country);
+                            String contactPhoneNumber = project.getContactPhone();
+                            Charity charity = new Charity(title, content, imageUrl, creatorName, creatorEmail,contactPhoneNumber ,date, projectUrl, country);
                             charityList.add(charity);
                         });
                     }

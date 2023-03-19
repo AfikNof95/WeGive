@@ -1,6 +1,5 @@
 package com.example.wegive.fragments.myPosts;
 
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 
@@ -23,6 +22,7 @@ import com.example.wegive.R;
 import com.example.wegive.databinding.FragmentMyPostsBinding;
 import com.example.wegive.models.post.Post;
 import com.example.wegive.models.post.PostModel;
+import com.example.wegive.viewModels.MyPostsViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class MyPostsFragment extends Fragment {

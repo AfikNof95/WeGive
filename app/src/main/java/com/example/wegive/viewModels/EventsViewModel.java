@@ -1,4 +1,4 @@
-package com.example.wegive.fragments.events;
+package com.example.wegive.viewModels;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;

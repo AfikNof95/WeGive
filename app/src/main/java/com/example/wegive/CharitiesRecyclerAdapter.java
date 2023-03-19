@@ -29,6 +29,7 @@ class CharityViewHolder extends RecyclerView.ViewHolder {
     TextView charityContent;
     TextView charityCreatorName;
     TextView charityCreatorEmail;
+    TextView charityCreatorPhoneNumber;
 
     TextView charityDate;
 
@@ -48,6 +49,7 @@ class CharityViewHolder extends RecyclerView.ViewHolder {
         charityContent = view.findViewById(R.id.charity_content);
         charityCreatorName = view.findViewById(R.id.charity_user_name);
         charityCreatorEmail = view.findViewById(R.id.charity_creator_email);
+        charityCreatorPhoneNumber = view.findViewById(R.id.charity_creator_phone_number);
         charityDate = view.findViewById(R.id.charity_event_date);
         charityImage = view.findViewById(R.id.charity_image);
         parentView = view;
@@ -74,6 +76,17 @@ class CharityViewHolder extends RecyclerView.ViewHolder {
         charityContent.setText(charity.getContent());
         charityCreatorName.setText(charity.getCreatorName());
         charityCreatorEmail.setText(charity.getCreatorEmail());
+        charityCreatorPhoneNumber.setText(charity.getCreatorPhoneNumber());
+
+        if(charity.getCreatorEmail() == null){
+            charityCreatorEmail.setVisibility(View.GONE);
+        }
+
+        if(charity.getCreatorPhoneNumber() == null){
+            charityCreatorPhoneNumber.setVisibility(View.GONE);
+        }
+
+
         Date date = new Date();
         try {
             date = DateFormat.getDateInstance().parse(charity.getDate());
