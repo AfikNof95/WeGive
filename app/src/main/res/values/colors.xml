@@ -13,4 +13,6 @@
     <color name="warning">#ed6c02</color>
     <color name="info">#0288d1</color>
     <color name="divider">#cecece</color>
+    <color name="dynamicNeutral">#FF454749</color>
+    <color name="dynamicNeutral20">#2E3133</color>
 </resources>

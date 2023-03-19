@@ -1,13 +1,14 @@
 package com.example.wegive.models.charity;
 
 public class Charity {
-    public Charity(String title, String content, String imageUrl, String creatorName, String creatorEmail, String date, String charityUrl, String country) {
+    public Charity(String title, String content, String imageUrl, String creatorName, String creatorEmail,String creatorPhoneNumber, String date, String charityUrl, String country) {
 
         this.title = title;
         this.content = content;
         this.imageUrl = imageUrl;
         this.creatorName = creatorName;
         this.creatorEmail = creatorEmail;
+        this.creatorEmail = creatorPhoneNumber;
         this.date = date;
         this.charityUrl = charityUrl;
         this.country = country;
@@ -19,6 +20,7 @@ public class Charity {
     private String imageUrl;
     private String creatorName;
     private String creatorEmail;
+    private String creatorPhoneNumber;
     private String date;
     private String charityUrl;
     private String country;
@@ -54,5 +56,13 @@ public class Charity {
 
     public String getCountry() {
         return country;
+    }
+
+    public String getCreatorPhoneNumber() {
+        return creatorPhoneNumber;
+    }
+
+    public void setCreatorPhoneNumber(String creatorPhoneNumber) {
+        this.creatorPhoneNumber = creatorPhoneNumber;
     }
 }

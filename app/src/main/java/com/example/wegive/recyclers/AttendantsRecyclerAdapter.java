@@ -1,8 +1,5 @@
 package com.example.wegive.recyclers;
 
-import android.app.AlertDialog;
-import android.content.res.ColorStateList;
-import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,7 +7,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.wegive.R;
@@ -21,8 +17,6 @@ import com.squareup.picasso.Picasso;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collectors;
 
 class AttendantsViewHolder extends RecyclerView.ViewHolder {
 
@@ -41,8 +35,8 @@ class AttendantsViewHolder extends RecyclerView.ViewHolder {
         this.view = view;
         this.data = data;
 
-        attendantAvatar = view.findViewById(R.id.attendant_avatar);
-        attendantName = view.findViewById(R.id.attendant_name);
+        attendantAvatar = view.findViewById(R.id.comment_user_avatar);
+        attendantName = view.findViewById(R.id.comment_user_name);
 
 
         view.setOnClickListener(view1 -> {

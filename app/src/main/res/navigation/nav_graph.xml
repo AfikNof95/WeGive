@@ -176,6 +176,14 @@
             app:popExitAnim="@anim/fade_out"
             app:popEnterAnim="@anim/slide_in"
             />
+        <action
+            android:id="@+id/action_postDetailsFragment_to_addCommentFragment"
+            app:destination="@id/addCommentFragment"
+            app:enterAnim="@anim/slide_in"
+            app:exitAnim="@anim/fade_out"
+            app:popExitAnim="@anim/fade_out"
+            app:popEnterAnim="@anim/slide_in"
+            />
     </fragment>
     <fragment
         android:id="@+id/charityFragment"
@@ -220,4 +228,13 @@
         android:name="com.example.wegive.fragments.auth.ForgotPasswordFragment"
         android:label="fragment_forgot_password"
         tools:layout="@layout/fragment_forgot_password" />
+    <fragment
+        android:id="@+id/addCommentFragment"
+        android:name="com.example.wegive.models.comment.AddCommentFragment"
+        android:label="fragment_add_comment"
+        tools:layout="@layout/fragment_add_comment" >
+        <argument
+            android:name="post"
+            app:argType="com.example.wegive.models.post.Post" />
+    </fragment>
 </navigation>

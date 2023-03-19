@@ -1,4 +1,5 @@
-package com.example.wegive.fragments.attendants;
+package com.example.wegive.viewModels;
+
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.ViewModel;
@@ -10,16 +11,15 @@ import com.example.wegive.models.user.UserModel;
 
 import java.util.List;
 
-public class AttendantsViewModel extends ViewModel {
+public class CommentsViewModel extends ViewModel {
+    // TODO: Implement the ViewModel
 
-    LiveData<List<User>> users = UserModel.instance().getAllUsers();
+    private LiveData<List<User>> users = UserModel.instance().getAllUsers();
+    private LiveData<List<Post>> posts = PostModel.getInstance().getAllPosts();
 
-    LiveData<List<Post>> posts = PostModel.getInstance().getAllPosts();
-
-    public LiveData<List<User>> getData(Post post) {
+    public LiveData<List<User>> getUsers() {
         return users;
     }
-
     public LiveData<List<Post>> getPosts() {
         return posts;
     }

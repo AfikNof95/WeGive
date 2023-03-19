@@ -14,12 +14,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.wegive.databinding.FragmentAttendantsBinding;
-import com.example.wegive.fragments.attendants.AttendantsFragmentArgs;
 import com.example.wegive.models.attendent.Attendant;
 import com.example.wegive.models.post.Post;
 import com.example.wegive.models.user.User;
 import com.example.wegive.models.user.UserModel;
 import com.example.wegive.recyclers.AttendantsRecyclerAdapter;
+import com.example.wegive.viewModels.AttendantsViewModel;
 
 import java.util.ArrayList;
 import java.util.List;
