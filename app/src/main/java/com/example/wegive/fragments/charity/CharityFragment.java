@@ -73,7 +73,7 @@ public class CharityFragment extends Fragment {
         });
 
         binding.swipeRefreshLayout.setOnRefreshListener(() -> {
-            CharityAPIModel.instance().getCharities("Israel");
+            CharityAPIModel.instance().getCharities( "Israel");
         });
 
         return view;

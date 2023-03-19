@@ -51,6 +51,9 @@ public class ProjectsResponse {
     @Element(name = "contactEmail", required = false)
     private String contactEmail;
 
+    @Element(name = "contactPhone", required = false)
+    private String contactPhone;
+
     @Element(name = "approvedDate", required = false)
     private String approvedDate;
 
@@ -80,6 +83,10 @@ public class ProjectsResponse {
 
     public String getContactEmail() {
         return contactEmail;
+    }
+
+    public String getContactPhone() {
+        return contactPhone;
     }
 
     public String getApprovedDate() {

@@ -74,14 +74,20 @@ class CommentsViewHolder extends RecyclerView.ViewHolder {
 
 
     private void setEventListeners() {
-        deleteCommentButton.setOnClickListener(view1 -> {
-            ProgressDialogGlobal.getInstance().show(view, view.getRootView().getResources().getString(R.string.processing_operation));
-            List<Comment> newComments = data.stream().filter(comm -> !comm.getId().equals(comment.getId())).collect(Collectors.toList());
-            post.setComments(newComments);
-            PostModel.getInstance().updatePost(post, data1 -> {
-            ProgressDialogGlobal.getInstance().hide();
+
+        if (User.getCurrentUser().getId().equals(comment.getUserId())) {
+            deleteCommentButton.setOnClickListener(view1 -> {
+                ProgressDialogGlobal.getInstance().show(view, view.getRootView().getResources().getString(R.string.processing_operation));
+                List<Comment> newComments = data.stream().filter(comm -> !comm.getId().equals(comment.getId())).collect(Collectors.toList());
+                post.setComments(newComments);
+                PostModel.getInstance().updatePost(post, data1 -> {
+                    ProgressDialogGlobal.getInstance().hide();
+                });
             });
-        });
+        } else {
+            deleteCommentButton.setVisibility(View.GONE);
+        }
+
     }
 
 
