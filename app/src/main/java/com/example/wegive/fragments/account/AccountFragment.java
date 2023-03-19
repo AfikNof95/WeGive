@@ -1,6 +1,8 @@
 package com.example.wegive.fragments.account;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
+import android.graphics.drawable.VectorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +21,8 @@ import com.example.wegive.R;
 import com.example.wegive.databinding.FragmentAccountBinding;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.squareup.picasso.Picasso;
+
+import java.util.Objects;
 
 public class AccountFragment extends Fragment {
     AccountViewModel viewModel;
@@ -65,6 +69,11 @@ public class AccountFragment extends Fragment {
         binding.userAvatar.setOnClickListener(v -> showUploadImageDialog());
         binding.accountCancelButton.setOnClickListener((v) ->
                 Navigation.findNavController(v).popBackStack());
+        binding.accountSaveButton.setOnClickListener((v) -> {
+            if (validateForm()) {
+                System.out.println("Form valid");
+            }
+        });
 
         return binding.getRoot();
     }
@@ -86,6 +95,30 @@ public class AccountFragment extends Fragment {
             imageUploadDialog = builder.create();
             imageUploadDialog.show();
         }
+    }
+
+    private boolean validateForm() {
+        Drawable userAvatar = binding.userAvatar.getDrawable();
+
+        boolean isFormValid = true;
+        if (Objects.toString(binding.accountNameInput.getText(), "").trim().equals("")) {
+            binding.accountNameInput.setError(getString(R.string.empty_name_error));
+            isFormValid = false;
+        }
+        if (Objects.toString(binding.accountEmailInput.getText(), "").trim().equals("")) {
+            binding.accountEmailInput.setError(getString(R.string.empty_email_error));
+            isFormValid = false;
+        }
+        if (Objects.toString(binding.accountPhoneInput.getText(), "").trim().equals("")) {
+            binding.accountPhoneInput.setError(getString(R.string.empty_phone_number_error));
+            isFormValid = false;
+        }
+        if (userAvatar instanceof VectorDrawable || userAvatar == null) {
+            binding.userAvatarError.setVisibility(View.VISIBLE);
+            isFormValid = false;
+        }
+
+        return isFormValid;
     }
 
 
