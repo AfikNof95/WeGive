@@ -130,6 +130,7 @@
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    app:endIconMode="none"
                     app:errorEnabled="true"
                     app:passwordToggleEnabled="true">
 
@@ -137,9 +138,11 @@
                         android:id="@+id/account_password_input"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:enabled="false"
                         android:hint="@string/password"
                         android:inputType="textPassword"
-                        android:singleLine="true" />
+                        android:singleLine="true"
+                        android:text="@string/password" />
                 </com.google.android.material.textfield.TextInputLayout>
             </LinearLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
