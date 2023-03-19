@@ -211,6 +211,11 @@
         android:label="fragment_account"
         tools:layout="@layout/fragment_account" />
     <fragment
+        android:id="@+id/staticAccountFragment"
+        android:name="com.example.wegive.fragments.account.StaticAccountFragment"
+        android:label="fragment_static_account"
+        tools:layout="@layout/fragment_static_account" />
+    <fragment
         android:id="@+id/forgotPasswordFragment"
         android:name="com.example.wegive.fragments.auth.ForgotPasswordFragment"
         android:label="fragment_forgot_password"
