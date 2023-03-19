@@ -14,9 +14,6 @@
     <string name="invalid_photo">Please upload a photo!</string>
     <string name="login_failed">"Login failed"</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-
     <!--Layout Elements Strings-->
     <string name="email">Email</string>
     <string name="password">Password</string>
@@ -52,6 +49,7 @@
     <string name="post_delete_success">Post deleted!</string>
     <string name="forgot_password_title">Reset Your Password</string>
     <string name="forgot_password_description">Please enter your email address, we will send you a link to reset your password.</string>
+    <string name="account_updated">Account details updated successfully!</string>
 
     <!--Loading Messages-->
     <string name="sign_up_loading_message">One moment away from joining our family!</string>
