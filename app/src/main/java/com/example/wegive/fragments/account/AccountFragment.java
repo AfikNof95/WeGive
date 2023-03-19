@@ -6,7 +6,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProvider;
@@ -24,6 +27,9 @@ public class AccountFragment extends Fragment {
 
     AccountViewModel viewModel;
     FragmentAccountBinding binding;
+    ActivityResultLauncher<Void> camera;
+    ActivityResultLauncher<String> gallery;
+    AlertDialog imageUploadDialog;
 
     public AccountFragment() {
     }
@@ -31,6 +37,20 @@ public class AccountFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        camera = registerForActivityResult(new ActivityResultContracts.TakePicturePreview(), result -> {
+            if (result != null) {
+                binding.userAvatar.setImageBitmap(result);
+                binding.userAvatarError.setVisibility(View.INVISIBLE);
+            }
+        });
+
+        gallery = registerForActivityResult(new ActivityResultContracts.GetContent(), result -> {
+            if (result != null) {
+                binding.userAvatar.setImageURI(result);
+                binding.userAvatarError.setVisibility(View.INVISIBLE);
+            }
+        });
     }
 
     @Override
@@ -46,11 +66,34 @@ public class AccountFragment extends Fragment {
                 .into(binding.userAvatar);
 
 
+        binding.userAvatar.setOnClickListener(v -> showUploadImageDialog());
         binding.accountCancelButton.setOnClickListener((v) ->
                 Navigation.findNavController(v).popBackStack());
 
         return binding.getRoot();
     }
+
+    private void showUploadImageDialog() {
+        if (imageUploadDialog != null) {
+            imageUploadDialog.show();
+            return;
+        }
+
+        FragmentActivity parentActivity = getActivity();
+        if (parentActivity != null) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            builder.setTitle("Upload Profile Picture");
+            builder.setPositiveButton("Camera", (dialogInterface, i) -> {
+                camera.launch(null);
+            });
+            builder.setNegativeButton("Gallery", (dialogInterface, i) -> {
+                gallery.launch("image/*");
+            });
+            imageUploadDialog = builder.create();
+            imageUploadDialog.show();
+        }
+    }
+
 
     @Override
     public void onAttach(@NonNull Context context) {
