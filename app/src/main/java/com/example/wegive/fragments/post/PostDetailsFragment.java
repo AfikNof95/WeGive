@@ -17,13 +17,12 @@ import android.view.ViewGroup;
 
 import com.example.wegive.R;
 import com.example.wegive.databinding.FragmentPostDetailsBinding;
-import com.example.wegive.models.user.UserModel;
+
 import com.example.wegive.utils.ProgressDialogGlobal;
-import com.example.wegive.viewModels.CommentsViewModel;
+import com.example.wegive.viewModels.PostDetailsViewModel;
 import com.example.wegive.models.attendent.Attendant;
 import com.example.wegive.models.comment.Comment;
 import com.example.wegive.models.post.Post;
-import com.example.wegive.models.post.PostModel;
 import com.example.wegive.models.user.User;
 import com.example.wegive.recyclers.CommentsRecyclerAdapter;
 import com.example.wegive.utils.SnackBarGlobal;
@@ -31,6 +30,7 @@ import com.google.android.material.button.MaterialButton;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -44,7 +44,7 @@ public class PostDetailsFragment extends Fragment {
     Post post;
 
     User user;
-    CommentsViewModel viewModel;
+    PostDetailsViewModel viewModel;
 
 
     CommentsRecyclerAdapter commentsAdapter;
@@ -56,7 +56,7 @@ public class PostDetailsFragment extends Fragment {
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        viewModel = new ViewModelProvider(this).get(CommentsViewModel.class);
+        viewModel = new ViewModelProvider(this).get(PostDetailsViewModel.class);
     }
 
     @Override
@@ -102,7 +102,7 @@ public class PostDetailsFragment extends Fragment {
         });
 
         viewModel.getPosts().observe(getViewLifecycleOwner(), posts -> {
-            UserModel.instance().refreshAllUsers();
+            viewModel.refreshUsers();
         });
 
 
@@ -152,6 +152,13 @@ public class PostDetailsFragment extends Fragment {
     }
 
     private void initializeAttendButton() {
+
+        Date eventDate = new Date(post.getTime());
+        if (eventDate.compareTo(new Date()) < 0) {
+            binding.postDetailsAttend.setVisibility(View.GONE);
+            return;
+        }
+
         binding.postDetailsAttend.setText(isAttended ? R.string.leave : R.string.join);
         int attendButtonColor = view.getResources().getColor(isAttended ? R.color.warning : R.color.success);
         Drawable attendButtonIcon = view.getResources().getDrawable(isAttended ? R.drawable.outline_cancel_24 : R.drawable.outline_task_alt_24);
@@ -179,7 +186,7 @@ public class PostDetailsFragment extends Fragment {
             attendantList.add(attendant);
             post.setAttendants(attendantList);
         }
-        PostModel.getInstance().updatePost(post, data1 -> {
+        viewModel.updatePost(post, response -> {
             binding.postDetailsAttend.setClickable(true);
             Navigation.findNavController(view).navigate(PostDetailsFragmentDirections.actionPostDetailsFragmentSelf(post));
             ProgressDialogGlobal.getInstance().hide();
@@ -196,7 +203,7 @@ public class PostDetailsFragment extends Fragment {
     }
 
     private void handlePostDelete() {
-        PostModel.getInstance().deletePost(post.getId(), data1 -> {
+        viewModel.deletePost(post.getId(), response -> {
             Navigation.findNavController(view).popBackStack();
             SnackBarGlobal.make(view, getString(R.string.post_delete_success), SnackBarGlobal.SEVERITY.ERROR);
         });

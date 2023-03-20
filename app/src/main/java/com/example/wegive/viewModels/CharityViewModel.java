@@ -13,6 +13,10 @@ public class CharityViewModel extends ViewModel {
     private MutableLiveData<List<Charity>> charities = CharityAPIModel.instance().getCharities("Israel");
 
 
+    public void refreshCharities(){
+        CharityAPIModel.instance().getCharities( "Israel");
+    }
+
     public MutableLiveData<List<Charity>> getCharities() {
         return charities;
     }

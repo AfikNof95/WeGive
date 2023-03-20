@@ -23,13 +23,13 @@ import com.example.wegive.R;
 import com.example.wegive.databinding.FragmentHomePageBinding;
 import com.example.wegive.models.post.Post;
 import com.example.wegive.models.post.PostModel;
-import com.example.wegive.models.user.UserModel;
+
 import com.example.wegive.viewModels.HomePageViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class HomePageFragment extends Fragment {
 
-    private HomePageViewModel mViewModel;
+    private HomePageViewModel viewModel;
     private PostsRecyclerAdapter adapter = null;
     private FragmentHomePageBinding binding;
 
@@ -44,7 +44,7 @@ public class HomePageFragment extends Fragment {
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
-        mViewModel = new ViewModelProvider(this).get(HomePageViewModel.class);
+        viewModel = new ViewModelProvider(this).get(HomePageViewModel.class);
     }
 
     @Override
@@ -56,7 +56,7 @@ public class HomePageFragment extends Fragment {
         actionBar.show();
         binding.postsRecyclerView.setHasFixedSize(true);
         binding.postsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        adapter = new PostsRecyclerAdapter(getLayoutInflater(), mViewModel.getPosts().getValue());
+        adapter = new PostsRecyclerAdapter(getLayoutInflater(), viewModel.getPosts().getValue());
         binding.postsRecyclerView.setAdapter(adapter);
 
 
@@ -64,17 +64,17 @@ public class HomePageFragment extends Fragment {
         bottomNavigationView.setVisibility(View.VISIBLE);
 
         adapter.setOnItemClickListener(pos -> {
-            Post post = mViewModel.getPosts().getValue().get(pos);
+            Post post = viewModel.getPosts().getValue().get(pos);
             Navigation.findNavController(view).navigate(com.example.wegive.fragments.homePage.HomePageFragmentDirections.actionHomePageFragmentToPostDetailsFragment(post));
 
         });
 
-        mViewModel.getPosts().observe(getViewLifecycleOwner(), list -> {
+        viewModel.getPosts().observe(getViewLifecycleOwner(), list -> {
             adapter.setData(list);
 
         });
 
-        PostModel.getInstance().EventPostListLoadingState.observe(getViewLifecycleOwner(), status -> {
+        viewModel.getPostsLoadingState().observe(getViewLifecycleOwner(), status -> {
             binding.swipeRefreshLayout.setRefreshing(status == PostModel.LoadingState.LOADING);
             if (status != PostModel.LoadingState.LOADING) {
                 getActivity().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
@@ -83,12 +83,13 @@ public class HomePageFragment extends Fragment {
 
         binding.swipeRefreshLayout.setOnRefreshListener(() -> {
             getActivity().getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE, WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
-            UserModel.instance().refreshAllUsers();
+            viewModel.refreshUsers();
+            viewModel.refreshPosts();
         });
 
-        mViewModel.getUsers().observe(getViewLifecycleOwner(), list -> {
-            PostModel.getInstance().refreshAllPosts();
-        });
+//        viewModel.getUsers().observe(getViewLifecycleOwner(), list -> {
+//            viewModel.refreshPosts();
+//        });
 
         binding.addPostButton.setOnClickListener(view1 -> {
             Navigation.findNavController(view).navigate(HomePageFragmentDirections.actionHomePageFragmentToNewPostFragment(null));

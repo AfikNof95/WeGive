@@ -20,6 +20,18 @@ public class HomePageViewModel extends ViewModel {
 
     private LiveData<List<User>> users = UserModel.instance().getAllUsers();
 
+    public void refreshUsers() {
+        UserModel.instance().refreshAllUsers();
+    }
+
+    public void refreshPosts() {
+        PostModel.getInstance().refreshAllPosts();
+    }
+
+    public MutableLiveData<PostModel.LoadingState> getPostsLoadingState(){
+        return PostModel.getInstance().EventPostListLoadingState;
+    }
+
 
     public LiveData<List<Post>> getPosts() {
         return posts;
