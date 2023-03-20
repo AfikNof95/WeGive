@@ -69,7 +69,7 @@
                 android:id="@+id/user_avatar_error"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Please upload a photo!"
+                android:text="@string/invalid_photo"
                 android:textColor="@color/error"
                 android:textSize="12sp"
                 android:visibility="invisible" />

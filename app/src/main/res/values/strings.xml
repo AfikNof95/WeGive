@@ -6,13 +6,13 @@
     <string name="action_sign_in">Sign in or register</string>
     <string name="action_sign_in_short">Sign in</string>
     <string name="action_sign_up_short">Sign up</string>
+    <string name="action_cancel_short">Cancel</string>
+    <string name="action_save_short">Save</string>
     <string name="welcome">"Welcome !"</string>
     <string name="invalid_username">Not a valid username</string>
     <string name="invalid_password">Password must be >5 characters</string>
+    <string name="invalid_photo">Please upload a photo!</string>
     <string name="login_failed">"Login failed"</string>
-
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 
     <!--Layout Elements Strings-->
     <string name="email">Email</string>
@@ -52,6 +52,7 @@
     <string name="post_comments_title">Post Comments</string>
     <string name="post_add_comment_title">Add Comment</string>
     <string name="post_add_comment_hint">Comment..</string>
+    <string name="account_updated">Account details update successfully</string>
 
     <!--Loading Messages-->
     <string name="sign_up_loading_message">One moment away from joining our family!</string>
@@ -79,7 +80,7 @@
     <string name="forgot_password_success">Check your email for further instructions!</string>
     <string name="empty_comment_error">Please enter a valid comment!</string>
     <string name="processing_operation">Processing Operation</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="past_date_error">Cannot create an event in the past!</string>
-
 
 </resources>

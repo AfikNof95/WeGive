@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="16dp"
+    tools:context=".fragments.account.StaticAccountFragment">
+
+    <ScrollView
+        android:id="@+id/static_account_form_scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/static_account_form_constraint_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/static_account_user_avatar_card"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:elevation="14dp"
+                android:hapticFeedbackEnabled="true"
+                app:cardBackgroundColor="@color/white"
+                app:cardCornerRadius="100dp"
+                app:cardElevation="14dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:strokeColor="@color/black"
+                app:strokeWidth="1dp">
+
+                <ImageView
+                    android:id="@+id/user_avatar"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:scaleType="fitXY"
+                    app:srcCompat="@drawable/undraw_pic_profile_re_7g2h"
+                    tools:src="@drawable/undraw_pic_profile_re_7g2h"
+                    tools:srcCompat="@drawable/undraw_pic_profile_re_7g2h"
+                    tools:visibility="visible" />
+            </com.google.android.material.card.MaterialCardView>
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/fields_guideline"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.39" />
+
+            <TextView
+                android:id="@+id/static_account_name_input_label"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:text="Full Name:"
+                android:textSize="16sp"
+                app:layout_constraintBaseline_toBaselineOf="@+id/static_account_name_input_text"
+                app:layout_constraintEnd_toStartOf="@id/static_account_name_input_text"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/static_account_name_input_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp"
+                android:layout_marginHorizontal="24dp"
+                android:text="TName"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/fields_guideline"
+                app:layout_constraintTop_toBottomOf="@id/static_account_user_avatar_card" />
+
+
+            <TextView
+                android:id="@+id/static_account_email_input_label"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:text="Email:"
+                android:textSize="16sp"
+                app:layout_constraintBaseline_toBaselineOf="@+id/static_account_email_input_text"
+                app:layout_constraintEnd_toStartOf="@id/fields_guideline"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/static_account_email_input_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:layout_marginHorizontal="24dp"
+                android:text="TEmail"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/fields_guideline"
+                app:layout_constraintTop_toBottomOf="@id/static_account_name_input_text" />
+
+
+            <TextView
+                android:id="@+id/static_account_phone_input_label"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:text="Phone Number:"
+                android:textSize="16sp"
+                app:layout_constraintBaseline_toBaselineOf="@+id/static_account_phone_input_text"
+                app:layout_constraintEnd_toStartOf="@id/fields_guideline"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <TextView
+                android:id="@+id/static_account_phone_input_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="24dp"
+                android:layout_marginTop="30dp"
+                android:text="Tphone"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/fields_guideline"
+                app:layout_constraintTop_toBottomOf="@id/static_account_email_input_text" />
+
+
+            <TextView
+                android:id="@+id/static_account_password_input_label"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="16dp"
+                android:text="Password:"
+                android:textSize="16sp"
+                app:layout_constraintBaseline_toBaselineOf="@+id/static_account_password_input_text"
+                app:layout_constraintEnd_toStartOf="@id/fields_guideline"
+                app:layout_constraintStart_toStartOf="parent" />
+
+
+            <TextView
+                android:id="@+id/static_account_password_input_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="40dp"
+                android:layout_marginHorizontal="24dp"
+                android:text="*******"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/fields_guideline"
+                app:layout_constraintTop_toBottomOf="@id/static_account_phone_input_text" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+
+    <Button
+        android:id="@+id/static_account_cancel_button"
+        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="8dp"
+        android:text="Back"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/static_account_save_button"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/static_account_save_button"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="8dp"
+        android:text="Edit"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/static_account_cancel_button" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

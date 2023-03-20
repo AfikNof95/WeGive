@@ -106,6 +106,8 @@ public class MainActivity extends AppCompatActivity {
             navController.navigate(R.id.loginFragment);
         } else if (itemId == R.id.menu_charities) {
             navController.navigate(R.id.charityFragment);
+        } else if (itemId == R.id.menu_account) {
+            navController.navigate(R.id.staticAccountFragment);
         } else {
             NavigationUI.onNavDestinationSelected(item, navController);
         }
