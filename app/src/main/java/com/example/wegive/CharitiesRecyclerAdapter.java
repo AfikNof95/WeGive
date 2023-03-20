@@ -17,6 +17,7 @@ import org.jetbrains.annotations.NotNull;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -88,8 +89,9 @@ class CharityViewHolder extends RecyclerView.ViewHolder {
 
 
         Date date = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
         try {
-            date = DateFormat.getDateInstance().parse(charity.getDate());
+            date =dateFormat.parse(charity.getDate());
         } catch (Exception ex) {
         }
 
