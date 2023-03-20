@@ -220,10 +220,20 @@ public class NewPostFragment extends Fragment {
             isValid = false;
         }
 
+
+
         if (dateTime.trim().equals("")) {
             dateLayout.setError(getString(R.string.empty_date_error));
             isValid = false;
+        }else {
+            Date eventDate = new Date(dateTime);
+            if (eventDate.compareTo(new Date()) < 0) {
+                dateLayout.setError(getString(R.string.past_date_error));
+                isValid = false;
+            }
         }
+
+
 
         if (isValid && (postImage instanceof VectorDrawable || postImage == null)) {
             uploadPostImage.setImageDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.new_post_default_image, null));

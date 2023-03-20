@@ -150,18 +150,19 @@ public class SignUpFragment extends Fragment {
                         String phoneNumber = binding.signUpPhoneInput.getText().toString();
                         User newUser = new User(userId, name, email, phoneNumber, data, false, false);
                         UserModel.instance().addUser(newUser, data1 -> {
-
+                            pg.hide();
                             Navigation.findNavController(view).navigate(SignUpFragmentDirections.actionSignUpFragmentToLoginFragment());
                             SnackBarGlobal.make(view,getString(R.string.sign_up_welcome), SnackBarGlobal.SEVERITY.SUCCESS);
                         });
                         Log.d("TAG", "test");
                     });
                 } else {
+                    pg.hide();
                     binding.signUpErrorLabel.setText(task.getException().getMessage());
                     binding.signUpErrorLabel.setVisibility(View.VISIBLE);
                 }
 
-                pg.hide();
+
             });
         }
     }
