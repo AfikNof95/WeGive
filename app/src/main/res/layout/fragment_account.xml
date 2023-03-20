@@ -52,6 +52,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
+                android:layout_marginEnd="20dp"
                 android:maxLines="2"
                 android:text="@string/invalid_photo"
                 android:textAlignment="center"
@@ -88,6 +89,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="48dp"
+                android:layout_marginEnd="12dp"
                 android:paddingHorizontal="8dp"
                 app:errorEnabled="true"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -139,7 +141,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
-                android:text="Phone Number:"
+                android:text="Phone:"
                 android:textSize="16sp"
                 app:layout_constraintBaseline_toBaselineOf="@id/account_phone_input_layout"
                 app:layout_constraintEnd_toStartOf="@id/fields_guideline"
@@ -150,6 +152,7 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="12dp"
                 android:paddingHorizontal="8dp"
                 app:errorEnabled="true"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -181,6 +184,7 @@
                 style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginEnd="12dp"
                 android:paddingHorizontal="8dp"
                 app:endIconMode="none"
                 app:errorEnabled="true"
@@ -199,27 +203,29 @@
                     android:text="@string/password" />
             </com.google.android.material.textfield.TextInputLayout>
 
+            <Button
+                android:id="@+id/account_cancel_button"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="8dp"
+                android:text="@string/action_cancel_short"
+                app:layout_constraintBaseline_toBaselineOf="@+id/account_save_button"
+                app:layout_constraintEnd_toStartOf="@id/account_save_button"
+                app:layout_constraintStart_toStartOf="parent" />
+
+            <Button
+                android:id="@+id/account_save_button"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="8dp"
+                android:text="@string/action_save_short"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/account_cancel_button"
+                app:layout_constraintTop_toBottomOf="@+id/account_password_input_layout" />
+
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 
-    <Button
-        android:id="@+id/account_cancel_button"
-        style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="8dp"
-        android:text="@string/action_cancel_short"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/account_save_button"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/account_save_button"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="8dp"
-        android:text="@string/action_save_short"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/account_cancel_button" />
 </androidx.constraintlayout.widget.ConstraintLayout>
