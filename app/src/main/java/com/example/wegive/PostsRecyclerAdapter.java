@@ -26,6 +26,8 @@ import com.squareup.picasso.Picasso;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -112,6 +114,12 @@ class PostViewHolder extends RecyclerView.ViewHolder {
         } else {
             postImage.setVisibility(View.GONE);
         }
+
+        Date eventDate = new Date(post.getTime());
+        if (eventDate.compareTo(new Date()) < 0) {
+            attendButton.setVisibility(View.GONE);
+        }
+
 
         if (post.getCreatorId().equals(userId)) {
             editButton.setVisibility(View.VISIBLE);

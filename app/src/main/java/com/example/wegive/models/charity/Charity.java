@@ -8,7 +8,7 @@ public class Charity {
         this.imageUrl = imageUrl;
         this.creatorName = creatorName;
         this.creatorEmail = creatorEmail;
-        this.creatorEmail = creatorPhoneNumber;
+        this.creatorPhoneNumber = creatorPhoneNumber;
         this.date = date;
         this.charityUrl = charityUrl;
         this.country = country;

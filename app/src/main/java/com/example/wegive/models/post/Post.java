@@ -1,7 +1,6 @@
 package com.example.wegive.models.post;
 
 
-
 import android.content.Context;
 import android.content.SharedPreferences;
 
@@ -29,7 +28,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.UUID;
-
 
 
 @Entity
@@ -237,6 +235,11 @@ public class Post implements Serializable, Comparable<Post> {
     @Override
     public int compareTo(Post post) {
         return (Objects.nonNull(post.lastUpdated)) ? getLastUpdated().compareTo(post.lastUpdated) : 0;
+    }
+
+    public Long getCreatedAtUnformatted() {
+
+        return this.createdAt;
     }
 
     public String getCreatedAt() {

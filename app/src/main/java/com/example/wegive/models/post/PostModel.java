@@ -49,7 +49,8 @@ public class PostModel {
 
     private LiveData<List<Post>> postList;
     private LiveData<List<Post>> myPostsList;
-    private LiveData<List<PostAttendantPair>> postAttendantList;
+    private LiveData<List<Post>> myEvents;
+
 
     public LiveData<List<Post>> getAllPosts() {
         if (postList == null) {
@@ -59,6 +60,14 @@ public class PostModel {
         return postList;
     }
 
+    public LiveData<List<Post>> getAllPostsOrderedByDate() {
+        if (myEvents == null) {
+            myEvents = localDB.postDao().getAllPostsOrderedByDate();
+            refreshAllPosts();
+        }
+        return myEvents;
+    }
+
     public LiveData<List<Post>> getAllUserPosts(String userId) {
         myPostsList = localDB.postDao().getAllPostsByUserId(userId);
         refreshAllPosts();
@@ -66,13 +75,7 @@ public class PostModel {
     }
 
 
-    public LiveData<List<PostAttendantPair>> getAllPostsWithAttendants() {
-        if (postAttendantList == null) {
-            postAttendantList = localDB.postDao().getAllPostWithAttendants();
-            refreshAllPosts();
-        }
-        return postAttendantList;
-    }
+
 
 
     public void refreshAllPosts() {
