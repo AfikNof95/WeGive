@@ -65,7 +65,8 @@ public class MainActivity extends AppCompatActivity {
         navController = Navigation.findNavController(navHostFragment);
         if (isFirstRun && User.getCurrentUser() != null) {
             NavController navController = Navigation.findNavController(navHostFragment);
-            navController.navigate(com.example.wegive.fragments.auth.LoginFragmentDirections.actionLoginFragmentToHomePageFragment());
+//            navController.navigate(com.example.wegive.fragments.auth.LoginFragmentDirections.actionLoginFragmentToHomePageFragment());
+            navController.navigate(R.id.homePageFragment);
 
         }
 

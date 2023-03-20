@@ -1,4 +1,4 @@
-package com.example.wegive;
+package com.example.wegive.recyclers;
 
 import android.app.AlertDialog;
 import android.content.res.ColorStateList;
@@ -11,9 +11,9 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.navigation.Navigation;
-import androidx.navigation.ui.NavigationUI;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.wegive.R;
 import com.example.wegive.fragments.homePage.HomePageFragmentDirections;
 import com.example.wegive.fragments.myPosts.MyPostsFragmentDirections;
 import com.example.wegive.models.attendent.Attendant;
@@ -26,6 +26,7 @@ import com.squareup.picasso.Picasso;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
@@ -112,6 +113,12 @@ class PostViewHolder extends RecyclerView.ViewHolder {
         } else {
             postImage.setVisibility(View.GONE);
         }
+
+        Date eventDate = new Date(post.getTime());
+        if (eventDate.compareTo(new Date()) < 0) {
+            attendButton.setVisibility(View.GONE);
+        }
+
 
         if (post.getCreatorId().equals(userId)) {
             editButton.setVisibility(View.VISIBLE);

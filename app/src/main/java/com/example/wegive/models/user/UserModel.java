@@ -13,6 +13,7 @@ import com.example.wegive.models.AppLocalDB;
 import com.example.wegive.models.AppLocalDbRepository;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.HashMap;
 import java.util.List;
@@ -20,7 +21,6 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class UserModel {
-
 
 
     public static class UserModelHolder {
@@ -88,6 +88,11 @@ public class UserModel {
         });
     }
 
+
+    public FirebaseUser getCurrentUser() {
+        return fireBaseAuth.getCurrentUser();
+
+    }
 
     public void signUp(String email, String password, IListener<Task<AuthResult>> listener) {
 

@@ -1,6 +1,7 @@
 package com.example.wegive.viewModels;
 
 import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.wegive.models.post.Post;
@@ -15,6 +16,18 @@ public class AttendantsViewModel extends ViewModel {
     LiveData<List<User>> users = UserModel.instance().getAllUsers();
 
     LiveData<List<Post>> posts = PostModel.getInstance().getAllPosts();
+
+    public void refreshUsers() {
+        UserModel.instance().refreshAllUsers();
+    }
+
+    public void refreshPosts() {
+        PostModel.getInstance().refreshAllPosts();
+    }
+
+    public MutableLiveData<PostModel.LoadingState> getPostsLoadingState(){
+        return PostModel.getInstance().EventPostListLoadingState;
+    }
 
     public LiveData<List<User>> getData(Post post) {
         return users;

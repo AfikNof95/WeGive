@@ -1,4 +1,4 @@
-package com.example.wegive;
+package com.example.wegive.recyclers;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,13 +9,13 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.wegive.R;
 import com.example.wegive.models.charity.Charity;
 import com.example.wegive.models.user.User;
 import com.squareup.picasso.Picasso;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -27,6 +27,7 @@ class CharityViewHolder extends RecyclerView.ViewHolder {
     List<Charity> data;
     TextView charityTitle;
     TextView charityContent;
+    TextView charityLink;
     TextView charityCreatorName;
     TextView charityCreatorEmail;
     TextView charityCreatorPhoneNumber;
@@ -47,6 +48,7 @@ class CharityViewHolder extends RecyclerView.ViewHolder {
 
         charityTitle = view.findViewById(R.id.charity_title);
         charityContent = view.findViewById(R.id.charity_content);
+        charityLink = view.findViewById(R.id.charity_link);
         charityCreatorName = view.findViewById(R.id.charity_user_name);
         charityCreatorEmail = view.findViewById(R.id.charity_creator_email);
         charityCreatorPhoneNumber = view.findViewById(R.id.charity_creator_phone_number);
@@ -77,6 +79,7 @@ class CharityViewHolder extends RecyclerView.ViewHolder {
         charityCreatorName.setText(charity.getCreatorName());
         charityCreatorEmail.setText(charity.getCreatorEmail());
         charityCreatorPhoneNumber.setText(charity.getCreatorPhoneNumber());
+        charityLink.setText(charity.getCharityUrl());
 
         if(charity.getCreatorEmail() == null){
             charityCreatorEmail.setVisibility(View.GONE);
@@ -88,8 +91,9 @@ class CharityViewHolder extends RecyclerView.ViewHolder {
 
 
         Date date = new Date();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssZ");
         try {
-            date = DateFormat.getDateInstance().parse(charity.getDate());
+            date =dateFormat.parse(charity.getDate());
         } catch (Exception ex) {
         }
 

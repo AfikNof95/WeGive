@@ -15,11 +15,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.wegive.CharitiesRecyclerAdapter;
+import com.example.wegive.recyclers.CharitiesRecyclerAdapter;
 import com.example.wegive.R;
 import com.example.wegive.databinding.FragmentCharityBinding;
 import com.example.wegive.models.charity.Charity;
-import com.example.wegive.models.charity.CharityAPIModel;
+
 import com.example.wegive.viewModels.CharityViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -67,13 +67,13 @@ public class CharityFragment extends Fragment {
 
         });
 
-        viewModel.getCharities().observe(getViewLifecycleOwner(),list->{
+        viewModel.getCharities().observe(getViewLifecycleOwner(), list -> {
             binding.swipeRefreshLayout.setRefreshing(list == null);
             adapter.setData(list);
         });
 
         binding.swipeRefreshLayout.setOnRefreshListener(() -> {
-            CharityAPIModel.instance().getCharities( "Israel");
+            viewModel.refreshCharities();
         });
 
         return view;

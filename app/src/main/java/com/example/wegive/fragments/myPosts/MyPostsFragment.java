@@ -17,7 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 
-import com.example.wegive.PostsRecyclerAdapter;
+import com.example.wegive.recyclers.PostsRecyclerAdapter;
 import com.example.wegive.R;
 import com.example.wegive.databinding.FragmentMyPostsBinding;
 import com.example.wegive.models.post.Post;
@@ -65,7 +65,7 @@ public class MyPostsFragment extends Fragment {
 
         });
 
-        PostModel.getInstance().EventPostListLoadingState.observe(getViewLifecycleOwner(), status -> {
+        viewModel.getMyPostsLoadingState().observe(getViewLifecycleOwner(), status -> {
             binding.swipeRefreshLayout.setRefreshing(status == PostModel.LoadingState.LOADING);
             if (status != PostModel.LoadingState.LOADING) {
                 getActivity().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
@@ -73,11 +73,9 @@ public class MyPostsFragment extends Fragment {
         });
 
         binding.swipeRefreshLayout.setOnRefreshListener(() -> {
-            PostModel.getInstance().refreshAllPosts();
+            viewModel.refreshMyPosts();
             getActivity().getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE, WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
         });
-
-
 
 
         return view;

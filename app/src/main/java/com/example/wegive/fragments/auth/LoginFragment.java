@@ -93,6 +93,7 @@ public class LoginFragment extends Fragment {
                 if (data.isSuccessful()) {
                     FirebaseUser fbUser = data.getResult().getUser();
                     UserModel.instance().getUser(fbUser.getUid(), user -> {
+                        pg.hide();
                         User.setCurrentUser(user);
                         SnackBarGlobal.make(view, getString(R.string.sign_in_success), SnackBarGlobal.SEVERITY.SUCCESS);
                         navController.navigate(LoginFragmentDirections.actionLoginFragmentToHomePageFragment());
@@ -100,6 +101,7 @@ public class LoginFragment extends Fragment {
 
                     });
                 } else {
+                    pg.hide();
                     if (data.getException() instanceof FirebaseAuthException) {
                         try {
                             FirebaseAuthException error = (FirebaseAuthException) (data.getException());
@@ -113,7 +115,7 @@ public class LoginFragment extends Fragment {
 
                     binding.signInErrorLabel.setVisibility(View.VISIBLE);
                 }
-                pg.hide();
+
             });
         }
 

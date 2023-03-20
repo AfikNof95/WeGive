@@ -80,7 +80,7 @@
     <string name="forgot_password_success">Check your email for further instructions!</string>
     <string name="empty_comment_error">Please enter a valid comment!</string>
     <string name="processing_operation">Processing Operation</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="past_date_error">Cannot create an event in the past!</string>
 
 </resources>
