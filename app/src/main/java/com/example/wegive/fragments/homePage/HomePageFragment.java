@@ -55,6 +55,7 @@ public class HomePageFragment extends Fragment {
         actionBar.show();
         binding.postsRecyclerView.setHasFixedSize(true);
         binding.postsRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        viewModel.refreshUsers();
         adapter = new PostsRecyclerAdapter(getLayoutInflater(), viewModel.getPosts().getValue());
         binding.postsRecyclerView.setAdapter(adapter);
 
@@ -78,14 +79,9 @@ public class HomePageFragment extends Fragment {
         });
 
         binding.swipeRefreshLayout.setOnRefreshListener(() -> {
-
             viewModel.refreshUsers();
             viewModel.refreshPosts();
         });
-
-//        viewModel.getUsers().observe(getViewLifecycleOwner(), list -> {
-//            viewModel.refreshPosts();
-//        });
 
         binding.addPostButton.setOnClickListener(view1 -> {
             Navigation.findNavController(view).navigate(HomePageFragmentDirections.actionHomePageFragmentToNewPostFragment(null));
