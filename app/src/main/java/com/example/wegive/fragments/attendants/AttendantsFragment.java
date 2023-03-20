@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import com.example.wegive.databinding.FragmentAttendantsBinding;
 import com.example.wegive.models.attendent.Attendant;
 import com.example.wegive.models.post.Post;
+import com.example.wegive.models.post.PostModel;
 import com.example.wegive.models.user.User;
 import com.example.wegive.models.user.UserModel;
 import com.example.wegive.recyclers.AttendantsRecyclerAdapter;
@@ -65,6 +66,14 @@ public class AttendantsFragment extends Fragment {
 
         viewModel.getPosts().observe(getViewLifecycleOwner(), posts -> {
             UserModel.instance().refreshAllUsers();
+        });
+
+        binding.swipeRefreshLayout.setOnRefreshListener(() -> {
+            viewModel.refreshPosts();
+        });
+
+        viewModel.getPostsLoadingState().observe(getViewLifecycleOwner(), status -> {
+            binding.swipeRefreshLayout.setRefreshing(status == PostModel.LoadingState.LOADING);
         });
 
 
