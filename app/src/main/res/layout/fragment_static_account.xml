@@ -51,7 +51,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                app:layout_constraintGuide_begin="125dp" />
+                app:layout_constraintGuide_percent="0.39" />
 
             <TextView
                 android:id="@+id/static_account_name_input_label"
@@ -60,30 +60,22 @@
                 android:layout_marginHorizontal="16dp"
                 android:text="Full Name:"
                 android:textSize="16sp"
-                app:layout_constraintBaseline_toBaselineOf="@id/static_account_name_input_layout"
-                app:layout_constraintEnd_toStartOf="@id/static_account_name_input_layout"
+                app:layout_constraintBaseline_toBaselineOf="@+id/static_account_name_input_text"
+                app:layout_constraintEnd_toStartOf="@id/static_account_name_input_text"
                 app:layout_constraintStart_toStartOf="parent" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/static_account_name_input_layout"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            <TextView
+                android:id="@+id/static_account_name_input_text"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="48dp"
-                android:paddingHorizontal="8dp"
-                app:errorEnabled="true"
+                android:layout_marginTop="50dp"
+                android:layout_marginHorizontal="24dp"
+                android:text="TName"
+                android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@id/fields_guideline"
-                app:layout_constraintTop_toBottomOf="@id/static_account_user_avatar_card">
+                app:layout_constraintTop_toBottomOf="@id/static_account_user_avatar_card" />
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/static_account_name_input"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/open_sans_semibold"
-                    android:inputType="text"
-                    android:singleLine="true" />
-            </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
                 android:id="@+id/static_account_email_input_label"
@@ -92,29 +84,22 @@
                 android:layout_marginHorizontal="16dp"
                 android:text="Email:"
                 android:textSize="16sp"
-                app:layout_constraintBaseline_toBaselineOf="@id/static_account_email_input_layout"
+                app:layout_constraintBaseline_toBaselineOf="@+id/static_account_email_input_text"
                 app:layout_constraintEnd_toStartOf="@id/fields_guideline"
                 app:layout_constraintStart_toStartOf="parent" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/static_account_email_input_layout"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            <TextView
+                android:id="@+id/static_account_email_input_text"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:paddingHorizontal="8dp"
-                app:errorEnabled="true"
-                app:layout_constraintEnd_toEndOf="@id/static_account_name_input_layout"
+                android:layout_marginTop="30dp"
+                android:layout_marginHorizontal="24dp"
+                android:text="TEmail"
+                android:textSize="16sp"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@id/fields_guideline"
-                app:layout_constraintTop_toBottomOf="@id/static_account_name_input_layout">
+                app:layout_constraintTop_toBottomOf="@id/static_account_name_input_text" />
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/static_account_email_input"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/open_sans_semibold"
-                    android:inputType="textEmailAddress"
-                    android:singleLine="true" />
-            </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
                 android:id="@+id/static_account_phone_input_label"
@@ -123,28 +108,22 @@
                 android:layout_marginHorizontal="16dp"
                 android:text="Phone Number:"
                 android:textSize="16sp"
-                app:layout_constraintBaseline_toBaselineOf="@id/static_account_phone_input_layout"
+                app:layout_constraintBaseline_toBaselineOf="@+id/static_account_phone_input_text"
                 app:layout_constraintEnd_toStartOf="@id/fields_guideline"
                 app:layout_constraintStart_toStartOf="parent" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/static_account_phone_input_layout"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            <TextView
+                android:id="@+id/static_account_phone_input_text"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:paddingHorizontal="8dp"
-                app:errorEnabled="true"
+                android:layout_marginHorizontal="24dp"
+                android:layout_marginTop="30dp"
+                android:text="Tphone"
+                android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@id/fields_guideline"
-                app:layout_constraintTop_toBottomOf="@id/static_account_email_input_layout">
+                app:layout_constraintTop_toBottomOf="@id/static_account_email_input_text" />
 
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/static_account_phone_input"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:inputType="phone"
-                    android:singleLine="true" />
-            </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
                 android:id="@+id/static_account_password_input_label"
@@ -153,33 +132,22 @@
                 android:layout_marginHorizontal="16dp"
                 android:text="Password:"
                 android:textSize="16sp"
-                app:layout_constraintBaseline_toBaselineOf="@id/static_account_password_input_layout"
+                app:layout_constraintBaseline_toBaselineOf="@+id/static_account_password_input_text"
                 app:layout_constraintEnd_toStartOf="@id/fields_guideline"
                 app:layout_constraintStart_toStartOf="parent" />
 
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/static_account_password_input_layout"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+            <TextView
+                android:id="@+id/static_account_password_input_text"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:paddingHorizontal="8dp"
-                app:endIconMode="none"
-                app:errorEnabled="true"
+                android:layout_marginTop="40dp"
+                android:layout_marginHorizontal="24dp"
+                android:text="*******"
+                android:textSize="16sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@+id/fields_guideline"
-                app:layout_constraintTop_toBottomOf="@id/static_account_phone_input_layout"
-                app:passwordToggleEnabled="true">
-
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/static_account_password_input"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:enabled="false"
-                    android:inputType="textPassword"
-                    android:singleLine="true"
-                    android:text="@string/password" />
-            </com.google.android.material.textfield.TextInputLayout>
+                app:layout_constraintTop_toBottomOf="@id/static_account_phone_input_text" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>

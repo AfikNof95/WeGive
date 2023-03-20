@@ -37,9 +37,9 @@ public class StaticAccountFragment extends Fragment {
         binding = FragmentStaticAccountBinding.inflate(inflater, container, false);
 
         User currentUser = viewModel.getCurrentUser();
-//        binding.staticAccountNameInput.setText(currentUser.getName());
-//        binding.accountEmailInput.setText(currentUser.getEmail());
-//        binding.accountPhoneInput.setText(currentUser.getPhoneNumber());
+        binding.staticAccountNameInputText.setText(currentUser.getName());
+        binding.staticAccountEmailInputText.setText(currentUser.getEmail());
+        binding.staticAccountPhoneInputText.setText(currentUser.getPhoneNumber());
         Picasso.get()
                 .load(currentUser.getAvatarUrl())
                 .placeholder(R.drawable.progress_animation)
