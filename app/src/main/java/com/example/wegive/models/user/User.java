@@ -7,8 +7,9 @@ import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-import com.example.wegive.MainActivity;
+
 import com.example.wegive.MyApplication;
+
 import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.FieldValue;
 

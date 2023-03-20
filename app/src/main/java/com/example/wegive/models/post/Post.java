@@ -47,7 +47,7 @@ public class Post implements Serializable, Comparable<Post> {
     public static final String ATTENDANTS = "attendants";
     public static final String COMMENTS = "comments";
     public static final String LAST_UPDATED = "last_updated";
-    public static final String LOCAL_LAST_UPDATED = "last_updated";
+    public static final String LOCAL_LAST_UPDATED = "posts_last_updated";
 
 
     @PrimaryKey

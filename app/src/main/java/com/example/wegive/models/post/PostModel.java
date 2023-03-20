@@ -10,8 +10,6 @@ import com.example.wegive.firebase.FireBaseStorage;
 import com.example.wegive.firebase.FirebasePostDB;
 import com.example.wegive.models.AppLocalDB;
 import com.example.wegive.models.AppLocalDbRepository;
-import com.example.wegive.models.attendent.Attendant;
-import com.example.wegive.models.postAttendantPair.PostAttendantPair;
 
 import java.util.ArrayList;
 import java.util.List;

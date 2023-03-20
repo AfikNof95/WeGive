@@ -9,7 +9,6 @@ import androidx.room.Query;
 import androidx.room.Transaction;
 
 
-import com.example.wegive.models.postAttendantPair.PostAttendantPair;
 
 import java.util.List;
 
@@ -22,8 +21,6 @@ public interface PostDao {
     @Query("SELECT Post.id as id, Post.title as title, Post.content as content, Post.time as time, Post.creatorId as creatorId,User.name as creatorName, User.avatarUrl as creatorAvatar, Post.createdAt as createdAt, Post.attendants as attendants,Post.comments as comments,Post.imageUrl as imageUrl, Post.lastUpdated as lastUpdated FROM Post LEFT JOIN User on Post.creatorId = User.id  WHERE Post.creatorId = :userId ORDER BY post.createdAt DESC")
     LiveData<List<Post>> getAllPostsByUserId(String userId);
 
-    /*@Query("SELECT Post.id as id, Post.title as title, Post.content as content, Post.time as time, Post.creatorId as creatorId,User.name as creatorName, User.avatarUrl as creatorAvatar, Post.createdAt as createdAt, Post.attendants as attendants,Post.imageUrl as imageUrl, Post.lastUpdated as lastUpdated FROM Post LEFT JOIN User on Post.creatorId = User.id  WHERE Post.creatorId = :userId ORDER BY post.createdAt DESC")
-    LiveData<List<Post>> getAllEventsByUserId(String userId);*/
 
     @Query("SELECT Post.id as id, Post.title as title, Post.content as content, Post.time as time, Post.creatorId as creatorId,User.name as creatorName, User.avatarUrl as creatorAvatar, Post.createdAt as createdAt, Post.attendants as attendants,Post.comments as comments,Post.imageUrl as imageUrl, Post.lastUpdated as lastUpdated FROM Post LEFT JOIN User on Post.creatorId = User.id ORDER BY post.createdAt DESC")
     LiveData<List<Post>> getAllPosts();
@@ -31,9 +28,7 @@ public interface PostDao {
     @Query("SELECT Post.id as id, Post.title as title, Post.content as content, Post.time as time, Post.creatorId as creatorId,User.name as creatorName, User.avatarUrl as creatorAvatar, Post.createdAt as createdAt, Post.attendants as attendants,Post.comments as comments,Post.imageUrl as imageUrl, Post.lastUpdated as lastUpdated FROM Post LEFT JOIN User on Post.creatorId = User.id ORDER BY post.time DESC")
     LiveData<List<Post>> getAllPostsOrderedByDate();
 
-    @Transaction
-    @Query("SELECT * FROM  Post ORDER BY createdAt DESC ")
-    LiveData<List<PostAttendantPair>> getAllPostWithAttendants();
+
 
     @Query("select * from Post where id = :postId")
     Post getPostById(String postId);

@@ -15,7 +15,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.wegive.CharitiesRecyclerAdapter;
+import com.example.wegive.recyclers.CharitiesRecyclerAdapter;
 import com.example.wegive.R;
 import com.example.wegive.databinding.FragmentCharityBinding;
 import com.example.wegive.models.charity.Charity;

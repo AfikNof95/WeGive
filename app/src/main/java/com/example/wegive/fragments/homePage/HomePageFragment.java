@@ -16,9 +16,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
 
-import com.example.wegive.PostsRecyclerAdapter;
+import com.example.wegive.recyclers.PostsRecyclerAdapter;
 import com.example.wegive.R;
 import com.example.wegive.databinding.FragmentHomePageBinding;
 import com.example.wegive.models.post.Post;

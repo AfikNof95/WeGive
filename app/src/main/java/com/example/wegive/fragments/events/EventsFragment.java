@@ -15,7 +15,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.example.wegive.PostsRecyclerAdapter;
+import com.example.wegive.recyclers.PostsRecyclerAdapter;
 import com.example.wegive.R;
 import com.example.wegive.databinding.FragmentEventsBinding;
 import com.example.wegive.models.attendent.Attendant;
