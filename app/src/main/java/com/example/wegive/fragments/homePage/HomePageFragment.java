@@ -76,13 +76,10 @@ public class HomePageFragment extends Fragment {
 
         viewModel.getPostsLoadingState().observe(getViewLifecycleOwner(), status -> {
             binding.swipeRefreshLayout.setRefreshing(status == PostModel.LoadingState.LOADING);
-            if (status != PostModel.LoadingState.LOADING) {
-                getActivity().getWindow().clearFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
-            }
         });
 
         binding.swipeRefreshLayout.setOnRefreshListener(() -> {
-            getActivity().getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE, WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
+
             viewModel.refreshUsers();
             viewModel.refreshPosts();
         });
