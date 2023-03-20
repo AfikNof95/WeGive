@@ -10,9 +10,8 @@
     <ScrollView
         android:id="@+id/static_account_form_scroll_view"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:layout_editor_absoluteX="0dp"
-        tools:layout_editor_absoluteY="0dp">
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/static_account_form_constraint_layout"
@@ -46,23 +45,6 @@
                     tools:srcCompat="@drawable/undraw_pic_profile_re_7g2h"
                     tools:visibility="visible" />
             </com.google.android.material.card.MaterialCardView>
-
-            <TextView
-                android:id="@+id/user_avatar_error"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="16dp"
-                android:maxLines="2"
-                android:text="@string/invalid_photo"
-                android:textAlignment="center"
-                android:textColor="@color/error"
-                android:textSize="12sp"
-                android:visibility="invisible"
-                app:layout_constraintBottom_toBottomOf="@id/static_account_user_avatar_card"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@id/static_account_user_avatar_card"
-                app:layout_constraintTop_toTopOf="@id/static_account_user_avatar_card"
-                tools:visibility="visible" />
 
             <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/fields_guideline"
