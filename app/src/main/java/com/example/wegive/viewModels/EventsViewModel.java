@@ -11,7 +11,7 @@ import com.example.wegive.models.user.User;
 import java.util.List;
 
 public class EventsViewModel extends ViewModel {
-    private LiveData<List<Post>> events = PostModel.getInstance().getAllPosts();
+    private LiveData<List<Post>> events = PostModel.getInstance().getAllPostsOrderedByDate();
 
 
 

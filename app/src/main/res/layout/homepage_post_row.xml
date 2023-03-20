@@ -21,13 +21,15 @@
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/post_edit_button"
-                android:layout_width="wrap_content"
+                android:layout_width="35dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="5dp"
-                android:text="@string/edit"
                 android:textColor="@color/white"
                 android:visibility="gone"
                 app:chipBackgroundColor="@color/purple_500"
+                app:chipIcon="@drawable/baseline_edit_24"
+                app:chipIconSize="25dp"
+                app:chipIconTint="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/post_delete_button"
                 app:layout_constraintTop_toTopOf="parent"
@@ -35,12 +37,14 @@
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/post_delete_button"
-                android:layout_width="wrap_content"
+                android:layout_width="35dp"
                 android:layout_height="wrap_content"
-                android:text="@string/delete"
                 android:textColor="@color/white"
                 android:visibility="gone"
                 app:chipBackgroundColor="@color/error"
+                app:chipIcon="@drawable/baseline_delete_24"
+                app:chipIconSize="25dp"
+                app:chipIconTint="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -98,7 +102,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/open_sans_semibold"
                 android:textColor="@color/dynamicNeutral"
-                android:textSize="12sp"
+                android:textSize="10sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -140,30 +144,6 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/post_event_date_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/open_sans_extrabold"
-                android:text="@string/post_event_date_label"
-                android:textSize="12sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/post_event_date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:fontFamily="@font/open_sans_semibold"
-                android:textSize="11sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@id/post_event_date_label"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="Mar 21, 2023" />
-
-            <TextView
                 android:id="@+id/post_attendant_count"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -177,20 +157,53 @@
                 tools:text="1 attendant" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/post_attend"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="end"
-            android:layout_marginBottom="5dp"
-            android:text="@string/join"
-            android:textColor="@color/success"
-            android:textSize="12sp"
-            app:icon="@drawable/outline_task_alt_24"
-            app:iconPadding="4dp"
-            app:iconSize="16sp"
-            app:iconTint="@color/success" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/post_event_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:fontFamily="@font/open_sans_semibold"
+                android:textColor="@color/info"
+                android:textSize="12sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/post_event_date_label"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Mar 21, 2023" />
+
+            <TextView
+                android:id="@+id/post_event_date_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/open_sans_extrabold"
+                android:text="@string/post_event_date_label"
+                android:textColor="@color/black"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/post_attend"
+                style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:text="@string/join"
+                android:textColor="@color/success"
+                android:textSize="12sp"
+                app:icon="@drawable/outline_task_alt_24"
+                app:iconPadding="4dp"
+                app:iconSize="16sp"
+                app:iconTint="@color/success"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
         <View
             android:id="@+id/post_divider"
