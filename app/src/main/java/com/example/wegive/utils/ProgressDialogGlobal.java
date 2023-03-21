@@ -4,13 +4,11 @@ import android.app.ProgressDialog;
 import android.view.View;
 
 
-import com.example.wegive.MyApplication;
-
 public class ProgressDialogGlobal {
 
 
     private static final ProgressDialogGlobal _instance = new ProgressDialogGlobal();
-    private  ProgressDialog pDialog;
+    private ProgressDialog pDialog;
 
     public static ProgressDialogGlobal getInstance() {
         return _instance;
@@ -26,7 +24,11 @@ public class ProgressDialogGlobal {
         this.pDialog.show();
     }
 
-    public void hide(){
+    public void hide() {
         this.pDialog.hide();
+    }
+
+    public void dismiss() {
+        this.pDialog.dismiss();
     }
 }

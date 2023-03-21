@@ -82,5 +82,7 @@
     <string name="processing_operation">Processing Operation</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="past_date_error">Cannot create an event in the past!</string>
+    <string name="no_posts">You don\'t have any post yet!</string>
+    <string name="empty_events">You don\'t have upcoming events!</string>
 
 </resources>

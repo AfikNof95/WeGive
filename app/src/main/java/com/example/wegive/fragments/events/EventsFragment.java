@@ -74,6 +74,11 @@ public class EventsFragment extends Fragment {
                     }
                 }
             }
+            if(events.size() == 0){
+                binding.emptyEvents.setVisibility(View.VISIBLE);
+            }else{
+                binding.emptyEvents.setVisibility(View.GONE);
+            }
             adapter.setData(events);
 
         });

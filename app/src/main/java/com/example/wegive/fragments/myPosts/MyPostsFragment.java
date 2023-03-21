@@ -52,6 +52,7 @@ public class MyPostsFragment extends Fragment {
         binding.myPostsRecyclerView.setAdapter(adapter);
 
 
+
         BottomNavigationView bottomNavigationView = ((AppCompatActivity) getActivity()).findViewById(R.id.bottom_navigation);
         bottomNavigationView.setVisibility(View.VISIBLE);
 
@@ -61,6 +62,12 @@ public class MyPostsFragment extends Fragment {
         });
 
         viewModel.getMyPosts().observe(getViewLifecycleOwner(), list -> {
+            if(list.size() == 0){
+                binding.myPostsEmpty.setVisibility(View.VISIBLE);
+            }else{
+                binding.myPostsEmpty.setVisibility(View.GONE);
+            }
+
             adapter.setData(list);
 
         });

@@ -7,6 +7,19 @@
     android:layout_height="match_parent"
     tools:context=".fragments.myPosts.MyPostsFragment" >
 
+    <TextView
+        android:id="@+id/my_posts_empty"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="@+id/swipeRefreshLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:text="@string/no_posts"
+        android:textSize="24sp"
+        android:textColor="@color/black"
+        />
+
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipeRefreshLayout"
         android:layout_width="match_parent"

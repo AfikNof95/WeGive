@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import androidx.navigation.NavController;
-import androidx.navigation.NavDestination;
+
 import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.NavigationUI;
@@ -22,12 +22,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-import com.example.wegive.fragments.homePage.HomePageFragmentDirections;
-import com.example.wegive.fragments.auth.LoginFragmentDirections;
+
 import com.example.wegive.models.user.User;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import java.util.Objects;
+
 
 
 public class MainActivity extends AppCompatActivity {
@@ -71,10 +70,10 @@ public class MainActivity extends AppCompatActivity {
         }
 
         navController.addOnDestinationChangedListener((navController1, navDestination, bundle) -> {
-            if(navDestination.getId() == R.id.homePageFragment){
+            if (navDestination.getId() == R.id.homePageFragment) {
                 getSupportActionBar().setDisplayHomeAsUpEnabled(false);
                 getSupportActionBar().setHomeButtonEnabled(false);
-            }else{
+            } else {
                 getSupportActionBar().setDisplayHomeAsUpEnabled(true);
                 getSupportActionBar().setHomeButtonEnabled(true);
             }

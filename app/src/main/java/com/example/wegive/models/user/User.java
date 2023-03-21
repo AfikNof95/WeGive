@@ -50,7 +50,6 @@ public class User {
     public long lastUpdated;
 
 
-
     public User(@NonNull String id, String name, String email, String phoneNumber, String avatarUrl, Boolean isVerified, Boolean isAdmin) {
         this.id = id;
         this.name = name;
@@ -97,8 +96,7 @@ public class User {
     }
 
 
-
-    public Long getLastUpdated(){
+    public Long getLastUpdated() {
         return this.lastUpdated;
     }
 
@@ -124,10 +122,11 @@ public class User {
     }
 
     public static void signOut() {
-        SharedPreferences sharedPref = MyApplication.getMyContext().getSharedPreferences("TAG", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPref.edit();
-        editor.remove("user");
-        editor.commit();
+//        SharedPreferences sharedPref = MyApplication.getMyContext().getSharedPreferences("TAG", Context.MODE_PRIVATE);
+//        SharedPreferences.Editor editor = sharedPref.edit();
+//        editor.remove("user");
+        MyApplication.getMyContext().deleteSharedPreferences("TAG");
+//        editor.commit();
     }
 
     public static long getLocalLastUpdated() {
@@ -141,7 +140,6 @@ public class User {
         editor.putLong(LOCAL_LAST_UPDATED, time);
         editor.commit();
     }
-
 
 
     @NotNull
