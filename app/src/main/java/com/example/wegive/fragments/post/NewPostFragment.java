@@ -196,7 +196,7 @@ public class NewPostFragment extends Fragment {
         String id = post != null ? post.getId() : null;
         String title = titleInput.getText().toString();
         String content = contentInput.getText().toString();
-        String date = dateInput.getText().toString();
+        Long date = new Date(dateInput.getText().toString()).getTime();
         Long createdAt = post != null ? post.getCreatedAtUnformatted() : (new Date()).getTime();
         User currentUser = User.getCurrentUser();
         List<Attendant> attendants = post != null ? post.getAttendants() : new ArrayList<>();

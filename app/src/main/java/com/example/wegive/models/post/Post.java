@@ -56,7 +56,7 @@ public class Post implements Serializable, Comparable<Post> {
     public String id;
     public String title;
     public String content;
-    public String time;
+    public Long time;
     public String imageUrl;
     public String creatorName;
     public String creatorId;
@@ -71,7 +71,7 @@ public class Post implements Serializable, Comparable<Post> {
     public Long lastUpdated;
 
 
-    public Post(String id, String title, String content, String time, String imageUrl, String creatorName, String creatorId, String creatorAvatar, List<Attendant> attendants, List<Comment> comments, Long createdAt) {
+    public Post(String id, String title, String content, Long time, String imageUrl, String creatorName, String creatorId, String creatorAvatar, List<Attendant> attendants, List<Comment> comments, Long createdAt) {
         this.id = id == null ? UUID.randomUUID().toString() : id;
         this.title = title;
         this.content = content;
@@ -90,7 +90,7 @@ public class Post implements Serializable, Comparable<Post> {
         String id = (String) json.get(ID);
         String title = (String) json.get(TITLE);
         String content = (String) json.get(CONTENT);
-        String time = (String) json.get(TIME);
+        Long time = (Long) json.get(TIME);
         String imageUrl = (String) json.get(IMAGE_URL);
         String creatorName = (String) json.get(CREATOR_NAME);
         String creatorId = (String) json.get(CREATOR_ID);
@@ -154,8 +154,7 @@ public class Post implements Serializable, Comparable<Post> {
     }
 
     public String getTime() {
-        return this.time;
-    }
+        return DateFormat.getDateInstance().format(new Date(this.time));    }
 
     public String getCreatorId() {
         return this.creatorId;
@@ -191,7 +190,7 @@ public class Post implements Serializable, Comparable<Post> {
         this.content = content;
     }
 
-    public void setTime(String time) {
+    public void setTime(Long time) {
         this.time = time;
     }
 
