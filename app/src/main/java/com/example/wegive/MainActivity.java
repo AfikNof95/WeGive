@@ -27,8 +27,6 @@ import com.example.wegive.models.user.User;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 
-
-
 public class MainActivity extends AppCompatActivity {
 
     boolean isFirstRun = true;
@@ -70,14 +68,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         navController.addOnDestinationChangedListener((navController1, navDestination, bundle) -> {
-            if (navDestination.getId() == R.id.homePageFragment) {
-                getSupportActionBar().setDisplayHomeAsUpEnabled(false);
-                getSupportActionBar().setHomeButtonEnabled(false);
-            } else {
-                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-                getSupportActionBar().setHomeButtonEnabled(true);
-            }
-
+            setNavigationListener(navDestination.getId());
         });
         isFirstRun = false;
 
@@ -102,7 +93,7 @@ public class MainActivity extends AppCompatActivity {
             navController.popBackStack();
         } else if (itemId == R.id.menu_sign_out) {
             User.signOut();
-            navController.navigate(R.id.loginFragment);
+            navController.navigate(R.id.action_global_loginFragment);
         } else if (itemId == R.id.menu_charities) {
             navController.navigate(R.id.charityFragment);
         } else if (itemId == R.id.menu_account) {
@@ -129,6 +120,16 @@ public class MainActivity extends AppCompatActivity {
             super.onBackPressed();
         }
 
+    }
+
+    public void setNavigationListener(int destinationId) {
+        if (destinationId == R.id.homePageFragment) {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(false);
+            getSupportActionBar().setHomeButtonEnabled(false);
+        } else {
+            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+            getSupportActionBar().setHomeButtonEnabled(true);
+        }
     }
 
 
