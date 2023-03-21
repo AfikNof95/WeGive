@@ -29,19 +29,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class EventsFragment extends Fragment {
-
     private EventsViewModel viewModel;
     private FragmentEventsBinding binding;
-
     PostsRecyclerAdapter adapter;
-
 
     @Override
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
         viewModel = new ViewModelProvider(this).get(EventsViewModel.class);
     }
-
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
@@ -74,9 +70,9 @@ public class EventsFragment extends Fragment {
                     }
                 }
             }
-            if(events.size() == 0){
+            if (events.size() == 0) {
                 binding.emptyEvents.setVisibility(View.VISIBLE);
-            }else{
+            } else {
                 binding.emptyEvents.setVisibility(View.GONE);
             }
             adapter.setData(events);
@@ -95,9 +91,7 @@ public class EventsFragment extends Fragment {
             getActivity().getWindow().setFlags(WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE, WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE);
         });
 
-
         return view;
     }
-
 
 }

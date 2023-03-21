@@ -42,7 +42,6 @@ public class User {
 
     public String name = "";
     public String email = "";
-
     public String phoneNumber = "";
     public String avatarUrl = "";
     public Boolean isVerified = false;
@@ -60,7 +59,6 @@ public class User {
         this.isAdmin = isAdmin;
     }
 
-
     public Map<String, Object> toJSON() {
         Map<String, Object> json = new HashMap<>();
         json.put(ID, getId());
@@ -74,7 +72,6 @@ public class User {
 
         return json;
     }
-
 
     public static User fromJSON(Map<String, Object> json) {
         String id = (String) json.get(ID);
@@ -91,7 +88,6 @@ public class User {
             user.setLastUpdated(time.getSeconds());
         }
 
-
         return user;
     }
 
@@ -104,7 +100,6 @@ public class User {
     public void setLastUpdated(Long lastUpdated) {
         this.lastUpdated = lastUpdated;
     }
-
 
     public static void setCurrentUser(User user) {
         SharedPreferences sp = MyApplication.getMyContext().getSharedPreferences("TAG", Context.MODE_PRIVATE);
@@ -194,6 +189,5 @@ public class User {
     public void setIsAdmin(boolean isAdmin) {
         this.isAdmin = isAdmin;
     }
-
 
 }

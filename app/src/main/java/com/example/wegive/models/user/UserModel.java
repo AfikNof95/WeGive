@@ -22,11 +22,9 @@ import java.util.concurrent.Executors;
 
 public class UserModel {
 
-
     public static class UserModelHolder {
         public static final UserModel _instance = new UserModel();
     }
-
 
     public enum LoadingState {
         LOADING,
@@ -88,7 +86,6 @@ public class UserModel {
         });
     }
 
-
     public FirebaseUser getCurrentUser() {
         return fireBaseAuth.getCurrentUser();
 
@@ -108,7 +105,6 @@ public class UserModel {
         fireBaseAuth.forgotPassword(email, listener);
     }
 
-
     public void uploadUserAvatar(String userId, Bitmap bitmap, IListener<String> listener) {
         storage.uploadUserAvatar(userId, bitmap, listener);
     }
@@ -120,6 +116,5 @@ public class UserModel {
     public void getUser(String userId, IListener<User> listener) {
         userDB.getUser(userId, listener);
     }
-
 
 }
