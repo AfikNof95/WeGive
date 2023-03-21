@@ -1,4 +1,5 @@
 package com.example.wegive.firebase;
+
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreSettings;
 

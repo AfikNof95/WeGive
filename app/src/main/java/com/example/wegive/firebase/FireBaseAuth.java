@@ -15,13 +15,9 @@ public class FireBaseAuth {
 
     FirebaseAuth auth;
 
-
     public FireBaseAuth() {
         auth = FirebaseAuth.getInstance();
     }
-
-
-
 
     public void signUp(String email, String password, IListener<Task<AuthResult>> listener) {
         auth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(task -> {
@@ -29,11 +25,11 @@ public class FireBaseAuth {
         });
     }
 
-    public void signOut(IListener<Task<Void>> listener){
+    public void signOut(IListener<Task<Void>> listener) {
         auth.signOut();
     }
 
-    public FirebaseUser getCurrentUser(){
+    public FirebaseUser getCurrentUser() {
         return auth.getCurrentUser();
     }
 
@@ -42,7 +38,8 @@ public class FireBaseAuth {
             listener.onComplete(task);
         });
     }
-    public void forgotPassword(String email,IListener<Task<Void>> listener) {
+
+    public void forgotPassword(String email, IListener<Task<Void>> listener) {
         auth.sendPasswordResetEmail(email).addOnCompleteListener(task -> {
             listener.onComplete(task);
         });

@@ -21,7 +21,6 @@ public class FireBaseStorage {
         storage = FirebaseStorage.getInstance();
     }
 
-
     private void deleteImage(String path, IListener<Void> listener) {
         StorageReference storageRef = storage.getReference();
         StorageReference imagesRef = storageRef.child("images/" + path + ".jpg");
@@ -31,7 +30,6 @@ public class FireBaseStorage {
             }
         });
     }
-
 
     private void uploadImage(String path, Bitmap image, IListener<String> listener) {
         StorageReference sf = storage.getReference();
