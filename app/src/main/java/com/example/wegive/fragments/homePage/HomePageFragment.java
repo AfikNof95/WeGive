@@ -27,17 +27,13 @@ import com.example.wegive.viewModels.HomePageViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class HomePageFragment extends Fragment {
-
     private HomePageViewModel viewModel;
     private PostsRecyclerAdapter adapter = null;
     private FragmentHomePageBinding binding;
 
-
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-
     }
 
     @Override
@@ -87,9 +83,7 @@ public class HomePageFragment extends Fragment {
             Navigation.findNavController(view).navigate(HomePageFragmentDirections.actionHomePageFragmentToNewPostFragment(null));
         });
 
-
         return view;
     }
-
 
 }
